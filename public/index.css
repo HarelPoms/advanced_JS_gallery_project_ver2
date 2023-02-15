@@ -1,0 +1,21 @@
+@media (max-width: 991px) {
+    .responsive-mt {
+        margin-top: 0.9rem;
+    }
+
+    .responsive-nav-flex {
+        flex-direction: column;
+    }
+}
+
+.search_line {
+    margin-left: 0.55em;
+}
+
+footer {
+    margin-left: 0.55em;
+}
+
+#logo {
+    width: 5vw;
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <!--https://freesvg.org/img/1669705921camera-logo-icon.png-->
+                <a class="navbar-brand" href="index.html"><img id="logo" src="./assets/images/CameraLogo_thumbnail.png"
+                        alt="camera logo"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto my-2 my-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#" id="nav-home-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="nav-aboutus-link">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="nav-contactus-link">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="nav-add-new-picture-link">Add new picture</a>
+                        </li>
+
+                    </ul>
+
+                    <form class="d-flex responsive-nav-flex" role="search" id="navBeforeLogin">
+                        <a class="nav-link me-3" href="#" id="nav-register-link">Register</a>
+                        <a class="nav-link responsive-mt" href="#" id="nav-login-link">Login</a>
+                    </form>
+                    <form class="d-flex responsive-nav-flex d-none" role="search" id="navAfterLogin">
+                        <a class="nav-link me-3" href="#" id="nav-edit-profile-page">Name</a>
+                        <a class="nav-link responsive-mt" href="#" id="nav-logout">Logout</a>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <main>
+            <!-- home page -->
+            <div id="home-page" class="d-block">
+                <h1>Home page</h1>
+                <div class="d-flex justify-content-between">
+                    <div class="container">
+                        <button type="button" class="btn btn-primary" id="home-gallery-btn">
+                            <i class="bi bi-images"></i>
+                        </button>
+                        <button type="button" class="btn btn-primary" id="home-list-btn">
+                            <i class="bi bi-list"></i>
+                        </button>
+                        <button type="button" class="btn btn-primary" id="home-carousel-btn">
+                            <i class="bi bi-card-list"></i>
+                        </button>
+
+                    </div>
+                    <button type="button" class="btn btn-info" id="homeDisplaySortASC">
+                        <i class="bi bi-sort-alpha-up"></i>
+                    </button>
+                    <button type="button" class="btn btn-info" id="homeDisplaySortDESC">
+                        <i class="bi bi-sort-alpha-down"></i>
+                    </button>
+
+
+                </div>
+                <div id="pictures_Gallery" class="d-none">
+                    <div class="row row-cols-1 row-cols-md-3 g-4" id="home-page-pictures-gallery">
+
+                    </div>
+                </div>
+
+                <div id="pictures-list" class="d-none">
+                    <input class="form-control search_line" type="search" placeholder="Search" aria-label="Search"
+                        id="homeDisplaySearch">
+
+                    <ul class="list-group" id="home-page-pictures-list">
+
+                    </ul>
+                </div>
+            </div>
+            <!-- about us -->
+            <div id="about-us" class="d-none">
+                <h1>About us</h1>
+            </div>
+            <!-- contact us -->
+            <div id="contact-us" class="d-none">
+                <h1>Contact us</h1>
+            </div>
+            <!-- register page -->
+            <div id="register-page" class="d-none">
+                <h1>Register page</h1>
+            </div>
+            <!-- login page -->
+            <div id="login-page" class="d-none">
+                <h1>Login page</h1>
+            </div>
+            <div id="profile-page" class="d-none">
+                <h1>Profile page</h1>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="editProfileName" placeholder="Name" />
+                                <label for="editProfileName">Name</label>
+                                <div class="alert alert-danger d-none" role="alert" id="edit-alert-name">
+                                    Name Rules
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="editProfilePassword"
+                                    placeholder="Password" />
+                                <label for="editProfilePassword">Password</label>
+                                <div class="alert alert-danger d-none" role="alert" id="edit-alert-password">
+                                    Password Rules
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="editProfileEmail" placeholder="Email" />
+                                <label for="editProfileEmail">Email</label>
+                                <div class="alert alert-danger d-none" role="alert" id="edit-alert-email">
+                                    Email Rules
+                                </div>
+                            </div>
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <button type="button" class="btn btn-success" id="editProfileSaveBtn">
+                            <i class="bi bi-check-circle-fill"></i> Save
+                        </button>
+                        <button type="button" class="btn btn-danger" id="editProfileCancelBtn">
+                            <i class="bi bi-x-circle-fill"></i>
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="page-not-found-page" class="d-none"></div>
+        </main>
+        <footer class="border-top pt-3 d-flex justify-content-center">
+            2023©️
+        </footer>
+    </div>
+    <script src="../src/app.js" type="module"></script>
+</body>
+
+</html>
