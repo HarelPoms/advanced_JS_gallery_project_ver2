@@ -1,4 +1,5 @@
 import Picture from "../models/Picture.js";
+import Address from "../models/Address.js";
 import User from "../models/User.js"
 let pic_id = 1;
 let user_id = 1;
@@ -16,10 +17,10 @@ const createPicturesData = () => {
 
 const createUsersData = () => {
     let usersArr = [
-        new User(user_id++, "Harel", "hareldanielpoms@gmail.com", "Aa123456!", true),
-        new User(user_id++, "Kenny", "kenny@gmail.com", "Aa123456!", false),
-        new User(user_id++, "Bob", "bob@gmail.com", "Aa123456!", false),
-    ];
+        new User(user_id++, "Harel", "Poms", new Address("Israel", "Not Relevant", "Ramat Hasharon", "Anonymous", 4, 67900), "hareldanielpoms@gmail.com", "0515936542", "Aa123456!", true ),
+        new User(user_id++, "Kenny", "Jenkins", new Address("USA", "Texas", "Huston", "Anonymous", 1, 1234900), "kenny@gmail.com", "0515456542", "Aa123456!", false ),
+        new User(user_id++, "Bob", "Lincoln", new Address("USA", "Iowa", "Forgot", "Anonymous", 8, 1267800), "bob@gmail.com", "0518906542", "Aa123456!", false )
+        ];
     return usersArr;
 }
 

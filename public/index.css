@@ -19,3 +19,40 @@ footer {
 #logo {
     width: 5vw;
 }
+
+.asterisk {
+    color: red;
+}
+
+.login-btn {
+    margin-left: 0.55em;
+    width: 81.2em;
+}
+
+.login-register-text-and-button {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.isAdminRow {
+    padding-bottom: 0.5em;
+}
+
+.register-btn {
+    margin-left: 0.55em;
+    width: 78em;
+}
+
+.popup-wrapper {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0000008d;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.popup-input {
+    padding-bottom: 1em;
+}

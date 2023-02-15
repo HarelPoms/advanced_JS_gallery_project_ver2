@@ -1,13 +1,19 @@
 class User{
     id;
-    name;
+    first_name;
+    last_name;
+    address;
     email;
+    phone;
     password;
     isAdmin;
-    constructor(id,name,email,password,isAdmin){
+    constructor(id,first_name,last_name,address,email,phone,password,isAdmin){
         this.id = id;
-        this.name = name;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.address = address;
         this.email = email;
+        this.phone = phone;
         this.password = password;
         this.isAdmin = isAdmin;
     }
