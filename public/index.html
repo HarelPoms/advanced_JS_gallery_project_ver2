@@ -154,7 +154,7 @@
 
                 <div id="pictures-list" class="d-none">
                     <input class="form-control search_line" type="search" placeholder="Search" aria-label="Search"
-                        id="homeDisplaySearch">
+                        id="ListDisplaySearch">
 
                     <ul class="list-group" id="home-page-pictures-list">
 
@@ -170,7 +170,7 @@
                 <h1>Contact us</h1>
             </div>
             <!-- register page -->
-            <div id="register-page" class="d-none">
+            <div id="register-page" class="d-block">
 
                 <form id="register-form" onsubmit="event.preventDefault()">
                     <div class="container">
@@ -184,7 +184,7 @@
                                     <span class="d-none register-label">First Name</span>
                                     <input type="text" class="form-control" id="register-input-first-name"
                                         placeholder="Your first name" />
-                                    <label for="register-input-f-rst-name">First Name<span
+                                    <label for="register-input-first-name">First Name<span
                                             class="asterisk">*</span></label>
                                 </div>
                                 <div class="alert alert-danger d-none" role="alert" id="register-alert-first-name">
@@ -296,19 +296,20 @@
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3">
                                         <input type="password" class="form-control"
-                                            id="register-input-password-re-enter" placeholder="Password-Re-enter" />
-                                        <label for="register-input-password-re-enter">Re-Enter
+                                            id="register-input-re_enter-password" placeholder="Password-Re-enter" />
+                                        <label for="register-input-re_enter-password">Re-Enter
                                             Password<span class="asterisk">*</span></label>
                                     </div>
                                     <div class="alert alert-danger d-none" role="alert"
-                                        id="register-alert-password-re-enter">
+                                        id="register-alert-re_enter-password">
                                         Password Rules
                                     </div>
                                 </div>
                             </div>
                             <div class="row isAdminRow">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <input class="form-check-input" type="checkbox" value="" id="isAdminCheckbox">
+                                    <input class="form-check-input is-admin-checkbox" type="checkbox" value=""
+                                        id="isAdminCheckbox">
                                     <label class="form-check-label" for="isAdminCheckbox">
                                         Is Admin
                                     </label>
@@ -348,7 +349,7 @@
                     <div class="alert alert-danger d-none" role="alert" id="login-alert-password">
                         Password Rules
                     </div>
-                    <div class="login-register-text-and-button">
+                    <div class="login-not-register-text-and-button">
                         <span>
                             Not registered yet?
                             <a id="login-goto-register-page">Click here...</a>

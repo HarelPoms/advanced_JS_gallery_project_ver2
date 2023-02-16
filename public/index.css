@@ -29,7 +29,7 @@ footer {
     width: 81.2em;
 }
 
-.login-register-text-and-button {
+.login-not-register-text-and-button {
     padding-top: 1em;
     padding-bottom: 1em;
 }
@@ -55,4 +55,8 @@ footer {
 
 .popup-input {
     padding-bottom: 1em;
+}
+
+.is-admin-checkbox {
+    background-color: green;
 }

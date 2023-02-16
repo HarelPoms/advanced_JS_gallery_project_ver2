@@ -1,0 +1,30 @@
+@mixin for-size($size) {
+    @if $size == phone-only {
+        @media (max-width: 576px) { @content; }
+    } @else if $size == tablet-portrait {
+        @media (max-width: 768px) { @content; }
+    } @else if $size == tablet-landscape {
+        @media (max-width: 992px) { @content; }
+    } @else if $size == desktop {
+        @media (max-width: 1200px) { @content; }
+    } @else if $size == big-desktop {
+        @media (max-width: 1400px) { @content; }
+    }
+}
+
+
+footer {
+    margin-left: 0.55em;
+}
+
+#logo {
+    width: 5vw;
+}
+
+.asterisk {
+    color: red;
+}
+
+.search_line {
+    margin-left: 0.55em;
+}

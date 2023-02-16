@@ -1,0 +1,13 @@
+.popup-wrapper {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0000008d;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.popup-input {
+    padding-bottom: 1em;
+}
