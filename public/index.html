@@ -63,8 +63,13 @@
                     id="editPicturesPopup">
                     <div class="popup-div" id="editPicturesPopupChild">
                         <div class="container">
-                            <div class="card text-center">
-                                <h3>EDIT PICTURE FORM</h3>
+                            <div class="card text-center d-flex justify-content-between">
+                                <h3>
+                                    EDIT PICTURE FORM
+                                    <button type="button" class="btn btn-danger" id="editPicturesPopupCancelBtn">
+                                        <i class="bi bi-x-circle-fill"></i>
+                                    </button>
+                                </h3>
                             </div>
                         </div>
                         <div class="container d-flex">
@@ -94,19 +99,6 @@
                                                 placeholder="price" />
                                             <label for="editPicturesPopupPrice">price</label>
                                         </div>
-
-                                        <div class="row">
-                                            <button type="button" class="btn btn-success" id="editPicturesPopupSaveBtn">
-                                                <i class="bi bi-check-circle-fill"></i> Save
-                                            </button>
-                                        </div>
-                                        <div class="row">
-                                            <button type="button" class="btn btn-danger"
-                                                id="editPicturesPopupCancelBtn">
-                                                <i class="bi bi-x-circle-fill"></i>
-                                                Cancel
-                                            </button>
-                                        </div>
                                     </div>
                                 </div>
 
@@ -114,6 +106,13 @@
                             </div>
                             <div class="card">
                                 <img src="" class="card-img-top" alt="" id="editPicturesPopupImgDisplay" />
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="card text-center">
+                                <button type="button" class="btn btn-success" id="editPicturesPopupSaveBtn">
+                                    <i class="bi bi-check-circle-fill"></i> Save
+                                </button>
                             </div>
                         </div>
 

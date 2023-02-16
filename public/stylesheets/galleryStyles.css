@@ -61,4 +61,10 @@ footer {
 
 .popup-input {
   padding-bottom: 1em;
+}
+
+#editPicturesPopupCancelBtn {
+  position: absolute;
+  right: 0;
+  bottom: 0.05em;
 }/*# sourceMappingURL=galleryStyles.css.map */
