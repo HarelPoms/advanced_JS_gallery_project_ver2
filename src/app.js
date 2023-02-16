@@ -2,6 +2,7 @@ import PAGES from "./models/pageModel.js";
 import { handlePageChange } from "./routes/router.js";
 import "./initialData/initialData.js";
 import "./pages/RegisterPage.js";
+import "./pages/LoginPage.js";
 
 const navHomeLink = document.getElementById("nav-home-link");
 const navAboutUsLink = document.getElementById("nav-aboutus-link");

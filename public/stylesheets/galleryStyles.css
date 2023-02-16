@@ -1,0 +1,64 @@
+footer {
+  margin-left: 0.55em;
+}
+
+#logo {
+  width: 5vw;
+}
+
+.asterisk {
+  color: red;
+}
+
+.search_line {
+  margin-left: 0.55em;
+}
+
+@media (max-width: 991px) {
+  .responsive-mt {
+    margin-top: 0.9rem;
+  }
+  .responsive-nav-flex {
+    flex-direction: column;
+  }
+}
+.isAdminRow {
+  padding-bottom: 0.5em;
+}
+
+.register-btn {
+  margin-left: 0.55em;
+  width: 78em;
+}
+
+.is-admin-checkbox {
+  background-color: green;
+}
+
+.login-btn {
+  margin-left: 0.55em;
+  width: 81.2em;
+}
+
+.login-not-register-text-and-button {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+#login-goto-register-page {
+  color: green;
+}
+
+.popup-wrapper {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5529411765);
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.popup-input {
+  padding-bottom: 1em;
+}/*# sourceMappingURL=galleryStyles.css.map */
