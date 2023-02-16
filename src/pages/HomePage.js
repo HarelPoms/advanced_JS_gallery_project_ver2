@@ -1,4 +1,4 @@
-import {initializePicturesGallery} from "../components/PicturesGallery.js";
+import {initializePicturesGallery, updatePicturesGallery} from "../components/PicturesGallery.js";
 import checkIfAdmin from "../utils/checkIfAdmin.js";
 
 let picturesArr, originalPicturesArr;
@@ -21,7 +21,7 @@ window.addEventListener("load", ()=>{
     picturesArr = JSON.parse(picturesArr);
     originalPicturesArr = [...picturesArr];
     isAdmin = checkIfAdmin();
-    initializePicturesGallery(picturesArr, isAdmin);
+    initializePicturesGallery(picturesArr, isAdmin, deletePicture);
     initElements();
     initBtns();
 })
@@ -71,3 +71,19 @@ const switchToAnotherDisplayMode = (DisplayToSwitchTo) => {
     //this is what we displaying now
     currentDisplayMode = DisplayToSwitchTo;
 };
+
+const updateDisplays = () => {
+    updatePicturesGallery(picturesArr);
+}
+
+const saveToLocalStorage = (arrToSave) => {
+    localStorage.setItem("pics", JSON.stringify(arrToSave));
+}
+
+const deletePicture = (id) => {
+    originalPicturesArr = originalPicturesArr.filter((item) => item.id !== id);
+    saveToLocalStorage(originalPicturesArr);
+
+    picturesArr = picturesArr.filter((item) => item.id !== id);
+    updateDisplays();
+}

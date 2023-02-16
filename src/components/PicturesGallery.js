@@ -1,10 +1,12 @@
 let galleryDiv;
 let isAdmin;
 let picturesArr;
+let deletePicture;
 
-const initializePicturesGallery = (picturesArrFromHomePage, isAdminParam) => {
+const initializePicturesGallery = (picturesArrFromHomePage, isAdminParam, deletePictureFromHomePage) => {
     galleryDiv = document.getElementById("home-page-pictures-gallery");
     isAdmin = isAdminParam;
+    deletePicture = deletePictureFromHomePage;
     updatePicturesGallery(picturesArrFromHomePage);
 }
 
@@ -53,14 +55,44 @@ const createCard = (id, url, alt, credit, price) => {
     `;
 };
 
+const getIdFromClick = (ev) =>{
+    let idFromId = ev.target.id.split("-");
+    if(!ev.target.id){
+        idFromId = ev.target.parentElement.id.split("-");
+    }
+    return(idFromId[1]);
+}
+
+const handleDeleteBtnClick = (ev) => {
+    deletePicture(+(getIdFromClick(ev)));
+};
+
+const clearEventListeners = (idKeyword, handleFunc) => {
+    let BtnsBefore = document.querySelectorAll(`[id^='${idKeyword}-']`);
+    for (let Btn of BtnsBefore) {
+        Btn.removeEventListener("click", handleFunc);
+    }
+}
+
+const createBtnEventListener = (idKeyword, handleFunc) => {
+    let Btns = document.querySelectorAll(`[id^=${idKeyword}-]`);
+    for (let Btn of Btns){
+        Btn.addEventListener("click", handleFunc);
+    }
+}
+
 const createGallery = () => {
     let buffer = "";
+
+    clearEventListeners("PictureGalleryDeleteButton", handleDeleteBtnClick);
 
     for (let picture of picturesArr){
         buffer += createCard(picture.id,picture.url,picture.alt,picture.credit,picture.price);
     }
 
     galleryDiv.innerHTML = buffer;
+
+    createBtnEventListener("PictureGalleryDeleteButton", handleDeleteBtnClick);
 }
 
-export {initializePicturesGallery};
+export {initializePicturesGallery, updatePicturesGallery};
