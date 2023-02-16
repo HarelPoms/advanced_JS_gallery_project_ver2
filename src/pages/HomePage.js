@@ -1,4 +1,6 @@
 import {initializePicturesGallery, updatePicturesGallery} from "../components/PicturesGallery.js";
+import {initPopup} from "../components/Popup.js";
+
 import checkIfAdmin from "../utils/checkIfAdmin.js";
 
 let picturesArr, originalPicturesArr;
@@ -21,7 +23,7 @@ window.addEventListener("load", ()=>{
     picturesArr = JSON.parse(picturesArr);
     originalPicturesArr = [...picturesArr];
     isAdmin = checkIfAdmin();
-    initializePicturesGallery(picturesArr, isAdmin, deletePicture);
+    initializePicturesGallery(picturesArr, isAdmin, deletePicture, showPopup);
     initElements();
     initBtns();
 })
@@ -87,3 +89,16 @@ const deletePicture = (id) => {
     picturesArr = picturesArr.filter((item) => item.id !== id);
     updateDisplays();
 }
+
+const showPopup = (id) => {
+    let selectedPicture = picturesArr.find((picture) => picture.id === (+id));
+    if(!selectedPicture){
+        return;
+    }
+    initPopup(selectedPicture, editPicture);
+}
+
+const editPicture = () => {
+    saveToLocalStorage(originalPicturesArr);
+    updateDisplays();
+};

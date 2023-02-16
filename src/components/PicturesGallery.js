@@ -2,12 +2,14 @@ let galleryDiv;
 let isAdmin;
 let picturesArr;
 let deletePicture;
+let showPopup;
 
-const initializePicturesGallery = (picturesArrFromHomePage, isAdminParam, deletePictureFromHomePage) => {
+const initializePicturesGallery = (picturesArrFromHomePage, isAdminParam, deletePictureFromHomePage,showPopupFromHomePage) => {
     galleryDiv = document.getElementById("home-page-pictures-gallery");
     isAdmin = isAdminParam;
     deletePicture = deletePictureFromHomePage;
     updatePicturesGallery(picturesArrFromHomePage);
+    showPopup = showPopupFromHomePage;
 }
 
 const updatePicturesGallery = (picturesArrFromHomePage) => {
@@ -67,6 +69,10 @@ const handleDeleteBtnClick = (ev) => {
     deletePicture(+(getIdFromClick(ev)));
 };
 
+const handleEditBtnClick = (ev) => {
+    showPopup(getIdFromClick(ev));
+}
+
 const clearEventListeners = (idKeyword, handleFunc) => {
     let BtnsBefore = document.querySelectorAll(`[id^='${idKeyword}-']`);
     for (let Btn of BtnsBefore) {
@@ -85,6 +91,7 @@ const createGallery = () => {
     let buffer = "";
 
     clearEventListeners("PictureGalleryDeleteButton", handleDeleteBtnClick);
+    clearEventListeners("PictureGalleryEditButton", handleEditBtnClick);
 
     for (let picture of picturesArr){
         buffer += createCard(picture.id,picture.url,picture.alt,picture.credit,picture.price);
@@ -93,6 +100,7 @@ const createGallery = () => {
     galleryDiv.innerHTML = buffer;
 
     createBtnEventListener("PictureGalleryDeleteButton", handleDeleteBtnClick);
+    createBtnEventListener("PictureGalleryEditButton", handleEditBtnClick);
 }
 
 export {initializePicturesGallery, updatePicturesGallery};
