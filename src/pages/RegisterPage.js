@@ -25,15 +25,21 @@ const registerIsAdminChkbox = document.getElementById("isAdminCheckbox");
 const btnRegisterSubmit = document.getElementById("register-submit-btn");
 const btnRegisterCancel = document.getElementById("register-cancel-btn");
 //Bool array to keep track of which inputs are valid for generic checkInput Func, 
-//order: 0:firstName, 1:lastName, 2:email, 3:password, 4:country 5: zip-code
-let inputOkArr = [false, false, false, false, false, false];
+//order: 0:firstName, 1:lastName, 2:country, 3:state, 4:city 5: street
+//       6: house_number 7: zip_code 8: email 9: phone, password: 10
+let inputOkArr = [false, false, false, false, false, false, false, false, false, false, false];
 const inputIndexes = {
 	firstName: 0,
 	lastName: 1,
-	email: 2,
-	password: 3,
-    country: 4,
-    zip_code: 5
+    country: 2,
+    state: 3,
+    city: 4,
+    street: 5,
+    house_number: 6,
+    zip_code: 7,
+    email: 8,
+    phone: 9,
+    password: 10
 }
 let reEnterPasswordOk = false;
 let next_user_id = 1;
@@ -69,79 +75,109 @@ const checkPasswordToReEnterMatch = () => {
     checkIfCanEnableButton();
 }
 
-
-window.addEventListener("load", () => {
-    //when page is loaded
+const firstLoadChecks = ()=>{
     if (registerInputFirstName.value !== "") {
         checkInput(registerInputFirstName, "register-alert-first-name", inputIndexes.firstName, validateName, "First ");
     }
     if (registerInputLastName.value !== "") {
         checkInput(registerInputLastName, "register-alert-last-name", inputIndexes.lastName, validateName, "Last ");
     }
-    if (registerInputEmail.value !== "") {
-        checkInput(registerInputEmail, "register-alert-email", inputIndexes.email, validateEmail, "Email ");
-    }
-    if (registerInputPassword.value !== "") {
-        checkInput(registerInputPassword, "register-alert-password", inputIndexes.password, validatePassword, "Password ");
-    }
     if (registerInputCountry.value !== "") {
-        checkInput(registerInputCountry, "register-alert-country", inputIndexes.country, validateString, "Country " );
+        checkInput(registerInputCountry, "register-alert-country", inputIndexes.country, validateString, "Country ");
+    }
+    if (registerInputState.value !== "") {
+        checkInput(registerInputState, "register-alert-state", inputIndexes.state, validateString, "State ");
+    }
+    if (registerInputCity.value !== "") {
+        checkInput(registerInputCity, "register-alert-city", inputIndexes.city, validateString, "City ");
+    }
+    if (registerInputStreet.value !== "") {
+        checkInput(registerInputStreet, "register-alert-street", inputIndexes.street, validateString, "Street ");
+    }
+    if (registerInputHouseNumber.value !== "") {
+        checkInput(registerInputHouseNumber, "register-alert-house-number", inputIndexes.house_number, validateNumber, "House Number ");
     }
     if (registerInputZipCode.value !== "") {
         checkInput(registerInputZipCode, "register-alert-zip-code", inputIndexes.zip_code, validateNumber, "Zip-Code " );
     }
+    if (registerInputEmail.value !== "") {
+        checkInput(registerInputEmail, "register-alert-email", inputIndexes.email, validateEmail, "Email ");
+    }
+    if (registerInputPhone.value !== "") {
+        checkInput(registerInputPhone, "register-alert-phone", inputIndexes.phone, validateNumber,
+        "Phone " );
+    }
+    if (registerInputPassword.value !== "") {
+        checkInput(registerInputPassword, "register-alert-password", inputIndexes.password, validatePassword, "Password ");
+    }
     if (registerInputReenterPassword.value !== "") {
         checkPasswordToReEnterMatch();
     }
-    
-});
-
-registerInputFirstName.addEventListener("input", () => {
-    checkInput(registerInputFirstName, "register-alert-first-name", inputIndexes.firstName, validateName, "First ");
-});
-
-registerInputLastName.addEventListener("input", () => {
-    checkInput(registerInputLastName, "register-alert-last-name", inputIndexes.lastName, validateName, 
-    "Last ");
-});
-
-registerInputEmail.addEventListener("input", () => {
-    checkInput(registerInputEmail, "register-alert-email", inputIndexes.email, validateEmail, "Email ");
-});
-
-registerInputPassword.addEventListener("input", () => {
-    checkInput(registerInputPassword, "register-alert-password", inputIndexes.password, validatePassword, "Password ");
-});
-
-registerInputReenterPassword.addEventListener("input", () => {
-    checkPasswordToReEnterMatch();
-});
-
-registerInputCountry.addEventListener("input", ()=> {
-    checkInput(registerInputCountry, "register-alert-country", inputIndexes.country, validateString, "Country " );
-})
-
-registerInputZipCode.addEventListener("input", ()=> {
-    checkInput(registerInputZipCode, "register-alert-zip-code", inputIndexes.zip_code, validateNumber, "Zip-Code " );
-})
-
-const checkIfCanEnableButton = () => {
-    (btnRegisterSubmit.disabled = !(inputOkArr[inputIndexes.firstName] 
-        && inputOkArr[inputIndexes.lastName]  
-        && inputOkArr[inputIndexes.email] 
-        && inputOkArr[inputIndexes.password] 
-        && inputOkArr[inputIndexes.country]
-        && inputOkArr[inputIndexes.zip_code]
-        && reEnterPasswordOk));
 }
 
-btnRegisterSubmit.addEventListener("click", () => {
+const initEventListeners = ()=> {
+    registerInputFirstName.addEventListener("input", () => {
+        checkInput(registerInputFirstName, "register-alert-first-name", inputIndexes.firstName, validateName, "First ");
+    });
+
+    registerInputLastName.addEventListener("input", () => {
+        checkInput(registerInputLastName, "register-alert-last-name", inputIndexes.lastName, validateName, 
+        "Last ");
+    });
+
+    registerInputCountry.addEventListener("input", ()=> {
+        checkInput(registerInputCountry, "register-alert-country", inputIndexes.country, validateString, "Country " );
+    })
+
+    registerInputState.addEventListener("input", ()=>{
+        checkInput(registerInputState, "register-alert-state", inputIndexes.state, validateString, "State ");
+    })
+
+    registerInputCity.addEventListener("input", ()=>{
+        checkInput(registerInputCity, "register-alert-city", inputIndexes.city, validateString, "City ");
+    })
+
+    registerInputStreet.addEventListener("input", ()=>{ 
+        checkInput(registerInputStreet, "register-alert-street", inputIndexes.street, validateString, "Street ");   
+    })
+
+    registerInputHouseNumber.addEventListener("input", ()=> {
+        checkInput(registerInputHouseNumber, "register-alert-house-number", inputIndexes.house_number, validateNumber, "House Number " );
+    })
+
+    registerInputZipCode.addEventListener("input", ()=> {
+        checkInput(registerInputZipCode, "register-alert-zip-code", inputIndexes.zip_code, validateNumber, "Zip-Code " );
+    })
+
+
+    registerInputEmail.addEventListener("input", () => {
+        checkInput(registerInputEmail, "register-alert-email", inputIndexes.email, validateEmail, "Email ");
+    });
+
+    registerInputPhone.addEventListener("input", ()=> {
+        checkInput(registerInputPhone, "register-alert-phone", inputIndexes.phone, validateNumber, "Phone " );
+    })
+
+    registerInputPassword.addEventListener("input", () => {
+        checkInput(registerInputPassword, "register-alert-password", inputIndexes.password, validatePassword, "Password ");
+    });
+
+    registerInputReenterPassword.addEventListener("input", () => {
+        checkPasswordToReEnterMatch();
+    });
+
+    btnRegisterSubmit.addEventListener("click", () => {
     if(!(inputOkArr[inputIndexes.firstName] 
-        && inputOkArr[inputIndexes.lastName]  
-        && inputOkArr[inputIndexes.email] 
-        && inputOkArr[inputIndexes.password] 
+        && inputOkArr[inputIndexes.lastName]
         && inputOkArr[inputIndexes.country]
-        && inputOkArr[inputIndexes.zip_code]
+        && inputOkArr[inputIndexes.state]
+        && inputOkArr[inputIndexes.city]
+        && inputOkArr[inputIndexes.street]
+        && inputOkArr[inputIndexes.house_number]
+        && inputOkArr[inputIndexes.zip_code]  
+        && inputOkArr[inputIndexes.email] 
+        && inputOkArr[inputIndexes.phone]
+        && inputOkArr[inputIndexes.password] 
         && reEnterPasswordOk))
     {
             return;
@@ -174,6 +210,32 @@ btnRegisterSubmit.addEventListener("click", () => {
     handlePageChange(PAGES.LOGIN);
 })
 
-btnRegisterCancel.addEventListener("click", ()=> {
-    handlePageChange(PAGES.HOME);
-})
+    btnRegisterCancel.addEventListener("click", ()=> {
+        handlePageChange(PAGES.HOME);
+    })
+
+}
+
+
+window.addEventListener("load", () => {
+    //when page is loaded
+    firstLoadChecks();
+    initEventListeners();
+});
+
+const checkIfCanEnableButton = () => {
+    (btnRegisterSubmit.disabled = !(
+        inputOkArr[inputIndexes.firstName] 
+        && inputOkArr[inputIndexes.lastName]
+        && inputOkArr[inputIndexes.country]
+        && inputOkArr[inputIndexes.state]
+        && inputOkArr[inputIndexes.city]
+        && inputOkArr[inputIndexes.street]
+        && inputOkArr[inputIndexes.house_number]
+        && inputOkArr[inputIndexes.zip_code]  
+        && inputOkArr[inputIndexes.email] 
+        && inputOkArr[inputIndexes.phone]
+        && inputOkArr[inputIndexes.password] 
+        && reEnterPasswordOk));
+        
+}

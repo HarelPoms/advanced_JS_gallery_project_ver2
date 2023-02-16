@@ -56,7 +56,7 @@
         </nav>
         <main>
             <!-- home page -->
-            <div id="home-page" class="d-block">
+            <div id="home-page" class="d-none">
                 <h1>Home page</h1>
                 <!--Popup Section-->
                 <div class="popup-wrapper d-flex justify-content-center align-items-center d-none"
@@ -177,7 +177,7 @@
                 <h1>Contact us</h1>
             </div>
             <!-- register page -->
-            <div id="register-page" class="d-none">
+            <div id="register-page" class="d-block">
 
                 <form id="register-form" onsubmit="event.preventDefault()">
                     <div class="container">
@@ -214,7 +214,6 @@
                         </div>
                         <h5>Address</h5>
                         <div class="row">
-
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-floating mb-3">
@@ -232,6 +231,9 @@
                                             placeholder="state" />
                                         <label for="register-input-state">State</label>
                                     </div>
+                                    <div class="alert alert-danger d-none" role="alert" id="register-alert-state">
+                                        State Rules
+                                    </div>
                                 </div>
 
                                 <div class="col-md-4">
@@ -239,6 +241,9 @@
                                         <input type="text" class="form-control" id="register-input-city"
                                             placeholder="city" />
                                         <label for="register-input-city">City</label>
+                                    </div>
+                                    <div class="alert alert-danger d-none" role="alert" id="register-alert-city">
+                                        City Rules
                                     </div>
                                 </div>
                             </div>
@@ -251,12 +256,18 @@
                                         placeholder="street" />
                                     <label for="register-input-street">Street</label>
                                 </div>
+                                <div class="alert alert-danger d-none" role="alert" id="register-alert-street">
+                                    Street Rules
+                                </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="register-input-house-number"
                                         placeholder="House Number" />
                                     <label for="register-input-house-number">House Number</label>
+                                </div>
+                                <div class="alert alert-danger d-none" role="alert" id="register-alert-house-number">
+                                    House Number Rules
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -291,6 +302,9 @@
                                         <input type="text" class="form-control" id="register-input-phone"
                                             placeholder="Phone" />
                                         <label for="register-input-phone">Phone</label>
+                                    </div>
+                                    <div class="alert alert-danger d-none" role="alert" id="register-alert-phone">
+                                        Phone Rules
                                     </div>
                                 </div>
                             </div>
