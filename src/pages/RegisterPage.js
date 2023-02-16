@@ -3,9 +3,11 @@ import { handlePageChange } from "../routes/router.js";
 import validateEmail from "../validation/validateEmail.js";
 import validatePassword from "../validation/validatePassword.js";
 import validateName from "../validation/validateName.js";
+import validateString from "../validation/validateString.js";
+import validateNumber from "../validation/validateNumber.js";
 import User from "../models/User.js";
 import Address from "../models/Address.js"
-import validate from "../validation/validate.js";
+
 
 const registerInputFirstName = document.getElementById("register-input-first-name");
 const registerInputLastName = document.getElementById("register-input-last-name");
@@ -23,19 +25,21 @@ const registerIsAdminChkbox = document.getElementById("isAdminCheckbox");
 const btnRegisterSubmit = document.getElementById("register-submit-btn");
 const btnRegisterCancel = document.getElementById("register-cancel-btn");
 //Bool array to keep track of which inputs are valid for generic checkInput Func, 
-//order: 0:firstName, 1:lastName, 2:email, 3:password
-let inputOkArr = [false, false, false, false];
+//order: 0:firstName, 1:lastName, 2:email, 3:password, 4:country 5: zip-code
+let inputOkArr = [false, false, false, false, false, false];
 const inputIndexes = {
 	firstName: 0,
 	lastName: 1,
 	email: 2,
-	password: 3
+	password: 3,
+    country: 4,
+    zip_code: 5
 }
 let reEnterPasswordOk = false;
 let next_user_id = 1;
 
-const checkInput = (registerInput, registerAlert, registerBooleanIndex, validateFunc) => {
-    let errorArr = validateFunc(registerInput.value);
+const checkInput = (registerInput, registerAlert, registerBooleanIndex, validateFunc, prefixLabel) => {
+    let errorArr = validateFunc(registerInput.value, prefixLabel);
     if (errorArr.length === 0) {
     //no error
     registerInput.classList.remove("is-invalid");
@@ -69,16 +73,22 @@ const checkPasswordToReEnterMatch = () => {
 window.addEventListener("load", () => {
     //when page is loaded
     if (registerInputFirstName.value !== "") {
-        checkInput(registerInputFirstName, "register-alert-first-name", inputIndexes.firstName, validateName);
+        checkInput(registerInputFirstName, "register-alert-first-name", inputIndexes.firstName, validateName, "First ");
     }
     if (registerInputLastName.value !== "") {
-        checkInput(registerInputLastName, "register-alert-last-name", inputIndexes.lastName, validateName);
+        checkInput(registerInputLastName, "register-alert-last-name", inputIndexes.lastName, validateName, "Last ");
     }
     if (registerInputEmail.value !== "") {
-        checkInput(registerInputEmail, "register-alert-email", inputIndexes.email, validateEmail);
+        checkInput(registerInputEmail, "register-alert-email", inputIndexes.email, validateEmail, "Email ");
     }
     if (registerInputPassword.value !== "") {
-        checkInput(registerInputPassword, "register-alert-password", inputIndexes.password, validatePassword);
+        checkInput(registerInputPassword, "register-alert-password", inputIndexes.password, validatePassword, "Password ");
+    }
+    if (registerInputCountry.value !== "") {
+        checkInput(registerInputCountry, "register-alert-country", inputIndexes.country, validateString, "Country " );
+    }
+    if (registerInputZipCode.value !== "") {
+        checkInput(registerInputZipCode, "register-alert-zip-code", inputIndexes.zip_code, validateNumber, "Zip-Code " );
     }
     if (registerInputReenterPassword.value !== "") {
         checkPasswordToReEnterMatch();
@@ -87,30 +97,41 @@ window.addEventListener("load", () => {
 });
 
 registerInputFirstName.addEventListener("input", () => {
-    checkInput(registerInputFirstName, "register-alert-first-name", inputIndexes.firstName, validateName);
+    checkInput(registerInputFirstName, "register-alert-first-name", inputIndexes.firstName, validateName, "First ");
 });
 
 registerInputLastName.addEventListener("input", () => {
-    checkInput(registerInputLastName, "register-alert-last-name", inputIndexes.lastName, validateName);
+    checkInput(registerInputLastName, "register-alert-last-name", inputIndexes.lastName, validateName, 
+    "Last ");
 });
 
 registerInputEmail.addEventListener("input", () => {
-    checkInput(registerInputEmail, "register-alert-email", inputIndexes.email, validateEmail);
+    checkInput(registerInputEmail, "register-alert-email", inputIndexes.email, validateEmail, "Email ");
 });
 
 registerInputPassword.addEventListener("input", () => {
-    checkInput(registerInputPassword, "register-alert-password", inputIndexes.password, validatePassword);
+    checkInput(registerInputPassword, "register-alert-password", inputIndexes.password, validatePassword, "Password ");
 });
 
 registerInputReenterPassword.addEventListener("input", () => {
     checkPasswordToReEnterMatch();
 });
 
+registerInputCountry.addEventListener("input", ()=> {
+    checkInput(registerInputCountry, "register-alert-country", inputIndexes.country, validateString, "Country " );
+})
+
+registerInputZipCode.addEventListener("input", ()=> {
+    checkInput(registerInputZipCode, "register-alert-zip-code", inputIndexes.zip_code, validateNumber, "Zip-Code " );
+})
+
 const checkIfCanEnableButton = () => {
     (btnRegisterSubmit.disabled = !(inputOkArr[inputIndexes.firstName] 
         && inputOkArr[inputIndexes.lastName]  
         && inputOkArr[inputIndexes.email] 
         && inputOkArr[inputIndexes.password] 
+        && inputOkArr[inputIndexes.country]
+        && inputOkArr[inputIndexes.zip_code]
         && reEnterPasswordOk));
 }
 
@@ -119,6 +140,8 @@ btnRegisterSubmit.addEventListener("click", () => {
         && inputOkArr[inputIndexes.lastName]  
         && inputOkArr[inputIndexes.email] 
         && inputOkArr[inputIndexes.password] 
+        && inputOkArr[inputIndexes.country]
+        && inputOkArr[inputIndexes.zip_code]
         && reEnterPasswordOk))
     {
             return;

@@ -1,8 +1,8 @@
 import validate from "./validate.js";
-const validateEmail = (value) => {
+const validateEmail = (value, prefixLabel = "Email") => {
     const reg = new RegExp("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", "ig");
 
-    return validate(reg, value, 5, 255).map((err) => `email is ${err}`);
+    return validate(reg, value, 5, 255).map((err) => `${prefixLabel} is ${err}`);
 
 };
 

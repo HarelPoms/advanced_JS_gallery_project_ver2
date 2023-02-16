@@ -1,8 +1,8 @@
 import validate from "./validate.js";
-const validateString = (value, label) => {
-    const reg = new RegExp("/^[a-zA-Z]+$/", "ig");
+const validateString = (value, prefixLabel) => {
+    const reg = new RegExp("^[A-Za-z0-9]*$", "ig");
 
-    return validate(reg, value, 2, 10).map((err) => `${label} is ${err}`);
+    return validate(reg, value, 2, 10).map((err) => `${prefixLabel} is ${err}`);
 
 };
 

@@ -1,8 +1,8 @@
 import validate from "./validate.js";
-const validateNumber = (value, label) => {
-    const reg = new RegExp("/^\d+$/", "ig");
+const validateNumber = (value, prefixLabel) => {
+    const reg = new RegExp("^[0-9]+$", "ig");
 
-    return validate(reg, value, 2, 10).map((err) => `${label} is ${err}`);
+    return validate(reg, value, 2, 10).map((err) => `${prefixLabel} is ${err}`);
 
 };
 

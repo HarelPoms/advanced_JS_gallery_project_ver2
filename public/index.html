@@ -20,7 +20,6 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <!--https://freesvg.org/img/1669705921camera-logo-icon.png-->
                 <a class="navbar-brand" href="index.html"><img id="logo" src="./assets/images/CameraLogo_thumbnail.png"
                         alt="camera logo"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -57,7 +56,7 @@
         </nav>
         <main>
             <!-- home page -->
-            <div id="home-page" class="d-none">
+            <div id="home-page" class="d-block">
                 <h1>Home page</h1>
                 <!--Popup Section-->
                 <div class="popup-wrapper d-flex justify-content-center align-items-center d-none"
@@ -146,7 +145,7 @@
 
 
                 </div>
-                <div id="pictures_Gallery" class="d-none">
+                <div id="pictures-gallery" class="d-none">
                     <div class="row row-cols-1 row-cols-md-3 g-4" id="home-page-pictures-gallery">
 
                     </div>
@@ -161,8 +160,8 @@
                     </ul>
                 </div>
 
-                <div class="carousel d-none" id="propertiesCarousel">
-                    <div class="img-container" id="home-page-properties-carousel"></div>
+                <div class="carousel d-none" id="pictures-carousel">
+                    <div class="img-container" id="home-page-pictures-carousel"></div>
                     <div class="d-flex justify-content-around">
                         <button type="button" class="btn btn-primary" id="back-carousel-btn">
                             <i class="bi bi-arrow-left"></i>
@@ -227,6 +226,9 @@
                                             placeholder="country" />
                                         <label for="register-input-country">Country</label>
                                     </div>
+                                    <div class="alert alert-danger d-none" role="alert" id="register-alert-country">
+                                        Country Rules
+                                    </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-floating mb-3">
@@ -266,6 +268,9 @@
                                     <input type="text" class="form-control" id="register-input-zip-code"
                                         placeholder="Zip Code" />
                                     <label for="register-input-zip-code">Zip Code</label>
+                                </div>
+                                <div class="alert alert-danger d-none" role="alert" id="register-alert-zip-code">
+                                    Zip Code Rules
                                 </div>
                             </div>
                         </div>
@@ -342,7 +347,7 @@
                 </form>
             </div>
             <!-- login page -->
-            <div id="login-page" class="d-block">
+            <div id="login-page" class="d-none">
                 <h1>Login page</h1>
                 <form id="login-form" onsubmit="event.preventDefault()">
 
