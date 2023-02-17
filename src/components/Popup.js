@@ -1,13 +1,12 @@
-const editPicturesPopupImgDisplay = document.getElementById("editPicturesPopupImgDisplay");
-const editPicturesPopupUrl = document.getElementById("editPicturesPopupUrl");
-const editPicturesPopupAlt = document.getElementById("editPicturesPopupAlt");
-const editPicturesPopupCredit = document.getElementById("editPicturesPopupCredit");
-const editPicturesPopupPrice = document.getElementById("editPicturesPopupPrice");
-const editPicturesPopup = document.getElementById("editPicturesPopup");
-const editPicturesCancelBtn = document.getElementById("editPicturesPopupCancelBtn");
-const editPicturesSaveBtn = document.getElementById("editPicturesPopupSaveBtn");
+let editPicturesPopupImgDisplay;
+let editPicturesPopupUrl;
+let editPicturesPopupAlt;
+let editPicturesPopupCredit;
+let editPicturesPopupPrice;
+let editPicturesPopup;
+let editPicturesCancelBtn;
+let editPicturesSaveBtn;
 let selectedPicture, editPicture;
-
 
 const initPopup = (selectedPictureFromHomePage, editPictureFromHomePage) => {
     selectedPicture = selectedPictureFromHomePage;
@@ -19,6 +18,17 @@ const initPopup = (selectedPictureFromHomePage, editPictureFromHomePage) => {
     editPicturesPopupImgDisplay.src = selectedPicture.url;
     showPopup();
 };
+
+const initElems = () => {
+    editPicturesPopupImgDisplay = document.getElementById("editPicturesPopupImgDisplay");
+    editPicturesPopupUrl = document.getElementById("editPicturesPopupUrl");
+    editPicturesPopupAlt = document.getElementById("editPicturesPopupAlt");
+    editPicturesPopupCredit = document.getElementById("editPicturesPopupCredit");
+    editPicturesPopupPrice = document.getElementById("editPicturesPopupPrice");
+    editPicturesPopup = document.getElementById("editPicturesPopup");
+    editPicturesCancelBtn = document.getElementById("editPicturesPopupCancelBtn");
+    editPicturesSaveBtn = document.getElementById("editPicturesPopupSaveBtn");
+}
 
 const showPopup = () => {
     editPicturesPopup.classList.remove("d-none");
@@ -33,7 +43,7 @@ const isImage = (src) => {
     let imageNew = new Image();
     
     imageNew.src = src;
-    
+
     // Get accurate measurements from that.
     if ((imageNew.width > 0) && (imageNew.height > 0)){
         return true;
@@ -43,6 +53,7 @@ const isImage = (src) => {
 }
 
 window.addEventListener("load", () => {
+    initElems();
     editPicturesSaveBtn.addEventListener("click", () => {
         selectedPicture.url = editPicturesPopupUrl.value;
         selectedPicture.alt = editPicturesPopupAlt.value;
