@@ -49,7 +49,6 @@ const createCard = (id, url, alt, credit, price) => {
             </li>
         </ul>
         <div class="card-body d-flex justify-content-center">
-            
             ${isAdmin ? adminBtns : ""}
         </div>
         </div>

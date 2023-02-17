@@ -1,4 +1,5 @@
 import {initializePicturesGallery, updatePicturesGallery} from "../components/PicturesGallery.js";
+import { initializePicturesList, updatePicturesList } from "../components/PicturesList.js";
 import {initPopup} from "../components/Popup.js";
 
 import checkIfAdmin from "../utils/checkIfAdmin.js";
@@ -24,6 +25,7 @@ window.addEventListener("load", ()=>{
     originalPicturesArr = [...picturesArr];
     isAdmin = checkIfAdmin();
     initializePicturesGallery(picturesArr, isAdmin, deletePicture, showPopup);
+    initializePicturesList(picturesArr, isAdmin, deletePicture, showPopup);
     initElements();
     initBtns();
 })
@@ -35,7 +37,7 @@ const initElements = () =>{
     galleryOfItems = document.getElementById("pictures-gallery");
     listOfItems = document.getElementById("pictures-list");
     carouselOfItems = document.getElementById("pictures-carousel");
-    currentDisplayMode = galleryOfItems; // choose who we want to display
+    currentDisplayMode = listOfItems; // choose who we want to display
     switchToAnotherDisplayMode(currentDisplayMode);
 }
 
@@ -76,6 +78,7 @@ const switchToAnotherDisplayMode = (DisplayToSwitchTo) => {
 
 const updateDisplays = () => {
     updatePicturesGallery(picturesArr);
+    updatePicturesList(propertiesArr);
 }
 
 const saveToLocalStorage = (arrToSave) => {

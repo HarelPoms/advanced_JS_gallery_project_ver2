@@ -72,4 +72,8 @@ footer {
 
 .editPictureCardBody {
   height: 18.75rem;
+}
+
+.PicTextContent {
+  word-wrap: break-word;
 }/*# sourceMappingURL=galleryStyles.css.map */
