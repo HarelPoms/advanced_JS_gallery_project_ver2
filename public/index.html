@@ -56,14 +56,15 @@
         </nav>
         <main>
             <!-- home page -->
-            <div id="home-page" class="d-none">
+            <div id="home-page" class="d-block">
                 <h1>Home page</h1>
                 <!--Popup Section-->
                 <div class="popup-wrapper d-flex justify-content-center align-items-center d-none"
                     id="editPicturesPopup">
                     <div class="popup-div" id="editPicturesPopupChild">
                         <div class="container">
-                            <div class="card text-center d-flex justify-content-between">
+                            <div class="card text-center d-flex justify-content-between responsiveResize"
+                                id="editPicturesPopupHeaderAndCancel">
                                 <h3>
                                     EDIT PICTURE FORM
                                     <button type="button" class="btn btn-danger" id="editPicturesPopupCancelBtn">
@@ -75,7 +76,7 @@
                         <div class="container d-flex">
 
                             <div class="card">
-                                <div class="card-body">
+                                <div class="card-body editPictureCardBody responsiveResize">
                                     <h5 class="card-title">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="editPicturesPopupUrl"
@@ -110,7 +111,8 @@
                         </div>
                         <div class="container">
                             <div class="card text-center">
-                                <button type="button" class="btn btn-success" id="editPicturesPopupSaveBtn">
+                                <button type="button" class="btn btn-success responsiveResize"
+                                    id="editPicturesPopupSaveBtn">
                                     <i class="bi bi-check-circle-fill"></i> Save
                                 </button>
                             </div>
@@ -177,7 +179,7 @@
                 <h1>Contact us</h1>
             </div>
             <!-- register page -->
-            <div id="register-page" class="d-block">
+            <div id="register-page" class="d-none">
 
                 <form id="register-form" onsubmit="event.preventDefault()">
                     <div class="container">

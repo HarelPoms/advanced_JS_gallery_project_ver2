@@ -28,6 +28,20 @@ const hidePopup = () => {
     editPicturesPopup.classList.add("d-none");
 }
 
+const isImage = (src) => {
+    // Create new offscreen image to test
+    let imageNew = new Image();
+    
+    imageNew.src = src;
+    
+    // Get accurate measurements from that.
+    if ((imageNew.width > 0) && (imageNew.height > 0)){
+        return true;
+    } else {
+        return false;
+    }
+}
+
 window.addEventListener("load", () => {
     editPicturesSaveBtn.addEventListener("click", () => {
         selectedPicture.url = editPicturesPopupUrl.value;
@@ -39,7 +53,15 @@ window.addEventListener("load", () => {
     });
 
     editPicturesPopupUrl.addEventListener("input", () => {
-        editPicturesPopupImgDisplay.src = editPicturesPopupUrl.value;
+        let URLValidityCheck = isImage(editPicturesPopupUrl.value);
+        if(URLValidityCheck){
+            editPicturesPopupImgDisplay.src = editPicturesPopupUrl.value;
+            editPicturesSaveBtn.disabled = false;
+        }
+        else{
+            editPicturesPopupImgDisplay.src = "../../public/assets/images/invalid_url.png";
+            editPicturesSaveBtn.disabled = true;
+        }
     });
     editPicturesCancelBtn.addEventListener("click", () => {
         hidePopup();

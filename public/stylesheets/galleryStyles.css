@@ -66,5 +66,10 @@ footer {
 #editPicturesPopupCancelBtn {
   position: absolute;
   right: 0;
-  bottom: 0.05em;
+  bottom: 0;
+  height: 100%;
+}
+
+.editPictureCardBody {
+  height: 18.75rem;
 }/*# sourceMappingURL=galleryStyles.css.map */
