@@ -1,29 +1,18 @@
+import { clearEventListeners } from "../utils/clearEventListener.js";
+import { createBtnEventListener } from "../utils/createBtnEventListener.js";
+
 let listPicturesUnorderedList;
 let picturesArr;
 let isAdmin;
-let deleteProperty;
+let deletePicture;
 let showPopup;
-
-const LIST_HEADLINES = `<li class="list-group-item ms-2">
-                            <div class="row">
-                                <div class="col-md-1">No.</div>
-                                <div class="col-md-1">
-                                    Image
-                                </div>
-                                <div class="col-md-4">
-                                    Pic
-                                </div>
-                                <div class="col-md-2">Title</div>
-                                <div class="col-md-2">Credit</div>
-                                <div class="col-md-1">Edit</div>
-                                <div class="col-md-1">Cancel</div>
-                            </div>
-                        </li>`;
+const ADMIN_HEADLINES_ACTIONS = `<div class="col-md-1">Edit</div>
+                                <div class="col-md-1">Cancel</div>`;
 
 const initializePicturesList = (picturesArrFromHomePage, isAdminParam,deletePictureFromHomePage, showPopupFromHomePage) => {
     isAdmin = isAdminParam;   
     listPicturesUnorderedList = document.getElementById("home-page-pictures-list");
-    deleteProperty = deletePictureFromHomePage;
+    deletePicture = deletePictureFromHomePage;
     updatePicturesList(picturesArrFromHomePage);
     showPopup = showPopupFromHomePage;
 }
@@ -33,6 +22,21 @@ const updatePicturesList = (picturesArrFromHomePage) => {
     createList();
 }
 
+const getIdFromClick = (ev) =>{
+    let idFromId = ev.target.id.split("-");
+    if(!ev.target.id){
+        idFromId = ev.target.parentElement.id.split("-");
+    }
+    return(idFromId[1]);
+}
+
+const handleDeleteBtnClick = (ev) => {
+    deletePicture(+(getIdFromClick(ev)));
+};
+
+const handleEditBtnClick = (ev) => {
+    showPopup(getIdFromClick(ev));
+}
 
 const createListItem = (id, url, alt, credit) => {
     const adminBtns = `<div class="col-md-1">
@@ -61,30 +65,42 @@ const createListItem = (id, url, alt, credit) => {
                     </div>
                     <div class="col-md-2">${alt}</div>
                     <div class="col-md-2">${credit}</div>
-                    <div class="col-md-1">
-                        <button class="btn btn-warning" id="PictureListEditButton-${id}">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                    </div>
-                    <div class="col-md-1">
-                        <button class="btn btn-danger" id="PictureListDeleteButton-${id}">
-                            <i class="bi bi-trash3-fill"></i>
-                        </button>
-                    </div>
+                    ${isAdmin ? adminBtns : ""}
                 </div>
             </li>
     `;
 }
 
 const createList = () => {
-    let buffer = "" + LIST_HEADLINES;
+    const LIST_HEADLINES = `
+    <li class="list-group-item ms-2">
+        <div class="row">
+            <div class="col-md-1">No.</div>
+            <div class="col-md-1">
+                Image
+            </div>
+            <div class="col-md-4">
+                Pic
+            </div>
+            <div class="col-md-2">Title</div>
+            <div class="col-md-2">Credit</div>
+            ${isAdmin ? ADMIN_HEADLINES_ACTIONS : ""}
+        </div>
+    </li>`;
 
+    clearEventListeners("PictureListDeleteButton", handleDeleteBtnClick);
+    clearEventListeners("PictureListEditButton", handleEditBtnClick);
+
+    let buffer = "" + LIST_HEADLINES;
 
     for (let picture of picturesArr){
         buffer += createListItem(picture.id,picture.url,picture.alt,picture.credit);
     }
 
     listPicturesUnorderedList.innerHTML = buffer;
+
+    createBtnEventListener("PictureListDeleteButton", handleDeleteBtnClick);
+    createBtnEventListener("PictureListEditButton", handleEditBtnClick);
 }
 
 export {initializePicturesList, updatePicturesList};

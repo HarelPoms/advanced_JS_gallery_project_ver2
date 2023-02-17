@@ -67,8 +67,7 @@ btnLogin.addEventListener("click", () => {
     localStorage.setItem("token", JSON.stringify({id: user.id, first_name:user.first_name, 
         last_name: user.last_name, email:user.email, isAdmin: user.isAdmin}));
     //initProfile(user);
-    handlePageChange(PAGES.HOME);
-    //location.reload();
+    location.reload();
 });
 
 loginRegisterIfNoAccountLink.addEventListener("click", ()=>{

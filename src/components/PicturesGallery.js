@@ -1,3 +1,6 @@
+import { clearEventListeners } from "../utils/clearEventListener.js";
+import { createBtnEventListener } from "../utils/createBtnEventListener.js";
+
 let galleryDiv;
 let isAdmin;
 let picturesArr;
@@ -70,20 +73,6 @@ const handleDeleteBtnClick = (ev) => {
 
 const handleEditBtnClick = (ev) => {
     showPopup(getIdFromClick(ev));
-}
-
-const clearEventListeners = (idKeyword, handleFunc) => {
-    let BtnsBefore = document.querySelectorAll(`[id^='${idKeyword}-']`);
-    for (let Btn of BtnsBefore) {
-        Btn.removeEventListener("click", handleFunc);
-    }
-}
-
-const createBtnEventListener = (idKeyword, handleFunc) => {
-    let Btns = document.querySelectorAll(`[id^=${idKeyword}-]`);
-    for (let Btn of Btns){
-        Btn.addEventListener("click", handleFunc);
-    }
 }
 
 const createGallery = () => {

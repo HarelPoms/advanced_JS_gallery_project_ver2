@@ -78,7 +78,7 @@ const switchToAnotherDisplayMode = (DisplayToSwitchTo) => {
 
 const updateDisplays = () => {
     updatePicturesGallery(picturesArr);
-    updatePicturesList(propertiesArr);
+    updatePicturesList(picturesArr);
 }
 
 const saveToLocalStorage = (arrToSave) => {
