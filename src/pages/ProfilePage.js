@@ -6,8 +6,7 @@ import validatePassword from "../validation/validatePassword.js";
 import validateName from "../validation/validateName.js";
 import validateString from "../validation/validateString.js";
 import validateNumber from "../validation/validateNumber.js";
-import User from "../models/User.js";
-import Address from "../models/Address.js"
+import checkIfAdmin from "../utils/checkIfAdmin.js";
 
 
 let profileInputFirstName;
@@ -66,6 +65,14 @@ const fillInputsWithCurrUserData = () => {
     profileInputPassword.value = currUser.password;
     profileInputReenterPassword.value = currUser.password;
     profileIsAdminChkbox.checked = currUser.isAdmin;
+    if(checkIfAdmin())
+    {
+        profileIsAdminChkbox.disabled = false;
+    }
+    else
+    {
+        profileIsAdminChkbox.disabled = true;
+    }
 }
 
 window.addEventListener("load", () => {
@@ -73,7 +80,7 @@ window.addEventListener("load", () => {
     initInputEventListeners();
     initBtns();
     initScreenDetails();
-    priorDataChecks();
+    initDetailChecks();
 });
 
 const initScreenDetails = () => {
@@ -115,46 +122,6 @@ const checkPasswordToReEnterMatch = () => {
         document.getElementById("profile-alert-re_enter-password").innerHTML = "Re-entered password doesn't match actual given password";
     }
     checkIfCanEnableButton();
-}
-
-const priorDataChecks = ()=>{
-    if (profileInputFirstName.value !== "") {
-        checkInput(profileInputFirstName, "profile-alert-first-name", inputIndexes.firstName, validateName, "First ");
-    }
-    if (profileInputLastName.value !== "") {
-        checkInput(profileInputLastName, "profile-alert-last-name", inputIndexes.lastName, validateName, "Last ");
-    }
-    if (profileInputCountry.value !== "") {
-        checkInput(profileInputCountry, "profile-alert-country", inputIndexes.country, validateString, "Country ");
-    }
-    if (profileInputState.value !== "") {
-        checkInput(profileInputState, "profile-alert-state", inputIndexes.state, validateString, "State ");
-    }
-    if (profileInputCity.value !== "") {
-        checkInput(profileInputCity, "profile-alert-city", inputIndexes.city, validateString, "City ");
-    }
-    if (profileInputStreet.value !== "") {
-        checkInput(profileInputStreet, "profile-alert-street", inputIndexes.street, validateString, "Street ");
-    }
-    if (profileInputHouseNumber.value !== "") {
-        checkInput(profileInputHouseNumber, "profile-alert-house-number", inputIndexes.house_number, validateNumber, "House Number ");
-    }
-    if (profileInputZipCode.value !== "") {
-        checkInput(profileInputZipCode, "profile-alert-zip-code", inputIndexes.zip_code, validateNumber, "Zip-Code " );
-    }
-    if (profileInputEmail.value !== "") {
-        checkInput(profileInputEmail, "profile-alert-email", inputIndexes.email, validateEmail, "Email ");
-    }
-    if (profileInputPhone.value !== "") {
-        checkInput(profileInputPhone, "profile-alert-phone", inputIndexes.phone, validateNumber,
-        "Phone " );
-    }
-    if (profileInputPassword.value !== "") {
-        checkInput(profileInputPassword, "profile-alert-password", inputIndexes.password, validatePassword, "Password ");
-    }
-    if (profileInputReenterPassword.value !== "") {
-        checkPasswordToReEnterMatch();
-    }
 }
 
 const initElems = () => {
@@ -245,7 +212,40 @@ const initBtns = () => {
             return;
     }
 
+    currUser.first_name = profileInputFirstName.value;
+    currUser.last_name = profileInputLastName.value;
+
+    currUser.address.country = profileInputCountry.value;
+    currUser.address.state = profileInputState.value;
+    currUser.address.city = profileInputCity.value;
+    currUser.address.street = profileInputStreet.value;
+    currUser.address.house_num = profileInputHouseNumber.value;
+    currUser.address.zip_code = profileInputZipCode.value;
+
+    currUser.email = profileInputEmail.value;
+    currUser.phone = profileInputPhone.value;
+    currUser.password = profileInputPassword.value;
+    currUser.password = profileInputReenterPassword.value;
+    currUser.isAdmin = profileIsAdminChkbox.checked;
+
+    let users = localStorage.getItem("users");
+    let token = localStorage.getItem("token");
+    if (users && token) {
+        //we have users
+        users = JSON.parse(users); // convert from string to array of objects
+        token = JSON.parse(token);
+        let userEmail = users.find((item) => item.email === profileInputEmail.value);
+        let user = users.find((item) => item.id === token.id);
+        if (userEmail && user.id !== userEmail.id) {
+            //the email already token
+            console.log("Email already taken");
+        }
+    }
     
+    let updatedUsers = users.map((user) => user.id === currUser.id ? currUser : user);
+    localStorage.setItem("users", JSON.stringify(updatedUsers));
+    localStorage.setItem("token", JSON.stringify({id: currUser.id, first_name: currUser.first_name, last_name: currUser.last_name, email: currUser.email, isAdmin: currUser.isAdmin}));
+    location.reload();
 })
 
     btnProfileCancel.addEventListener("click", ()=> {
