@@ -58,13 +58,25 @@ const initBtns = () => {
     });
 
     document.getElementById("homeDisplaySortASC").addEventListener("click", () => {
-        // sortProperties();
+        sortPictures();
     });
 
     document.getElementById("homeDisplaySortDESC").addEventListener("click", () => {
-        // sortProperties(false);
+        sortPictures(false);
     });
 
+}
+
+const sortPictures = (asc = true) => {
+    if(asc){
+        //sort from a to z
+        picturesArr.sort((a,b) => a.alt.localeCompare(b.alt));
+    }
+    else{
+        //sort from z to a
+        picturesArr.sort((a,b) => b.alt.localeCompare(a.alt));
+    }
+    updateDisplays();
 }
 
 const switchToAnotherDisplayMode = (DisplayToSwitchTo) => {
