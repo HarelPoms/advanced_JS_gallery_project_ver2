@@ -157,13 +157,15 @@
                 </div>
 
                 <div class="carousel d-none" id="pictures-carousel">
-                    <div class="img-container" id="home-page-pictures-carousel"></div>
-                    <div class="d-flex justify-content-around">
-                        <button type="button" class="btn btn-primary" id="back-carousel-btn">
-                            <i class="bi bi-arrow-left"></i>
+                    <div id="home-page-pictures-carousel" class="d-flex justify-content-center">
+
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-danger" id="back-carousel-btn">
+                            Prev
                         </button>
-                        <button type="button" class="btn btn-primary" id="next-carousel-btn">
-                            <i class="bi bi-arrow-right"></i>
+                        <button type="button" class="btn btn-success" id="next-carousel-btn">
+                            Next
                         </button>
                     </div>
                 </div>
@@ -448,8 +450,10 @@
 
             </div>
         </main>
-        <footer class="border-top pt-3 d-flex justify-content-center">
-            2023©️
+        <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50 mt-auto">
+            <div class="container text-center">
+                Harel Poms 2023
+            </div>
         </footer>
     </div>
     <script src="../src/app.js" type="module"></script>

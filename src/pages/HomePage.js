@@ -1,5 +1,6 @@
 import {initializePicturesGallery, updatePicturesGallery} from "../components/PicturesGallery.js";
 import { initializePicturesList, updatePicturesList } from "../components/PicturesList.js";
+import { initializePicturesCarousel, updatePicturesCarousel } from "../components/PicturesCarousel.js";
 import {initPopup} from "../components/Popup.js";
 
 import checkIfAdmin from "../utils/checkIfAdmin.js";
@@ -26,6 +27,7 @@ window.addEventListener("load", ()=>{
     isAdmin = checkIfAdmin();
     initializePicturesGallery(picturesArr, isAdmin, deletePicture, showPopup);
     initializePicturesList(picturesArr, isAdmin, deletePicture, showPopup);
+    initializePicturesCarousel(picturesArr);
     initElements();
     initBtns();
 })
@@ -37,7 +39,7 @@ const initElements = () =>{
     galleryOfItems = document.getElementById("pictures-gallery");
     listOfItems = document.getElementById("pictures-list");
     carouselOfItems = document.getElementById("pictures-carousel");
-    currentDisplayMode = listOfItems; // choose who we want to display
+    currentDisplayMode = carouselOfItems; // choose who we want to display
     switchToAnotherDisplayMode(currentDisplayMode);
 }
 
@@ -66,19 +68,20 @@ const initBtns = () => {
 }
 
 const switchToAnotherDisplayMode = (DisplayToSwitchTo) => {
-    // hide what we currently showing
+    // hide what we are currently showing
     currentDisplayMode.classList.remove("d-block");
     currentDisplayMode.classList.add("d-none");
     // show what we want to display now
     DisplayToSwitchTo.classList.remove("d-none");
     DisplayToSwitchTo.classList.add("d-block");
-    //this is what we displaying now
+    //this is what we are displaying now
     currentDisplayMode = DisplayToSwitchTo;
 };
 
 const updateDisplays = () => {
     updatePicturesGallery(picturesArr);
     updatePicturesList(picturesArr);
+    updatePicturesCarousel(picturesArr);
 }
 
 const saveToLocalStorage = (arrToSave) => {
