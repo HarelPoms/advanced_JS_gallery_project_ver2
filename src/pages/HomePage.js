@@ -104,7 +104,13 @@ const showPopup = (id) => {
     initPopup(selectedPicture, editPicture);
 }
 
+const showNewPopup = () => {
+    //placeholder
+};
+
 const editPicture = () => {
     saveToLocalStorage(originalPicturesArr);
     updateDisplays();
 };
+
+export {showNewPopup};

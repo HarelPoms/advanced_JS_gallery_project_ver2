@@ -4,6 +4,9 @@ import "./initialData/initialData.js";
 import "./pages/RegisterPage.js";
 import "./pages/LoginPage.js";
 import "./pages/HomePage.js";
+import { showNewPopup } from "./pages/HomePage.js";
+import initializeNavbar from "./components/Navbar.js";
+import checkIfConnected from "./utils/checkIfConnected.js";
 
 const navHomeLink = document.getElementById("nav-home-link");
 const navAboutUsLink = document.getElementById("nav-aboutus-link");
@@ -13,6 +16,14 @@ const navRegisterUsLink = document.getElementById("nav-register-link");
 const navEditProfilePage = document.getElementById("nav-edit-profile-page");
 const navLogout = document.getElementById("nav-logout");
 
+window.addEventListener("load", () => {
+    initializeNavbar(showNewPopup);
+    if (checkIfConnected()) {
+        let user = localStorage.getItem("token");
+        user = JSON.parse(user);
+        navEditProfilePage.innerText = user.first_name + " " + user.last_name;
+    }
+});
 
 navHomeLink.addEventListener("click", function(){
     handlePageChange(PAGES.HOME);
