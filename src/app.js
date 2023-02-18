@@ -33,3 +33,8 @@ navRegisterUsLink.addEventListener("click", function(){
 navEditProfilePage.addEventListener("click", () => {
     handlePageChange(PAGES.PROFILE);
 });
+
+navLogout.addEventListener("click", () => {
+    localStorage.removeItem("token");
+    location.reload();
+});

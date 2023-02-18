@@ -59,7 +59,7 @@ const initBtns = () => {
     if (prevIdx < 0) {
         prevIdx = picturesArr.length - 1; //last image
     }
-    let imgToHide = document.querySelector(`#carousel-item-${showIdx + 1}`);
+    let imgToHide = document.querySelector(`#carousel-item-${picIds[showIdx]}`);
     imgToHide.classList.add("fade-out");
 
     imgToHide.addEventListener("animationend", () => {
@@ -71,7 +71,7 @@ const initBtns = () => {
         animationStarted--;
     },{once:true});
 
-    let imgToShow = document.querySelector(`#carousel-item-${prevIdx + 1}`);
+    let imgToShow = document.querySelector(`#carousel-item-${picIds[prevIdx]}`);
     
     imgToShow.classList.remove("opacity-0");
     imgToShow.classList.remove("d-none");
@@ -95,7 +95,7 @@ const initBtns = () => {
         if(nextIdx >= picturesArr.length){
             nextIdx = 0;
         }
-        let imgToHide = document.querySelector(`#carousel-item-${showIdx + 1}`);
+        let imgToHide = document.querySelector(`#carousel-item-${picIds[showIdx]}`);
         imgToHide.classList.add("fade-out");
         imgToHide.addEventListener("animationend", () => {
 
@@ -107,7 +107,7 @@ const initBtns = () => {
         }, {once:true});
 
         console.log(nextIdx);
-        let imgToShow = document.querySelector(`#carousel-item-${nextIdx + 1}`);
+        let imgToShow = document.querySelector(`#carousel-item-${picIds[nextIdx]}`);
 
         imgToShow.classList.remove("opacity-0");
         imgToShow.classList.remove("d-none");
