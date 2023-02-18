@@ -236,6 +236,5 @@ const checkIfCanEnableButton = () => {
         && inputOkArr[inputIndexes.email] 
         && inputOkArr[inputIndexes.phone]
         && inputOkArr[inputIndexes.password] 
-        && reEnterPasswordOk));
-        
+        && reEnterPasswordOk));  
 }

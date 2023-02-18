@@ -14,7 +14,6 @@ const updatePicturesCarousel = (picturesArrFromHomePage) => {
     showIdx = 0;
     animationStarted = 0;
     picIds = picturesArr.map(picture => picture.id);
-    console.log(picIds);
     createCarousel();
 }
 
@@ -106,7 +105,6 @@ const initBtns = () => {
             animationStarted--;
         }, {once:true});
 
-        console.log(nextIdx);
         let imgToShow = document.querySelector(`#carousel-item-${picIds[nextIdx]}`);
 
         imgToShow.classList.remove("opacity-0");

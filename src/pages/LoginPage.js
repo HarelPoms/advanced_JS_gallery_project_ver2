@@ -2,6 +2,7 @@ import PAGES from "../models/pageModel.js"
 import { handlePageChange } from "../routes/router.js";
 import validateEmail from "../validation/validateEmail.js";
 import validatePassword from "../validation/validatePassword.js";
+import { initializeProfile } from "./ProfilePage.js"; 
 
 const loginEmailInput = document.getElementById("login-input-email");
 const loginPasswordInput = document.getElementById("login-input-password");
@@ -66,7 +67,7 @@ btnLogin.addEventListener("click", () => {
     }
     localStorage.setItem("token", JSON.stringify({id: user.id, first_name:user.first_name, 
         last_name: user.last_name, email:user.email, isAdmin: user.isAdmin}));
-    //initProfile(user);
+    initializeProfile(user);
     location.reload();
 });
 
