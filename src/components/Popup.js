@@ -1,3 +1,7 @@
+import getNextPictureId from "../utils/getNextPictureId.js";
+import Picture from "../models/Picture.js"
+
+let editPicturesHeader;
 let editPicturesPopupImgDisplay;
 let editPicturesPopupUrl;
 let editPicturesPopupAlt;
@@ -8,10 +12,34 @@ let editPicturesCancelBtn;
 let editPicturesSaveBtn;
 let selectedPicture, editPicture;
 
+const EMPTY_URL_PIC_PATH = "../../public/assets/images/empty_image_preview.png"
+const EDIT_PICTURE_FORM_HEADER = `EDIT PICTURE FORM
+                                <button type="button" class="btn btn-danger" id="editPicturesPopupCancelBtn">
+                                    <i class="bi bi-x-circle-fill"></i>
+                                </button>`;
+const CREATE_PICTURE_FORM_HEADER = `CREATE PICTURE FORM
+                                    <button type="button" class="btn btn-danger" id="editPicturesPopupCancelBtn">
+                                        <i class="bi bi-x-circle-fill"></i>
+                                    </button>`;
+
 const initPopup = (selectedPictureFromHomePage, editPictureFromHomePage) => {
-    selectedPicture = selectedPictureFromHomePage;
+    if(selectedPictureFromHomePage){
+        editPicturesHeader.innerHTML = EDIT_PICTURE_FORM_HEADER;
+        selectedPicture = selectedPictureFromHomePage;
+    }
+    else{
+        editPicturesHeader.innerHTML = CREATE_PICTURE_FORM_HEADER;
+        selectedPicture = new Picture(getNextPictureId(),EMPTY_URL_PIC_PATH, "", "", "");
+    }
+    initHeader();
+    
     editPicture = editPictureFromHomePage;
-    editPicturesPopupUrl.value = selectedPicture.url;
+    if(selectedPicture.url != EMPTY_URL_PIC_PATH){
+        editPicturesPopupUrl.value = selectedPicture.url;
+    }
+    else{
+        editPicturesPopupUrl.value = "";
+    }
     editPicturesPopupAlt.value = selectedPicture.alt;
     editPicturesPopupCredit.value = selectedPicture.credit;
     editPicturesPopupPrice.value = selectedPicture.price;
@@ -20,6 +48,7 @@ const initPopup = (selectedPictureFromHomePage, editPictureFromHomePage) => {
 };
 
 const initElems = () => {
+    editPicturesHeader = document.getElementById("popupHeader");
     editPicturesPopupImgDisplay = document.getElementById("editPicturesPopupImgDisplay");
     editPicturesPopupUrl = document.getElementById("editPicturesPopupUrl");
     editPicturesPopupAlt = document.getElementById("editPicturesPopupAlt");
@@ -54,6 +83,10 @@ const isImage = (src) => {
 
 window.addEventListener("load", () => {
     initElems();
+    initBtns();
+})
+
+const initBtns = () => {
     editPicturesSaveBtn.addEventListener("click", () => {
         selectedPicture.url = editPicturesPopupUrl.value;
         selectedPicture.alt = editPicturesPopupAlt.value;
@@ -77,6 +110,13 @@ window.addEventListener("load", () => {
     editPicturesCancelBtn.addEventListener("click", () => {
         hidePopup();
     })
-})
+}
+
+const initHeader = () => {
+    editPicturesCancelBtn = document.getElementById("editPicturesPopupCancelBtn");
+    editPicturesCancelBtn.addEventListener("click", () => {
+        hidePopup();
+    })
+}
 
 export {initPopup};

@@ -117,7 +117,15 @@ const showPopup = (id) => {
 }
 
 const showNewPopup = () => {
-    //placeholder
+    initPopup(undefined, addNewPicture);
+};
+
+const addNewPicture = (newPicture) => {
+    originalPicturesArr = [...originalPicturesArr, newPicture];
+    
+    localStorage.setItem("next_pic_id", (+newPicture.id + 1) + "");
+    picturesArr = [...originalPicturesArr];
+    editPicture();
 };
 
 const editPicture = () => {
