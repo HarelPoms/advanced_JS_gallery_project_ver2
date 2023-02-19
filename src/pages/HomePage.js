@@ -39,7 +39,7 @@ const initElements = () =>{
     galleryOfItems = document.getElementById("pictures-gallery");
     listOfItems = document.getElementById("pictures-list");
     carouselOfItems = document.getElementById("pictures-carousel");
-    currentDisplayMode = carouselOfItems; // choose who we want to display
+    currentDisplayMode = listOfItems; // choose who we want to display
     switchToAnotherDisplayMode(currentDisplayMode);
 }
 
