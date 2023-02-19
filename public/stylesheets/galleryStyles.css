@@ -118,4 +118,14 @@ footer {
 .about-us-div, .team-box {
   background-color: #000;
   color: #fff;
+}
+
+.about-us-team-header-row {
+  border-color: lime;
+  border-style: ridge;
+}
+
+.about-poetic-desc-div {
+  border-color: green;
+  border-style: double;
 }/*# sourceMappingURL=galleryStyles.css.map */
