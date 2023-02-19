@@ -6,8 +6,7 @@ let picturesArr;
 let isAdmin;
 let deletePicture;
 let showPopup;
-const ADMIN_HEADLINES_ACTIONS = `<div class="col-md-1">Edit</div>
-                                <div class="col-md-1">Cancel</div>`;
+
 
 const initializePicturesList = (picturesArrFromHomePage, isAdminParam,deletePictureFromHomePage, showPopupFromHomePage) => {
     isAdmin = isAdminParam;   
@@ -72,6 +71,10 @@ const createListItem = (id, url, alt, credit) => {
 }
 
 const createList = () => {
+    const ADMIN_HEADLINES_ACTIONS = `
+        <div class="col-md-1">Edit</div>
+        <div class="col-md-1">Delete</div>
+    `;
     const LIST_HEADLINES = `
     <li class="list-group-item ms-2">
         <div class="row">
