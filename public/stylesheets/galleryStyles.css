@@ -128,4 +128,9 @@ footer {
 .about-poetic-desc-div {
   border-color: green;
   border-style: double;
+}
+
+.divider-line {
+  border-color: lime;
+  border-style: solid;
 }/*# sourceMappingURL=galleryStyles.css.map */
