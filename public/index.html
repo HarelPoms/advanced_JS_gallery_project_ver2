@@ -63,7 +63,7 @@
                     id="editPicturesPopup">
                     <div class="popup-div" id="editPicturesPopupChild">
                         <div class="container">
-                            <div class="card text-center d-flex justify-content-between responsiveResize"
+                            <div class="card text-center d-flex justify-content-between"
                                 id="editPicturesPopupHeaderAndCancel">
                                 <h3 id="popupHeader">
                                     EDIT PICTURE FORM
@@ -75,8 +75,9 @@
                         </div>
                         <div class="container d-flex">
 
+                            <!--Picture Characteristics Card-->
                             <div class="card">
-                                <div class="card-body editPictureCardBody responsiveResize">
+                                <div class="card-body editPictureCardBody">
                                     <h5 class="card-title">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="editPicturesPopupUrl"
@@ -106,13 +107,38 @@
 
                             </div>
                             <div class="card">
+                                <div class="card-body editPictureCardBody">
+                                    <div class="form-floating popup-input">
+                                        <input type="text" class="form-control" id="editPicturesPopupCreatedAt"
+                                            placeholder="created at" />
+                                        <label for="editPicturesPopupCreatedAt">created at</label>
+                                    </div>
+                                    <div class="form-floating popup-input">
+                                        <input type="text" class="form-control" id="editPicturesPopupDescription"
+                                            placeholder="description" />
+                                        <label for="editPicturesPopupDescription">description</label>
+                                    </div>
+                                    <div class="form-floating popup-input">
+                                        <input type="text" class="form-control" id="editPicturesPopupTitle"
+                                            placeholder="title" />
+                                        <label for="editPicturesPopupTitle">title</label>
+                                    </div>
+                                    <div class="form-floating popup-input">
+                                        <input type="text" class="form-control" id="editPicturesPopupSubtitle"
+                                            placeholder="subtitle" />
+                                        <label for="editPicturesPopupSubtitle">subtitle</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Image Preview card-->
+                            <div class="card">
+                                <!--assets/images/empty_image_preview.png-->
                                 <img src="" class="card-img-top" alt="" id="editPicturesPopupImgDisplay" />
                             </div>
                         </div>
                         <div class="container">
                             <div class="card text-center">
-                                <button type="button" class="btn btn-success responsiveResize"
-                                    id="editPicturesPopupSaveBtn">
+                                <button type="button" class="btn btn-success" id="editPicturesPopupSaveBtn">
                                     <i class="bi bi-check-circle-fill"></i> Save
                                 </button>
                             </div>
