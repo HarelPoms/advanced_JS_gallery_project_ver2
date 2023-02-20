@@ -25,8 +25,8 @@ window.addEventListener("load", ()=>{
     picturesArr = JSON.parse(picturesArr);
     originalPicturesArr = [...picturesArr];
     isAdmin = checkIfAdmin();
-    initializePicturesGallery(picturesArr, isAdmin, deletePicture, showPopup);
-    initializePicturesList(picturesArr, isAdmin, deletePicture, showPopup);
+    initializePicturesGallery(picturesArr, isAdmin, deletePicture, showPopup, showExtraDetailsPopup);
+    initializePicturesList(picturesArr, isAdmin, deletePicture, showPopup, showExtraDetailsPopup);
     initializePicturesCarousel(picturesArr);
     initElements();
     initBtns();
@@ -119,6 +119,14 @@ const showPopup = (id) => {
 const showNewPopup = () => {
     initPopup(undefined, addNewPicture);
 };
+
+const showExtraDetailsPopup = (id) => {
+    let clickedPicture = picturesArr.find((picture) => picture.id === (+id));
+    if(!clickedPicture){
+        return;
+    }
+    initPopup(clickedPicture, undefined);
+}
 
 const addNewPicture = (newPicture) => {
     originalPicturesArr = [...originalPicturesArr, newPicture];

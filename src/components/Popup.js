@@ -13,8 +13,10 @@ let editPicturesPopupDescription;
 let editPicturesPopupTitle;
 let editPicturesPopupSubtitle;
 let editPicturesPopup;
+let editPicturesPrimaryDetailsCard;
 let editPicturesCancelBtn;
 let editPicturesSaveBtn;
+let editPicturesSaveBtnDiv;
 let selectedPicture, editPicture;
 
 const EMPTY_URL_PIC_PATH = "../../public/assets/images/empty_image_preview.png"
@@ -27,9 +29,21 @@ const CREATE_PICTURE_FORM_HEADER = `CREATE PICTURE FORM
                                         <i class="bi bi-x-circle-fill"></i>
                                     </button>`;
 
+const VIEW_PICTURE_FORM_HEADER = `
+                                Picture Extra Details
+                                <button type="button" class="btn btn-danger" id="editPicturesPopupCancelBtn">
+                                    <i class="bi bi-x-circle-fill"></i>
+                                </button>
+                                `;
+
 const initPopup = (selectedPictureFromHomePage, editPictureFromHomePage) => {
+    //Just viewing the picture
+    if(!editPictureFromHomePage){
+        editPicturesHeader.innerHTML = VIEW_PICTURE_FORM_HEADER;
+        selectedPicture = selectedPictureFromHomePage;
+    }
     //If editing existing picture
-    if(selectedPictureFromHomePage){
+    else if(selectedPictureFromHomePage){
         editPicturesHeader.innerHTML = EDIT_PICTURE_FORM_HEADER;
         selectedPicture = selectedPictureFromHomePage;
     }
@@ -60,6 +74,14 @@ const initPopup = (selectedPictureFromHomePage, editPictureFromHomePage) => {
     //
     editPicturesPopupImgDisplay.src = selectedPicture.url;
     showPopup();
+    if(!editPictureFromHomePage){
+        hidePrimaryDetailsAndSaveButton();
+        setSecondaryDetailsReadOnlyAttribute();
+    }
+    else{
+        showPrimaryDetailsAndSaveButton();
+        setSecondaryDetailsReadOnlyAttribute(false);
+    }
 };
 
 const initElems = () => {
@@ -74,8 +96,12 @@ const initElems = () => {
     editPicturesPopupDescription = document.getElementById("editPicturesPopupDescription");
     editPicturesPopupTitle = document.getElementById("editPicturesPopupTitle");
     editPicturesPopupSubtitle = document.getElementById("editPicturesPopupSubtitle");
-    //
+    //Getting the actual popup
     editPicturesPopup = document.getElementById("editPicturesPopup");
+    //Getting the primary details NOT to be shown on view mode
+    editPicturesPrimaryDetailsCard = document.getElementById("primaryPictureDetailsCard");
+    editPicturesSaveBtnDiv = document.getElementById("editPicturesSaveBtnDiv");
+
     editPicturesCancelBtn = document.getElementById("editPicturesPopupCancelBtn");
     editPicturesSaveBtn = document.getElementById("editPicturesPopupSaveBtn");
 }
@@ -86,6 +112,23 @@ const showPopup = () => {
 
 const hidePopup = () => {
     editPicturesPopup.classList.add("d-none");
+}
+
+const hidePrimaryDetailsAndSaveButton = () => {
+    editPicturesPrimaryDetailsCard.classList.add("d-none");
+    editPicturesSaveBtnDiv.classList.add("d-none");
+}
+
+const setSecondaryDetailsReadOnlyAttribute = (ReadOnly = true) => {
+    editPicturesPopupCreatedAt.readOnly = ReadOnly;
+    editPicturesPopupDescription.readOnly = ReadOnly;
+    editPicturesPopupTitle.readOnly = ReadOnly;
+    editPicturesPopupSubtitle.readOnly = ReadOnly;
+}
+
+const showPrimaryDetailsAndSaveButton = () => {
+    editPicturesPrimaryDetailsCard.classList.remove("d-none");
+    editPicturesSaveBtnDiv.classList.remove("d-none");
 }
 
 const isImage = (src) => {

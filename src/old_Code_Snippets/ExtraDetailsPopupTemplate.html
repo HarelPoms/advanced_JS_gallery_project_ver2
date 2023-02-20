@@ -1,0 +1,47 @@
+<!--View Extra Details Popup section-->
+<div class="popup-wrapper d-flex justify-content-center align-items-center d-none" id="moreInfoOnPicPopup">
+    <div class="popup-div" id="moreInfoOnPicPopupChild">
+        <div class="container">
+            <div class="card text-center d-flex justify-content-between" id="moreInfoOnPicPopupHeaderAndCancel">
+                <h3>
+                    Picture Extra Details
+                    <button type="button" class="btn btn-danger" id="moreInfoOnPicPopupCancelBtn">
+                        <i class="bi bi-x-circle-fill"></i>
+                    </button>
+                </h3>
+            </div>
+        </div>
+        <!--Extra details container-->
+        <div class="container d-flex">
+            <div class="card">
+                <div class="card-body moreInfoOnPicPopupCardBody">
+                    <div class="form-floating popup-input">
+                        <input type="text" class="form-control" id="moreInfoOnPicPopupCreatedAt"
+                            placeholder="created at" />
+                        <label for="moreInfoOnPicPopupCreatedAt">created at</label>
+                    </div>
+                    <div class="form-floating popup-input">
+                        <input type="text" class="form-control" id="moreInfoOnPicPopupDescription"
+                            placeholder="description" />
+                        <label for="moreInfoOnPicPopupDescription">description</label>
+                    </div>
+                    <div class="form-floating popup-input">
+                        <input type="text" class="form-control" id="moreInfoOnPicPopupTitle" placeholder="title" />
+                        <label for="moreInfoOnPicPopupTitle">title</label>
+                    </div>
+                    <div class="form-floating popup-input">
+                        <input type="text" class="form-control" id="moreInfoOnPicPopupSubtitle"
+                            placeholder="subtitle" />
+                        <label for="moreInfoOnPicPopupSubtitle">subtitle</label>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <!--assets/images/empty_image_preview.png for testing sessions-->
+                <img src="assets/images/empty_image_preview.png" class="card-img-top" alt=""
+                    id="moreInfoOnPicPopupImgDisplay" />
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -6,14 +6,16 @@ let picturesArr;
 let isAdmin;
 let deletePicture;
 let showPopup;
+let showExtraDetailsPopup;
 
 
-const initializePicturesList = (picturesArrFromHomePage, isAdminParam,deletePictureFromHomePage, showPopupFromHomePage) => {
+const initializePicturesList = (picturesArrFromHomePage, isAdminParam,deletePictureFromHomePage, showPopupFromHomePage, showExtraDetailsPopupFromHomePage) => {
     isAdmin = isAdminParam;   
     listPicturesUnorderedList = document.getElementById("home-page-pictures-list");
     deletePicture = deletePictureFromHomePage;
     updatePicturesList(picturesArrFromHomePage);
     showPopup = showPopupFromHomePage;
+    showExtraDetailsPopup = showExtraDetailsPopupFromHomePage;
 }
 
 const updatePicturesList = (picturesArrFromHomePage) => {
@@ -37,6 +39,10 @@ const handleEditBtnClick = (ev) => {
     showPopup(getIdFromClick(ev));
 }
 
+const handlePicClick = (ev) => {
+    showExtraDetailsPopup(getIdFromClick(ev));
+}
+
 const createListItem = (id, url, alt, credit) => {
     const adminBtns = `<div class="col-md-1">
                             <button class="btn btn-warning" id="PictureListEditButton-${id}">
@@ -52,7 +58,7 @@ const createListItem = (id, url, alt, credit) => {
                 <div class="row">
                     <div class="col-md-1">${id}</div>
                     <div class="col-md-1">
-                        <img src="${url}" alt="${alt}" class="img-fluid">
+                        <img src="${url}" alt="${alt}" class="img-fluid" id="PictureListThumbnail-${id}">
                     </div>
                     <div class="col-md-4">
                         <div class="card-body">
@@ -93,6 +99,7 @@ const createList = () => {
 
     clearEventListeners("PictureListDeleteButton", handleDeleteBtnClick);
     clearEventListeners("PictureListEditButton", handleEditBtnClick);
+    clearEventListeners("PictureListThumbnail", handlePicClick);
 
     let buffer = "" + LIST_HEADLINES;
 
@@ -104,6 +111,7 @@ const createList = () => {
 
     createBtnEventListener("PictureListDeleteButton", handleDeleteBtnClick);
     createBtnEventListener("PictureListEditButton", handleEditBtnClick);
+    createBtnEventListener("PictureListThumbnail", handlePicClick);
 }
 
 export {initializePicturesList, updatePicturesList};
