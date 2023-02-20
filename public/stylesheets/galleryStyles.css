@@ -115,7 +115,7 @@ footer {
   padding-bottom: 6.875rem;
 }
 
-.about-us-div, .team-box {
+.about-us-div, .team-box, .cards-display-how-to-section, .list-display-how-to-section {
   background-color: #000;
   color: #fff;
 }
