@@ -2,6 +2,7 @@ import PAGES from "../models/pageModel.js"
 import { handlePageChange } from "../routes/router.js";
 import validateEmail from "../validation/validateEmail.js";
 import validatePassword from "../validation/validatePassword.js";
+import checkIfInputIsValid from "../utils/checkIfInputIsValid.js";
 import { initializeProfile } from "./ProfilePage.js"; 
 
 let loginEmailInput;
@@ -13,8 +14,6 @@ window.addEventListener("load", () => {
     //when page is loaded
     initElems();
     initEventListeners();
-    loginEmailInput.value = "";
-    loginPasswordInput.value = "";
 });
 
 const initElems = ()=> {
@@ -22,36 +21,17 @@ const initElems = ()=> {
     loginPasswordInput = document.getElementById("login-input-password");
     loginRegisterIfNoAccountLink = document.getElementById("login-goto-register-page");
     btnLogin = document.getElementById("login-btn");
+    loginEmailInput.value = "";
+    loginPasswordInput.value = "";
 }
 
 const initEventListeners = () => {
     loginEmailInput.addEventListener("input", () => {
-        let errorArr = validateEmail(loginEmailInput.value);
-        if (errorArr.length === 0) {
-            //no error
-            loginEmailInput.classList.remove("is-invalid");
-            document.getElementById("login-alert-email").classList.add("d-none");
-        } else {
-            // error/s
-            loginEmailInput.classList.add("is-invalid");
-            document.getElementById("login-alert-email").classList.remove("d-none");
-            document.getElementById("login-alert-email").innerHTML = errorArr.join("<br>"); 
-        }
-});
+        checkIfInputIsValid(loginEmailInput, "login-alert-email", validateEmail, "Email ");
+    });
 
     loginPasswordInput.addEventListener("input", () => {
-        let errorArr = validatePassword(loginPasswordInput.value);
-        if (errorArr.length === 0) {
-            //no error
-            loginPasswordInput.classList.remove("is-invalid");
-            document.getElementById("login-alert-password").classList.add("d-none");
-        } else {
-            // error/s
-            loginPasswordInput.classList.add("is-invalid");
-            document.getElementById("login-alert-password").classList.remove("d-none");
-            document.getElementById("login-alert-password").innerHTML =
-            errorArr.join("<br>");
-        }
+        checkIfInputIsValid(loginPasswordInput, "login-alert-password", validatePassword, "Password ");
     });
 
     btnLogin.addEventListener("click", () => {

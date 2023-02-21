@@ -5,6 +5,7 @@ import validatePassword from "../validation/validatePassword.js";
 import validateName from "../validation/validateName.js";
 import validateString from "../validation/validateString.js";
 import validateNumber from "../validation/validateNumber.js";
+import checkIfInputIsValid from "../utils/checkIfInputIsValid.js";
 import User from "../models/User.js";
 import Address from "../models/Address.js"
 
@@ -45,17 +46,10 @@ let reEnterPasswordOk = false;
 let next_user_id = 1;
 
 const checkInput = (registerInput, registerAlert, registerBooleanIndex, validateFunc, prefixLabel) => {
-    let errorArr = validateFunc(registerInput.value, prefixLabel);
-    if (errorArr.length === 0) {
-    //no error
-    registerInput.classList.remove("is-invalid");
-    document.getElementById(registerAlert).classList.add("d-none");
-    inputOkArr[registerBooleanIndex] = true;
-    } else {
-        // error/s
-        registerInput.classList.add("is-invalid");
-        document.getElementById(registerAlert).classList.remove("d-none");
-        document.getElementById(registerAlert).innerHTML = errorArr.join("<br>"); 
+    if (checkIfInputIsValid (registerInput, registerAlert, validateFunc, prefixLabel)){
+        inputOkArr[registerBooleanIndex] = true;
+    }
+    else{
         inputOkArr[registerBooleanIndex] = false;
     }
     checkIfCanEnableButton();
