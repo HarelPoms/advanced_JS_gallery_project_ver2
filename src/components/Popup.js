@@ -1,6 +1,7 @@
 import getNextPictureId from "../utils/getNextPictureId.js";
 import Picture from "../models/Picture.js"
 import AdditionalDetails from "../models/AdditionalDetails.js";
+import validateImgUrl from "../validation/validateImgUrl.js";
 
 let editPicturesHeader;
 let editPicturesPopupImgDisplay;
@@ -137,8 +138,8 @@ const isImage = (src) => {
     
     imageNew.src = src;
 
-    // Get accurate measurements from that.
-    if ((imageNew.width > 0) && (imageNew.height > 0)){
+    // Check if its a real image meeting the exact specifications required, 300x300
+    if ((imageNew.width > 0) && (imageNew.height > 0) && (imageNew.width == 300) && (imageNew.height == 300)){
         return true;
     } else {
         return false;
@@ -171,8 +172,10 @@ const initBtns = () => {
     })
 
     editPicturesPopupUrl.addEventListener("input", () => {
-        let URLValidityCheck = isImage(editPicturesPopupUrl.value);
-        if(URLValidityCheck){
+        let URLRegexValidityCheck = validateImgUrl(editPicturesPopupUrl.value);
+        let URLImageValidityCheck = isImage(editPicturesPopupUrl.value);
+        
+        if(URLRegexValidityCheck.length == 0 && URLImageValidityCheck){
             editPicturesPopupImgDisplay.src = editPicturesPopupUrl.value;
             editPicturesSaveBtn.disabled = false;
         }
