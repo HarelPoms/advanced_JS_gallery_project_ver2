@@ -1,6 +1,7 @@
 import validateEmail from "../validation/validateEmail.js";
 import validateName from "../validation/validateName.js";
 import validateString from "../validation/validateString.js";
+import checkIfInputIsValid from "../utils/checkIfInputIsValid.js"
 let contactNameInput;
 let contactEmailInput;
 let contactMessageInput;
@@ -21,17 +22,10 @@ window.addEventListener("load", () => {
 });
 
 const checkInput = (contactInput, contactAlert, contactBooleanIndex, validateFunc, prefixLabel) => {
-    let errorArr = validateFunc(contactInput.value, prefixLabel);
-    if (errorArr.length === 0) {
-    //no error
-        contactInput.classList.remove("is-invalid");
-        document.getElementById(contactAlert).classList.add("d-none");
+    if (checkIfInputIsValid (contactInput, contactAlert, validateFunc, prefixLabel)){
         inputOkArr[contactBooleanIndex] = true;
-    } else {
-        // error/s
-        contactInput.classList.add("is-invalid");
-        document.getElementById(contactAlert).classList.remove("d-none");
-        document.getElementById(contactAlert).innerHTML = errorArr.join("<br>"); 
+    }
+    else{
         inputOkArr[contactBooleanIndex] = false;
     }
     checkIfCanEnableButton();
