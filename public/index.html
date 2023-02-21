@@ -56,7 +56,7 @@
         </nav>
         <main>
             <!-- home page -->
-            <div id="home-page" class="d-block">
+            <div id="home-page" class="d-none">
                 <h1>Home page</h1>
                 <!--Popup Section For editing/creating new pictures-->
                 <div class="popup-wrapper d-flex justify-content-center align-items-center d-none"
@@ -366,479 +366,450 @@
                     </div>
                 </div>
             </div>
-            <!-- contact us -->
-            <div id="contact-us" class="d-none">
+            <!-- contact us page-->
+            <div id="contact-us" class="d-block">
                 <h1>Contact us</h1>
-                <!-- Wrapper container -->
-                <div class="container py-4">
 
-                    <!-- Bootstrap 5 starter form -->
-                    <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                <!-- Bootstrap 5 starter form -->
+                <form id="contactForm" onsubmit="event.preventDefault()">
 
-                        <!-- Name input -->
-                        <div class="mb-3">
-                            <label class="form-label" for="name">Name</label>
-                            <input class="form-control" id="name" type="text" placeholder="Name"
-                                data-sb-validations="required" />
-                            <div class="invalid-feedback" data-sb-feedback="name:required">Name is required.</div>
+                    <!-- Name input -->
+                    <div class="mb-3">
+                        <label class="form-label" for="contact-input-name">Name</label>
+                        <input class="form-control" id="contact-input-name" type="text" placeholder="Name"
+                            data-sb-validations="required" />
+                        <div id="contact-alert-name" role="alert" class="d-none alert alert-danger">
+                        </div>
+                    </div>
+
+
+                    <!-- Email address input -->
+                    <div class="mb-3">
+                        <label class="form-label" for="contact-input-email">Email Address</label>
+                        <input class="form-control" id="contact-input-email" type="email" placeholder="Email Address"
+                            data-sb-validations="required, email" />
+                        <div id="contact-alert-email" class="alert alert-danger d-none"></div>
+                    </div>
+
+                    <!-- Message input -->
+                    <div class="mb-3">
+                        <label class="form-label" for="contact-input-message">Message</label>
+                        <textarea class="form-control" id="contact-input-message" type="text" placeholder="Message"
+                            style="height: 10rem;"></textarea>
+                        <div id="contact-alert-message" class="alert alert-danger d-none"></div>
+                    </div>
+
+                    <!-- Form submit button -->
+                    <div class="d-grid">
+                        <button class="btn btn-primary btn-lg disabled" id="contact-btn" type="submit">Submit</button>
+                    </div>
+
+                    <!-- Form submissions success message -->
+                    <div class="d-none d-flex justify-content-center alert alert-success" id="submitSuccessMessage">
+
+                    </div>
+
+                </form>
+
+            </div>
+    </div>
+    <!-- register page -->
+    <div id="register-page" class="d-none">
+
+        <form id="register-form" onsubmit="event.preventDefault()">
+            <div class="container">
+                <div class="row">
+                    <h1>Register page</h1>
+                </div>
+                <h5>Name</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <span class="d-none register-label">First Name</span>
+                            <input type="text" class="form-control" id="register-input-first-name"
+                                placeholder="Your first name" />
+                            <label for="register-input-first-name">First Name<span class="asterisk">*</span></label>
+                        </div>
+                        <div class="alert alert-danger d-none" role="alert" id="register-alert-first-name">
+                            First Name Rules
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="register-input-last-name"
+                                placeholder="Your last name" />
+                            <label for="register-input-last-name">Last Name<span class="asterisk">*</span></label>
+                        </div>
+                        <div class="alert alert-danger d-none" role="alert" id="register-alert-last-name">
+                            Last Name Rules
                         </div>
 
-                        <!-- Email address input -->
-                        <div class="mb-3">
-                            <label class="form-label" for="emailAddress">Email Address</label>
-                            <input class="form-control" id="emailAddress" type="email" placeholder="Email Address"
-                                data-sb-validations="required, email" />
-                            <div class="invalid-feedback" data-sb-feedback="emailAddress:required">Email Address is
-                                required.</div>
-                            <div class="invalid-feedback" data-sb-feedback="emailAddress:email">Email Address Email is
-                                not valid.</div>
-                        </div>
-
-                        <!-- Message input -->
-                        <div class="mb-3">
-                            <label class="form-label" for="message">Message</label>
-                            <textarea class="form-control" id="message" type="text" placeholder="Message"
-                                style="height: 10rem;" data-sb-validations="required"></textarea>
-                            <div class="invalid-feedback" data-sb-feedback="message:required">Message is required.</div>
-                        </div>
-
-                        <!-- Form submissions success message -->
-                        <div class="d-none" id="submitSuccessMessage">
-                            <div class="text-center mb-3">Form submission successful!</div>
-                        </div>
-
-                        <!-- Form submissions error message -->
-                        <div class="d-none" id="submitErrorMessage">
-                            <div class="text-center text-danger mb-3">Error sending message!</div>
-                        </div>
-
-                        <!-- Form submit button -->
-                        <div class="d-grid">
-                            <button class="btn btn-primary btn-lg disabled" id="submitButton"
-                                type="submit">Submit</button>
-                        </div>
-
-                    </form>
+                    </div>
 
                 </div>
-            </div>
-            <!-- register page -->
-            <div id="register-page" class="d-none">
-
-                <form id="register-form" onsubmit="event.preventDefault()">
-                    <div class="container">
-                        <div class="row">
-                            <h1>Register page</h1>
-                        </div>
-                        <h5>Name</h5>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <span class="d-none register-label">First Name</span>
-                                    <input type="text" class="form-control" id="register-input-first-name"
-                                        placeholder="Your first name" />
-                                    <label for="register-input-first-name">First Name<span
-                                            class="asterisk">*</span></label>
-                                </div>
-                                <div class="alert alert-danger d-none" role="alert" id="register-alert-first-name">
-                                    First Name Rules
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="register-input-last-name"
-                                        placeholder="Your last name" />
-                                    <label for="register-input-last-name">Last Name<span
-                                            class="asterisk">*</span></label>
-                                </div>
-                                <div class="alert alert-danger d-none" role="alert" id="register-alert-last-name">
-                                    Last Name Rules
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <h5>Address</h5>
-                        <div class="row">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="register-input-country"
-                                            placeholder="country" />
-                                        <label for="register-input-country">Country</label>
-                                    </div>
-                                    <div class="alert alert-danger d-none" role="alert" id="register-alert-country">
-                                        Country Rules
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="register-input-state"
-                                            placeholder="state" />
-                                        <label for="register-input-state">State</label>
-                                    </div>
-                                    <div class="alert alert-danger d-none" role="alert" id="register-alert-state">
-                                        State Rules
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="register-input-city"
-                                            placeholder="city" />
-                                        <label for="register-input-city">City</label>
-                                    </div>
-                                    <div class="alert alert-danger d-none" role="alert" id="register-alert-city">
-                                        City Rules
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="register-input-street"
-                                        placeholder="street" />
-                                    <label for="register-input-street">Street</label>
-                                </div>
-                                <div class="alert alert-danger d-none" role="alert" id="register-alert-street">
-                                    Street Rules
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="register-input-house-number"
-                                        placeholder="House Number" />
-                                    <label for="register-input-house-number">House Number</label>
-                                </div>
-                                <div class="alert alert-danger d-none" role="alert" id="register-alert-house-number">
-                                    House Number Rules
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="register-input-zip-code"
-                                        placeholder="Zip Code" />
-                                    <label for="register-input-zip-code">Zip Code</label>
-                                </div>
-                                <div class="alert alert-danger d-none" role="alert" id="register-alert-zip-code">
-                                    Zip Code Rules
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <h5>Means of Contact</h5>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="email" class="form-control" id="register-input-email"
-                                            placeholder="name@example.com" />
-                                        <label for="register-input-email">Email address<span
-                                                class="asterisk">*</span></label>
-                                    </div>
-                                    <div class="alert alert-danger d-none" role="alert" id="register-alert-email">
-                                        Email Rules
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="register-input-phone"
-                                            placeholder="Phone" />
-                                        <label for="register-input-phone">Phone</label>
-                                    </div>
-                                    <div class="alert alert-danger d-none" role="alert" id="register-alert-phone">
-                                        Phone Rules
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="password" class="form-control" id="register-input-password"
-                                            placeholder="Password" />
-                                        <label for="register-input-password">Password<span
-                                                class="asterisk">*</span></label>
-                                    </div>
-                                    <div class="alert alert-danger d-none" role="alert" id="register-alert-password">
-                                        Password Rules
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="password" class="form-control"
-                                            id="register-input-re_enter-password" placeholder="Password-Re-enter" />
-                                        <label for="register-input-re_enter-password">Re-Enter
-                                            Password<span class="asterisk">*</span></label>
-                                    </div>
-                                    <div class="alert alert-danger d-none" role="alert"
-                                        id="register-alert-re_enter-password">
-                                        Password Rules
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row isAdminRow">
-                                <div class="col-md-12 d-flex justify-content-center">
-                                    <input class="form-check-input is-admin-checkbox" type="checkbox" value=""
-                                        id="isAdminCheckbox">
-                                    <label class="form-check-label" for="isAdminCheckbox">
-                                        Is Admin
-                                    </label>
-                                </div>
-
-                            </div>
-                            <div class="row">
-                                <button class="btn btn-success register-btn" disabled="true"
-                                    id="register-submit-btn">Submit</button>
-                            </div>
-                            <div class="row">
-                                <button class="btn btn-danger register-btn" id="register-cancel-btn">Cancel</button>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </form>
-            </div>
-            <!-- login page -->
-            <div id="login-page" class="d-none">
-                <h1>Login page</h1>
-                <form id="login-form" onsubmit="event.preventDefault()">
-
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="login-input-email"
-                            placeholder="name@example.com" />
-                        <label for="login-input-email">Email address</label>
-                    </div>
-                    <div class="alert alert-danger d-none" role="alert" id="login-alert-email">
-                        Email Rules
-                    </div>
-                    <div class="form-floating">
-                        <input type="password" class="form-control" id="login-input-password" placeholder="Password" />
-                        <label for="login-input-password">Password</label>
-                    </div>
-                    <div class="alert alert-danger d-none" role="alert" id="login-alert-password">
-                        Password Rules
-                    </div>
-                    <div class="login-not-register-text-and-button">
-                        <span>
-                            Not registered yet?
-                            <a id="login-goto-register-page">Click here...</a>
-                        </span>
-                    </div>
-
-                    <div class="row mb-2">
-                        <button class="btn btn-success login-btn" id="login-btn">Login</button>
-                        <div class="alert alert-success d-none" role="alert" id="login-msg">
-                            Login success
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <button class="btn btn-danger login-btn" id="login-cancel-btn">Cancel</button>
-                    </div>
-                </form>
-            </div>
-            <!--Profile Page-->
-            <div id="profile-page" class="d-none">
-                <form id="profile-form" onsubmit="event.preventDefault()">
-                    <div class="container">
-                        <div class="row">
-                            <h1>Profile page</h1>
-                        </div>
-                        <h5>Name</h5>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <span class="d-none profile-label">First Name</span>
-                                    <input type="text" class="form-control" id="profile-input-first-name"
-                                        placeholder="Your first name" />
-                                    <label for="profile-input-first-name">First Name<span
-                                            class="asterisk">*</span></label>
-                                </div>
-                                <div class="alert alert-danger d-none" role="alert" id="profile-alert-first-name">
-                                    First Name Rules
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="profile-input-last-name"
-                                        placeholder="Your last name" />
-                                    <label for="profile-input-last-name">Last Name<span
-                                            class="asterisk">*</span></label>
-                                </div>
-                                <div class="alert alert-danger d-none" role="alert" id="profile-alert-last-name">
-                                    Last Name Rules
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <h5>Address</h5>
-                        <div class="row">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="profile-input-country"
-                                            placeholder="country" />
-                                        <label for="profile-input-country">Country</label>
-                                    </div>
-                                    <div class="alert alert-danger d-none" role="alert" id="profile-alert-country">
-                                        Country Rules
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="profile-input-state"
-                                            placeholder="state" />
-                                        <label for="profile-input-state">State</label>
-                                    </div>
-                                    <div class="alert alert-danger d-none" role="alert" id="profile-alert-state">
-                                        State Rules
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="profile-input-city"
-                                            placeholder="city" />
-                                        <label for="profile-input-city">City</label>
-                                    </div>
-                                    <div class="alert alert-danger d-none" role="alert" id="profile-alert-city">
-                                        City Rules
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="profile-input-street"
-                                        placeholder="street" />
-                                    <label for="profile-input-street">Street</label>
-                                </div>
-                                <div class="alert alert-danger d-none" role="alert" id="profile-alert-street">
-                                    Street Rules
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="profile-input-house-number"
-                                        placeholder="House Number" />
-                                    <label for="profile-input-house-number">House Number</label>
-                                </div>
-                                <div class="alert alert-danger d-none" role="alert" id="profile-alert-house-number">
-                                    House Number Rules
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="profile-input-zip-code"
-                                        placeholder="Zip Code" />
-                                    <label for="profile-input-zip-code">Zip Code</label>
-                                </div>
-                                <div class="alert alert-danger d-none" role="alert" id="profile-alert-zip-code">
-                                    Zip Code Rules
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <h5>Means of Contact</h5>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="email" class="form-control" id="profile-input-email"
-                                            placeholder="name@example.com" />
-                                        <label for="profile-input-email">Email address<span
-                                                class="asterisk">*</span></label>
-                                    </div>
-                                    <div class="alert alert-danger d-none" role="alert" id="profile-alert-email">
-                                        Email Rules
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="profile-input-phone"
-                                            placeholder="Phone" />
-                                        <label for="profile-input-phone">Phone</label>
-                                    </div>
-                                    <div class="alert alert-danger d-none" role="alert" id="profile-alert-phone">
-                                        Phone Rules
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="password" class="form-control" id="profile-input-password"
-                                            placeholder="Password" />
-                                        <label for="profile-input-password">Password<span
-                                                class="asterisk">*</span></label>
-                                    </div>
-                                    <div class="alert alert-danger d-none" role="alert" id="profile-alert-password">
-                                        Password Rules
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="password" class="form-control" id="profile-input-re_enter-password"
-                                            placeholder="Password-Re-enter" />
-                                        <label for="profile-input-re_enter-password">Re-Enter
-                                            Password<span class="asterisk">*</span></label>
-                                    </div>
-                                    <div class="alert alert-danger d-none" role="alert"
-                                        id="profile-alert-re_enter-password">
-                                        Password Rules
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row isAdminRow">
-                                <div class="col-md-12 d-flex justify-content-center">
-                                    <input class="form-check-input is-admin-checkbox" type="checkbox" value=""
-                                        id="profileIsAdminCheckbox">
-                                    <label class="form-check-label" for="profileIsAdminCheckbox">
-                                        Is Admin
-                                    </label>
-                                </div>
-
-                            </div>
-                            <div class="row">
-                                <button class="btn btn-success profile-btn" disabled="true"
-                                    id="profile-submit-btn">Submit</button>
-                            </div>
-                            <div class="row">
-                                <button class="btn btn-danger profile-btn" id="profile-cancel-btn">Cancel</button>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </form>
-            </div>
-            <div id="page-not-found-page" class="d-none">
-                <div class="container">
+                <h5>Address</h5>
+                <div class="row">
                     <div class="row">
-                        <h3>Page Not Found</h3>
+                        <div class="col-md-4">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="register-input-country"
+                                    placeholder="country" />
+                                <label for="register-input-country">Country</label>
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="register-alert-country">
+                                Country Rules
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="register-input-state" placeholder="state" />
+                                <label for="register-input-state">State</label>
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="register-alert-state">
+                                State Rules
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="register-input-city" placeholder="city" />
+                                <label for="register-input-city">City</label>
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="register-alert-city">
+                                City Rules
+                            </div>
+                        </div>
                     </div>
-                    <div class="row"><a href="" id="404-return-to-home-page-link">click here to return to
-                            homepage...</a>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="register-input-street" placeholder="street" />
+                            <label for="register-input-street">Street</label>
+                        </div>
+                        <div class="alert alert-danger d-none" role="alert" id="register-alert-street">
+                            Street Rules
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="register-input-house-number"
+                                placeholder="House Number" />
+                            <label for="register-input-house-number">House Number</label>
+                        </div>
+                        <div class="alert alert-danger d-none" role="alert" id="register-alert-house-number">
+                            House Number Rules
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="register-input-zip-code"
+                                placeholder="Zip Code" />
+                            <label for="register-input-zip-code">Zip Code</label>
+                        </div>
+                        <div class="alert alert-danger d-none" role="alert" id="register-alert-zip-code">
+                            Zip Code Rules
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h5>Means of Contact</h5>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="register-input-email"
+                                    placeholder="name@example.com" />
+                                <label for="register-input-email">Email address<span class="asterisk">*</span></label>
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="register-alert-email">
+                                Email Rules
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="register-input-phone" placeholder="Phone" />
+                                <label for="register-input-phone">Phone</label>
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="register-alert-phone">
+                                Phone Rules
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="register-input-password"
+                                    placeholder="Password" />
+                                <label for="register-input-password">Password<span class="asterisk">*</span></label>
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="register-alert-password">
+                                Password Rules
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="register-input-re_enter-password"
+                                    placeholder="Password-Re-enter" />
+                                <label for="register-input-re_enter-password">Re-Enter
+                                    Password<span class="asterisk">*</span></label>
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="register-alert-re_enter-password">
+                                Password Rules
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row isAdminRow">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <input class="form-check-input is-admin-checkbox" type="checkbox" value=""
+                                id="isAdminCheckbox">
+                            <label class="form-check-label" for="isAdminCheckbox">
+                                Is Admin
+                            </label>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <button class="btn btn-success register-btn" disabled="true"
+                            id="register-submit-btn">Submit</button>
+                    </div>
+                    <div class="row">
+                        <button class="btn btn-danger register-btn" id="register-cancel-btn">Cancel</button>
                     </div>
                 </div>
 
             </div>
-        </main>
-        <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50 mt-auto">
-            <div class="container text-center">
-                Harel Poms 2023
+
+        </form>
+    </div>
+    <!-- login page -->
+    <div id="login-page" class="d-none">
+        <h1>Login page</h1>
+        <form id="login-form" onsubmit="event.preventDefault()">
+
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="login-input-email" placeholder="name@example.com" />
+                <label for="login-input-email">Email address</label>
             </div>
-        </footer>
+            <div class="alert alert-danger d-none" role="alert" id="login-alert-email">
+                Email Rules
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="login-input-password" placeholder="Password" />
+                <label for="login-input-password">Password</label>
+            </div>
+            <div class="alert alert-danger d-none" role="alert" id="login-alert-password">
+                Password Rules
+            </div>
+            <div class="login-not-register-text-and-button">
+                <span>
+                    Not registered yet?
+                    <a id="login-goto-register-page">Click here...</a>
+                </span>
+            </div>
+
+            <div class="row mb-2">
+                <button class="btn btn-success login-btn" id="login-btn">Login</button>
+                <div class="alert alert-success d-none" role="alert" id="login-msg">
+                    Login success
+                </div>
+            </div>
+            <div class="row mb-2">
+                <button class="btn btn-danger login-btn" id="login-cancel-btn">Cancel</button>
+            </div>
+        </form>
+    </div>
+    <!--Profile Page-->
+    <div id="profile-page" class="d-none">
+        <form id="profile-form" onsubmit="event.preventDefault()">
+            <div class="container">
+                <div class="row">
+                    <h1>Profile page</h1>
+                </div>
+                <h5>Name</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <span class="d-none profile-label">First Name</span>
+                            <input type="text" class="form-control" id="profile-input-first-name"
+                                placeholder="Your first name" />
+                            <label for="profile-input-first-name">First Name<span class="asterisk">*</span></label>
+                        </div>
+                        <div class="alert alert-danger d-none" role="alert" id="profile-alert-first-name">
+                            First Name Rules
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="profile-input-last-name"
+                                placeholder="Your last name" />
+                            <label for="profile-input-last-name">Last Name<span class="asterisk">*</span></label>
+                        </div>
+                        <div class="alert alert-danger d-none" role="alert" id="profile-alert-last-name">
+                            Last Name Rules
+                        </div>
+
+                    </div>
+
+                </div>
+                <h5>Address</h5>
+                <div class="row">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="profile-input-country"
+                                    placeholder="country" />
+                                <label for="profile-input-country">Country</label>
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="profile-alert-country">
+                                Country Rules
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="profile-input-state" placeholder="state" />
+                                <label for="profile-input-state">State</label>
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="profile-alert-state">
+                                State Rules
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="profile-input-city" placeholder="city" />
+                                <label for="profile-input-city">City</label>
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="profile-alert-city">
+                                City Rules
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="profile-input-street" placeholder="street" />
+                            <label for="profile-input-street">Street</label>
+                        </div>
+                        <div class="alert alert-danger d-none" role="alert" id="profile-alert-street">
+                            Street Rules
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="profile-input-house-number"
+                                placeholder="House Number" />
+                            <label for="profile-input-house-number">House Number</label>
+                        </div>
+                        <div class="alert alert-danger d-none" role="alert" id="profile-alert-house-number">
+                            House Number Rules
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="profile-input-zip-code"
+                                placeholder="Zip Code" />
+                            <label for="profile-input-zip-code">Zip Code</label>
+                        </div>
+                        <div class="alert alert-danger d-none" role="alert" id="profile-alert-zip-code">
+                            Zip Code Rules
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h5>Means of Contact</h5>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="profile-input-email"
+                                    placeholder="name@example.com" />
+                                <label for="profile-input-email">Email address<span class="asterisk">*</span></label>
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="profile-alert-email">
+                                Email Rules
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="profile-input-phone" placeholder="Phone" />
+                                <label for="profile-input-phone">Phone</label>
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="profile-alert-phone">
+                                Phone Rules
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="profile-input-password"
+                                    placeholder="Password" />
+                                <label for="profile-input-password">Password<span class="asterisk">*</span></label>
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="profile-alert-password">
+                                Password Rules
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="profile-input-re_enter-password"
+                                    placeholder="Password-Re-enter" />
+                                <label for="profile-input-re_enter-password">Re-Enter
+                                    Password<span class="asterisk">*</span></label>
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="profile-alert-re_enter-password">
+                                Password Rules
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row isAdminRow">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <input class="form-check-input is-admin-checkbox" type="checkbox" value=""
+                                id="profileIsAdminCheckbox">
+                            <label class="form-check-label" for="profileIsAdminCheckbox">
+                                Is Admin
+                            </label>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <button class="btn btn-success profile-btn" disabled="true"
+                            id="profile-submit-btn">Submit</button>
+                    </div>
+                    <div class="row">
+                        <button class="btn btn-danger profile-btn" id="profile-cancel-btn">Cancel</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+    <div id="page-not-found-page" class="d-none">
+        <div class="container">
+            <div class="row">
+                <h3>Page Not Found</h3>
+            </div>
+            <div class="row"><a href="" id="404-return-to-home-page-link">click here to return to
+                    homepage...</a>
+            </div>
+        </div>
+
+    </div>
+    </main>
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50 mt-auto">
+        <div class="container text-center">
+            Harel Poms 2023
+        </div>
+    </footer>
     </div>
     <script src="../src/app.js" type="module"></script>
-    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 
 </html>

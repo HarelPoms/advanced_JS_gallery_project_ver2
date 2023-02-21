@@ -4,6 +4,7 @@ import "./initialData/initialData.js";
 import "./pages/RegisterPage.js";
 import "./pages/LoginPage.js";
 import "./pages/HomePage.js";
+import "./pages/ContactPage.js"
 import { showNewPopup } from "./pages/HomePage.js";
 import initializeNavbar from "./components/Navbar.js";
 import checkIfConnected from "./utils/checkIfConnected.js";

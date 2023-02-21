@@ -9,21 +9,21 @@ import User from "../models/User.js";
 import Address from "../models/Address.js"
 
 
-const registerInputFirstName = document.getElementById("register-input-first-name");
-const registerInputLastName = document.getElementById("register-input-last-name");
-const registerInputCountry = document.getElementById("register-input-country");
-const registerInputState = document.getElementById("register-input-state");
-const registerInputCity = document.getElementById("register-input-city");
-const registerInputStreet = document.getElementById("register-input-street");
-const registerInputHouseNumber = document.getElementById("register-input-house-number");
-const registerInputZipCode = document.getElementById("register-input-zip-code");
-const registerInputEmail = document.getElementById("register-input-email");
-const registerInputPhone = document.getElementById("register-input-phone");
-const registerInputPassword = document.getElementById("register-input-password");
-const registerInputReenterPassword = document.getElementById("register-input-re_enter-password");
-const registerIsAdminChkbox = document.getElementById("isAdminCheckbox");
-const btnRegisterSubmit = document.getElementById("register-submit-btn");
-const btnRegisterCancel = document.getElementById("register-cancel-btn");
+let registerInputFirstName;
+let registerInputLastName;
+let registerInputCountry;
+let registerInputState;
+let registerInputCity;
+let registerInputStreet;
+let registerInputHouseNumber;
+let registerInputZipCode;
+let registerInputEmail;
+let registerInputPhone;
+let registerInputPassword;
+let registerInputReenterPassword;
+let registerIsAdminChkbox;
+let btnRegisterSubmit;
+let btnRegisterCancel;
 //Bool array to keep track of which inputs are valid for generic checkInput Func, 
 //order: 0:firstName, 1:lastName, 2:country, 3:state, 4:city 5: street
 //       6: house_number 7: zip_code 8: email 9: phone, password: 10
@@ -113,6 +113,24 @@ const firstLoadChecks = ()=>{
     if (registerInputReenterPassword.value !== "") {
         checkPasswordToReEnterMatch();
     }
+}
+
+const initElems = ()=> {
+    registerInputFirstName = document.getElementById("register-input-first-name");
+    registerInputLastName = document.getElementById("register-input-last-name");
+    registerInputCountry = document.getElementById("register-input-country");
+    registerInputState = document.getElementById("register-input-state");
+    registerInputCity = document.getElementById("register-input-city");
+    registerInputStreet = document.getElementById("register-input-street");
+    registerInputHouseNumber = document.getElementById("register-input-house-number");
+    registerInputZipCode = document.getElementById("register-input-zip-code");
+    registerInputEmail = document.getElementById("register-input-email");
+    registerInputPhone = document.getElementById("register-input-phone");
+    registerInputPassword = document.getElementById("register-input-password");
+    registerInputReenterPassword = document.getElementById("register-input-re_enter-password");
+    registerIsAdminChkbox = document.getElementById("isAdminCheckbox");
+    btnRegisterSubmit = document.getElementById("register-submit-btn");
+    btnRegisterCancel = document.getElementById("register-cancel-btn");
 }
 
 const initEventListeners = ()=> {
@@ -219,6 +237,7 @@ const initEventListeners = ()=> {
 
 window.addEventListener("load", () => {
     //when page is loaded
+    initElems();
     firstLoadChecks();
     initEventListeners();
 });
