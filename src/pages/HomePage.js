@@ -1,5 +1,5 @@
 import {initializePicturesGallery, updatePicturesGallery} from "../components/PicturesGallery.js";
-import { initializePicturesList, updatePicturesList } from "../components/PicturesList.js";
+import { initializePicturesList, updatePicturesList, updateOriginalPicturesArr } from "../components/PicturesList.js";
 import { initializePicturesCarousel, updatePicturesCarousel } from "../components/PicturesCarousel.js";
 import {initPopup} from "../components/Popup.js";
 
@@ -26,7 +26,7 @@ window.addEventListener("load", ()=>{
     originalPicturesArr = [...picturesArr];
     isAdmin = checkIfAdmin();
     initializePicturesGallery(picturesArr, isAdmin, deletePicture, showPopup, showExtraDetailsPopup);
-    initializePicturesList(picturesArr, isAdmin, deletePicture, showPopup, showExtraDetailsPopup);
+    initializePicturesList(picturesArr, isAdmin, deletePicture, showPopup, showExtraDetailsPopup, originalPicturesArr);
     initializePicturesCarousel(picturesArr);
     initElements();
     initBtns();
@@ -103,6 +103,7 @@ const saveToLocalStorage = (arrToSave) => {
 const deletePicture = (id) => {
     originalPicturesArr = originalPicturesArr.filter((item) => item.id !== id);
     saveToLocalStorage(originalPicturesArr);
+    updateOriginalPicturesArr(originalPicturesArr);
 
     picturesArr = picturesArr.filter((item) => item.id !== id);
     updateDisplays();

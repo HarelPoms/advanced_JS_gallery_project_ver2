@@ -7,15 +7,17 @@ let isAdmin;
 let deletePicture;
 let showPopup;
 let showExtraDetailsPopup;
+let originalPicturesArr;
 
 
-const initializePicturesList = (picturesArrFromHomePage, isAdminParam,deletePictureFromHomePage, showPopupFromHomePage, showExtraDetailsPopupFromHomePage) => {
+const initializePicturesList = (picturesArrFromHomePage, isAdminParam,deletePictureFromHomePage, showPopupFromHomePage, showExtraDetailsPopupFromHomePage, originalPicturesArrFromHomePage) => {
     isAdmin = isAdminParam;   
     listPicturesUnorderedList = document.getElementById("home-page-pictures-list");
     deletePicture = deletePictureFromHomePage;
     updatePicturesList(picturesArrFromHomePage);
     showPopup = showPopupFromHomePage;
     showExtraDetailsPopup = showExtraDetailsPopupFromHomePage;
+    originalPicturesArr = originalPicturesArrFromHomePage;
 }
 
 const updatePicturesList = (picturesArrFromHomePage) => {
@@ -96,6 +98,13 @@ const createList = () => {
             ${isAdmin ? ADMIN_HEADLINES_ACTIONS : ""}
         </div>
     </li>`;
+    // const SEARCH_LINE = `<li class="list-group-item ms-2">
+    //                         <div class="row">
+    //                             <input class="form-control search_line" 
+    //                             type="search" placeholder="Search" aria-label="Search"
+    //                             id="ListDisplaySearch">
+    //                         </div>
+    //                     </li>`;
 
     clearEventListeners("PictureListDeleteButton", handleDeleteBtnClick);
     clearEventListeners("PictureListEditButton", handleEditBtnClick);
@@ -114,4 +123,16 @@ const createList = () => {
     createBtnEventListener("PictureListThumbnail", handlePicClick);
 }
 
-export {initializePicturesList, updatePicturesList};
+document.getElementById("ListDisplaySearch").addEventListener("input", (ev) => {
+    let regex = new RegExp("^" + ev.target.value, "i");
+    picturesArr = originalPicturesArr.filter((item) => {
+        return regex.test(item.alt);
+    });
+    updatePicturesList(picturesArr);
+});
+
+const updateOriginalPicturesArr = (updatedOriginalPicturesArr) =>{
+    originalPicturesArr = updatedOriginalPicturesArr;
+}
+
+export {initializePicturesList, updatePicturesList, updateOriginalPicturesArr};
