@@ -98,13 +98,6 @@ const createList = () => {
             ${isAdmin ? ADMIN_HEADLINES_ACTIONS : ""}
         </div>
     </li>`;
-    // const SEARCH_LINE = `<li class="list-group-item ms-2">
-    //                         <div class="row">
-    //                             <input class="form-control search_line" 
-    //                             type="search" placeholder="Search" aria-label="Search"
-    //                             id="ListDisplaySearch">
-    //                         </div>
-    //                     </li>`;
 
     clearEventListeners("PictureListDeleteButton", handleDeleteBtnClick);
     clearEventListeners("PictureListEditButton", handleEditBtnClick);

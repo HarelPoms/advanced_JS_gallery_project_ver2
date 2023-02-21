@@ -1,3 +1,23 @@
 .PicTextContent{
     word-wrap: break-word;
 }
+
+#ListDisplaySearch {
+    width: 80.5rem;
+    @include for-size(big-desktop){
+        width: 58rem;
+    }
+    @include for-size(desktop){
+        width: 58rem;
+    }
+    @include for-size(tablet-landscape)
+    {
+        width: 43rem;
+    }
+    @include for-size(tablet-portrait){
+        width: 31.7rem;
+    }
+    @include for-size(phone-only){
+        width: 31.7rem;
+    }
+}

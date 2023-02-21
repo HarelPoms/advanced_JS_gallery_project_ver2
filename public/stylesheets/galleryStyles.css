@@ -78,6 +78,35 @@ footer {
   word-wrap: break-word;
 }
 
+#ListDisplaySearch {
+  width: 80.5rem;
+}
+@media (max-width: 1400px) {
+  #ListDisplaySearch {
+    width: 58rem;
+  }
+}
+@media (max-width: 1200px) {
+  #ListDisplaySearch {
+    width: 58rem;
+  }
+}
+@media (max-width: 992px) {
+  #ListDisplaySearch {
+    width: 43rem;
+  }
+}
+@media (max-width: 768px) {
+  #ListDisplaySearch {
+    width: 31.7rem;
+  }
+}
+@media (max-width: 576px) {
+  #ListDisplaySearch {
+    width: 31.7rem;
+  }
+}
+
 .carousel-center-img {
   display: block;
   margin-left: auto;
