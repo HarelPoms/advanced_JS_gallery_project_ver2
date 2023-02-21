@@ -55,95 +55,95 @@
             </div>
         </nav>
         <main>
+            <!--Popup Section For editing/creating new pictures-->
+            <div class="popup-wrapper d-flex justify-content-center align-items-center d-none" id="editPicturesPopup">
+                <div class="popup-div" id="editPicturesPopupChild">
+                    <div class="container">
+                        <div class="card text-center d-flex justify-content-between"
+                            id="editPicturesPopupHeaderAndCancel">
+                            <h3 id="popupHeader">
+                                EDIT PICTURE FORM
+                                <button type="button" class="btn btn-danger" id="editPicturesPopupCancelBtn">
+                                    <i class="bi bi-x-circle-fill"></i>
+                                </button>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="container d-flex">
+                        <!--Picture Characteristics Card-->
+                        <div class="card" id="primaryPictureDetailsCard">
+                            <div class="card-body editPictureCardBody">
+                                <h5 class="card-title">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="editPicturesPopupUrl"
+                                            placeholder="URL" />
+                                        <label for="editPicturesPopupUrl">URL</label>
+                                    </div>
+                                </h5>
+                                <div class="card-text">
+                                    <div class="form-floating popup-input">
+                                        <input type="text" class="form-control" id="editPicturesPopupAlt"
+                                            placeholder="alt" />
+                                        <label for="editPicturesPopupAlt">alt</label>
+                                    </div>
+                                    <div class="form-floating popup-input">
+                                        <input type="text" class="form-control" id="editPicturesPopupCredit"
+                                            placeholder="credit" />
+                                        <label for="editPicturesPopupCredit">credit</label>
+                                    </div>
+                                    <div class="form-floating popup-input">
+                                        <input type="text" class="form-control" id="editPicturesPopupPrice"
+                                            placeholder="price" />
+                                        <label for="editPicturesPopupPrice">price</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Extra Details section-->
+                        <div class="card">
+                            <div class="card-body editPictureCardBody">
+                                <div class="form-floating popup-input">
+                                    <input type="text" class="form-control" id="editPicturesPopupCreatedAt"
+                                        placeholder="created at" />
+                                    <label for="editPicturesPopupCreatedAt">created at</label>
+                                </div>
+                                <div class="form-floating popup-input">
+                                    <input type="text" class="form-control" id="editPicturesPopupDescription"
+                                        placeholder="description" />
+                                    <label for="editPicturesPopupDescription">description</label>
+                                </div>
+                                <div class="form-floating popup-input">
+                                    <input type="text" class="form-control" id="editPicturesPopupTitle"
+                                        placeholder="title" />
+                                    <label for="editPicturesPopupTitle">title</label>
+                                </div>
+                                <div class="form-floating popup-input">
+                                    <input type="text" class="form-control" id="editPicturesPopupSubtitle"
+                                        placeholder="subtitle" />
+                                    <label for="editPicturesPopupSubtitle">subtitle</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Image Preview card-->
+                        <div class="card">
+                            <!--assets/images/empty_image_preview.png for testing sessions-->
+                            <img src="" class="card-img-top" alt="" id="editPicturesPopupImgDisplay" />
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="card text-center" id="editPicturesSaveBtnDiv">
+                            <button type="button" class="btn btn-success" id="editPicturesPopupSaveBtn">
+                                <i class="bi bi-check-circle-fill"></i> Save
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
             <!-- home page -->
             <div id="home-page" class="d-block">
                 <h1>Home page</h1>
-                <!--Popup Section For editing/creating new pictures-->
-                <div class="popup-wrapper d-flex justify-content-center align-items-center d-none"
-                    id="editPicturesPopup">
-                    <div class="popup-div" id="editPicturesPopupChild">
-                        <div class="container">
-                            <div class="card text-center d-flex justify-content-between"
-                                id="editPicturesPopupHeaderAndCancel">
-                                <h3 id="popupHeader">
-                                    EDIT PICTURE FORM
-                                    <button type="button" class="btn btn-danger" id="editPicturesPopupCancelBtn">
-                                        <i class="bi bi-x-circle-fill"></i>
-                                    </button>
-                                </h3>
-                            </div>
-                        </div>
-                        <div class="container d-flex">
-                            <!--Picture Characteristics Card-->
-                            <div class="card" id="primaryPictureDetailsCard">
-                                <div class="card-body editPictureCardBody">
-                                    <h5 class="card-title">
-                                        <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="editPicturesPopupUrl"
-                                                placeholder="URL" />
-                                            <label for="editPicturesPopupUrl">URL</label>
-                                        </div>
-                                    </h5>
-                                    <div class="card-text">
-                                        <div class="form-floating popup-input">
-                                            <input type="text" class="form-control" id="editPicturesPopupAlt"
-                                                placeholder="alt" />
-                                            <label for="editPicturesPopupAlt">alt</label>
-                                        </div>
-                                        <div class="form-floating popup-input">
-                                            <input type="text" class="form-control" id="editPicturesPopupCredit"
-                                                placeholder="credit" />
-                                            <label for="editPicturesPopupCredit">credit</label>
-                                        </div>
-                                        <div class="form-floating popup-input">
-                                            <input type="text" class="form-control" id="editPicturesPopupPrice"
-                                                placeholder="price" />
-                                            <label for="editPicturesPopupPrice">price</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--Extra Details section-->
-                            <div class="card">
-                                <div class="card-body editPictureCardBody">
-                                    <div class="form-floating popup-input">
-                                        <input type="text" class="form-control" id="editPicturesPopupCreatedAt"
-                                            placeholder="created at" />
-                                        <label for="editPicturesPopupCreatedAt">created at</label>
-                                    </div>
-                                    <div class="form-floating popup-input">
-                                        <input type="text" class="form-control" id="editPicturesPopupDescription"
-                                            placeholder="description" />
-                                        <label for="editPicturesPopupDescription">description</label>
-                                    </div>
-                                    <div class="form-floating popup-input">
-                                        <input type="text" class="form-control" id="editPicturesPopupTitle"
-                                            placeholder="title" />
-                                        <label for="editPicturesPopupTitle">title</label>
-                                    </div>
-                                    <div class="form-floating popup-input">
-                                        <input type="text" class="form-control" id="editPicturesPopupSubtitle"
-                                            placeholder="subtitle" />
-                                        <label for="editPicturesPopupSubtitle">subtitle</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--Image Preview card-->
-                            <div class="card">
-                                <!--assets/images/empty_image_preview.png for testing sessions-->
-                                <img src="" class="card-img-top" alt="" id="editPicturesPopupImgDisplay" />
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="card text-center" id="editPicturesSaveBtnDiv">
-                                <button type="button" class="btn btn-success" id="editPicturesPopupSaveBtn">
-                                    <i class="bi bi-check-circle-fill"></i> Save
-                                </button>
-                            </div>
-                        </div>
 
-                    </div>
-                </div>
                 <!--end of section for popup for creating/editing pictures -->
 
                 <div class="d-flex justify-content-between">
