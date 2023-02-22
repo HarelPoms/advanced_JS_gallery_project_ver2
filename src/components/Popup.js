@@ -139,7 +139,8 @@ const isImage = (src) => {
     imageNew.src = src;
 
     // Check if its a real image meeting the exact specifications required, 300x300
-    if ((imageNew.width > 0) && (imageNew.height > 0) && (imageNew.width == 300) && (imageNew.height == 300)){
+    //&& (imageNew.width == 300) && (imageNew.height == 300)
+    if ((imageNew.width > 0) && (imageNew.height > 0) ){
         return true;
     } else {
         return false;
