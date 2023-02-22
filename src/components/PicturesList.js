@@ -7,17 +7,14 @@ let isAdmin;
 let deletePicture;
 let showPopup;
 let showExtraDetailsPopup;
-let originalPicturesArr;
 
-
-const initializePicturesList = (picturesArrFromHomePage, isAdminParam,deletePictureFromHomePage, showPopupFromHomePage, showExtraDetailsPopupFromHomePage, originalPicturesArrFromHomePage) => {
+const initializePicturesList = (picturesArrFromHomePage, isAdminParam,deletePictureFromHomePage, showPopupFromHomePage, showExtraDetailsPopupFromHomePage) => {
     isAdmin = isAdminParam;   
     listPicturesUnorderedList = document.getElementById("home-page-pictures-list");
     deletePicture = deletePictureFromHomePage;
     updatePicturesList(picturesArrFromHomePage);
     showPopup = showPopupFromHomePage;
     showExtraDetailsPopup = showExtraDetailsPopupFromHomePage;
-    originalPicturesArr = originalPicturesArrFromHomePage;
 }
 
 const updatePicturesList = (picturesArrFromHomePage) => {
@@ -116,16 +113,4 @@ const createList = () => {
     createBtnEventListener("PictureListThumbnail", handlePicClick);
 }
 
-document.getElementById("ListDisplaySearch").addEventListener("input", (ev) => {
-    let regex = new RegExp("^" + ev.target.value, "i");
-    picturesArr = originalPicturesArr.filter((item) => {
-        return regex.test(item.alt);
-    });
-    updatePicturesList(picturesArr);
-});
-
-const updateOriginalPicturesArr = (updatedOriginalPicturesArr) =>{
-    originalPicturesArr = updatedOriginalPicturesArr;
-}
-
-export {initializePicturesList, updatePicturesList, updateOriginalPicturesArr};
+export {initializePicturesList, updatePicturesList};

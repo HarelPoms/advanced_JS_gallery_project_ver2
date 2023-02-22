@@ -1,5 +1,5 @@
 import {initializePicturesGallery, updatePicturesGallery} from "../components/PicturesGallery.js";
-import { initializePicturesList, updatePicturesList, updateOriginalPicturesArr } from "../components/PicturesList.js";
+import { initializePicturesList, updatePicturesList } from "../components/PicturesList.js";
 import { initializePicturesCarousel, updatePicturesCarousel } from "../components/PicturesCarousel.js";
 import {initPopup} from "../components/Popup.js";
 
@@ -17,6 +17,10 @@ let galleryOfItems;
 let listOfItems;
 let carouselOfItems;
 
+let homeDisplaySortAsc;
+let homeDisplaySortDesc;
+let homeSearchLine;
+
 window.addEventListener("load", ()=>{
     picturesArr = localStorage.getItem("pics")
     if(!picturesArr){
@@ -26,7 +30,7 @@ window.addEventListener("load", ()=>{
     originalPicturesArr = [...picturesArr];
     isAdmin = checkIfAdmin();
     initializePicturesGallery(picturesArr, isAdmin, deletePicture, showPopup, showExtraDetailsPopup);
-    initializePicturesList(picturesArr, isAdmin, deletePicture, showPopup, showExtraDetailsPopup, originalPicturesArr);
+    initializePicturesList(picturesArr, isAdmin, deletePicture, showPopup, showExtraDetailsPopup);
     initializePicturesCarousel(picturesArr);
     initElements();
     initBtns();
@@ -39,6 +43,11 @@ const initElements = () =>{
     galleryOfItems = document.getElementById("pictures-gallery");
     listOfItems = document.getElementById("pictures-list");
     carouselOfItems = document.getElementById("pictures-carousel");
+
+    homeDisplaySortAsc = document.getElementById("homeDisplaySortASC");
+    homeDisplaySortDesc = document.getElementById("homeDisplaySortDESC");
+
+    homeSearchLine = document.getElementById("homeDisplaySearch");
     currentDisplayMode = listOfItems; // choose who we want to display
     switchToAnotherDisplayMode(currentDisplayMode);
 }
@@ -46,23 +55,37 @@ const initElements = () =>{
 const initBtns = () => {
     
     galleryBtn.addEventListener("click", ()=>{
+        homeSearchLine.classList.remove("d-none");
+        homeSearchLine.style.marginLeft  = "0rem";
         switchToAnotherDisplayMode(galleryOfItems);
     });
 
     listBtn.addEventListener("click", ()=>{
+        homeSearchLine.classList.remove("d-none");
+        homeSearchLine.style.marginLeft  = "0.55rem";
         switchToAnotherDisplayMode(listOfItems);
     });
 
     carouselBtn.addEventListener("click", ()=>{
+        homeSearchLine.classList.remove("d-none");
+        homeSearchLine.classList.add("d-none");
         switchToAnotherDisplayMode(carouselOfItems);
     });
 
-    document.getElementById("homeDisplaySortASC").addEventListener("click", () => {
+    homeDisplaySortAsc.addEventListener("click", () => {
         sortPictures();
     });
 
-    document.getElementById("homeDisplaySortDESC").addEventListener("click", () => {
+    homeDisplaySortDesc.addEventListener("click", () => {
         sortPictures(false);
+    });
+
+    homeSearchLine.addEventListener("input", (ev) => {
+        let regex = new RegExp("^" + ev.target.value, "i");
+        picturesArr = originalPicturesArr.filter((pic) => {
+            return regex.test(pic.alt);
+        });
+        updateDisplays();
     });
 
 }
@@ -103,7 +126,6 @@ const saveToLocalStorage = (arrToSave) => {
 const deletePicture = (id) => {
     originalPicturesArr = originalPicturesArr.filter((item) => item.id !== id);
     saveToLocalStorage(originalPicturesArr);
-    updateOriginalPicturesArr(originalPicturesArr);
 
     picturesArr = picturesArr.filter((item) => item.id !== id);
     updateDisplays();
