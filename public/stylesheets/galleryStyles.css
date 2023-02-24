@@ -101,6 +101,16 @@ footer {
   margin-left: 1em;
 }
 
+.carousel-inner > .carousel-item > .carousel-picture > img {
+  height: 18.75rem;
+  width: 18.75rem;
+}
+
+.carousel-inner > .carousel-item > img {
+  height: 18.75rem;
+  width: 18.75rem;
+}
+
 .fade-in {
   animation: fadein 2s ease forwards;
 }

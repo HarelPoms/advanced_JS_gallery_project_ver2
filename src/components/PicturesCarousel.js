@@ -3,17 +3,18 @@ let carouselDiv;
 let showIdx;
 let animationStarted;
 let picIds;
+let carouselNextBtn;
+
 const initializePicturesCarousel = (picturesArrFromHomePage) => {
-    carouselDiv = document.getElementById("home-page-pictures-carousel");
+    carouselDiv = document.getElementById("gallery-carousel-inner");
     updatePicturesCarousel(picturesArrFromHomePage);
     initBtns();
 }
 
 const updatePicturesCarousel = (picturesArrFromHomePage) => {
-    picturesArr = picturesArrFromHomePage;   
-    showIdx = 0;
-    animationStarted = 0;
+    picturesArr = picturesArrFromHomePage;
     picIds = picturesArr.map(picture => picture.id);
+    showIdx = 0;   
     createCarousel();
 }
 
@@ -29,14 +30,26 @@ const updatePicturesCarousel = (picturesArrFromHomePage) => {
 
 const createCarouselItem = (id, src, alt, credit) => {
     return `
-    <div class="card opacity-0 d-none carousel-picture" id="carousel-item-${id}">
-        <img src="${src}" class="card-img-top" alt="${alt}">
-        <div class="card-body">
-            <p class="card-text">Photographed by ${credit}</p>
+    <div class="carousel-item">
+        <div class="card carousel-picture border-0" 
+        id="carousel-item-${id}">
+            <img src="${src}" class="card-img-top img-fluid carousel-center-img" alt="${alt}">
+            <div class="card-body">
+                <p class="card-text text-center">Photographed by: ${credit}</p>
+            </div>
         </div>
     </div>
     `;
 };
+
+// const createCarouselItem = (id, src, alt, credit) => {
+//     return `<div class="carousel-item">
+//                 <img src="${src}" class="d-block carousel-center-img" alt="${alt}">
+//                 <span class="d-flex justify-content-center">Photographed by: ${credit}
+//                 </span>
+//             </div>
+//     `
+// }
 
 const createCarousel = () => {
     let buffer = "";
@@ -44,81 +57,13 @@ const createCarousel = () => {
         buffer += createCarouselItem(picture.id, picture.url, picture.alt, picture.credit);
     }
     carouselDiv.innerHTML = buffer;
-    document.querySelector("#carousel-item-1").classList.remove("opacity-0");
-    document.querySelector("#carousel-item-1").classList.remove("d-none");
+    document.querySelector(`.carousel-item`).classList.add("active");
+    //document.querySelector(`.carousel-picture`).classList.remove("border-0");
 }
 
 const initBtns = () => {
-    document.getElementById("back-carousel-btn").addEventListener("click", ()=>{
-    if (animationStarted !== 0) {
-        return;
-    }
-    animationStarted = 2;
-    let prevIdx = showIdx - 1;
-    if (prevIdx < 0) {
-        prevIdx = picturesArr.length - 1; //last image
-    }
-    let imgToHide = document.querySelector(`#carousel-item-${picIds[showIdx]}`);
-    imgToHide.classList.add("fade-out");
-
-    imgToHide.addEventListener("animationend", () => {
-            
-        imgToHide.classList.add("opacity-0");
-        imgToHide.classList.add("d-none");
-
-        imgToHide.classList.remove("fade-out");
-        animationStarted--;
-    },{once:true});
-
-    let imgToShow = document.querySelector(`#carousel-item-${picIds[prevIdx]}`);
-    
-    imgToShow.classList.remove("opacity-0");
-    imgToShow.classList.remove("d-none");
-
-    imgToShow.classList.add("fade-in");
-    imgToShow.addEventListener("animationend", () => {
-        imgToShow.classList.remove("fade-in");
-        animationStarted--;
-    }, { once: true });
-    showIdx = prevIdx;
-
-    });
-    document.getElementById("next-carousel-btn").addEventListener("click", ()=>{
-        if(animationStarted !== 0){
-            return;
-        }
-        animationStarted = 2;
-        let nextIdx = showIdx + 1;
-        //showIdx = index of image to hide
-        //nextIdx = index of image to display
-        if(nextIdx >= picturesArr.length){
-            nextIdx = 0;
-        }
-        let imgToHide = document.querySelector(`#carousel-item-${picIds[showIdx]}`);
-        imgToHide.classList.add("fade-out");
-        imgToHide.addEventListener("animationend", () => {
-
-            imgToHide.classList.add("opacity-0");
-            imgToHide.classList.add("d-none");
-
-            imgToHide.classList.remove("fade-out");
-            animationStarted--;
-        }, {once:true});
-
-        let imgToShow = document.querySelector(`#carousel-item-${picIds[nextIdx]}`);
-
-        imgToShow.classList.remove("opacity-0");
-        imgToShow.classList.remove("d-none");
-
-        imgToShow.classList.add("fade-in");
-        imgToShow.addEventListener("animationend", () => {
-            imgToShow.classList.remove("fade-in");
-            animationStarted--;
-    }, {once:true});
-    showIdx = nextIdx;
-
-    });
-
+    carouselNextBtn = document.getElementById("next-carousel-btn");
+    setInterval(() => {carouselNextBtn.click();}, 3000);
 }
 
 
