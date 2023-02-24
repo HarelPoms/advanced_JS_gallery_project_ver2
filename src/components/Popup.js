@@ -2,6 +2,7 @@ import getNextPictureId from "../utils/getNextPictureId.js";
 import Picture from "../models/Picture.js"
 import AdditionalDetails from "../models/AdditionalDetails.js";
 import validateImgUrl from "../validation/validateImgUrl.js";
+import validateDate from "../validation/validateDate.js";
 
 let editPicturesHeader;
 let editPicturesPopupImgDisplay;
@@ -19,6 +20,11 @@ let editPicturesCancelBtn;
 let editPicturesSaveBtn;
 let editPicturesSaveBtnDiv;
 let selectedPicture, editPicture;
+let inputOkArr = [false, false];
+const inputIndexes = {
+	url: 0,
+    createdAt: 1
+}
 
 const EMPTY_URL_PIC_PATH = "../../public/assets/images/empty_image_preview.png"
 const EDIT_PICTURE_FORM_HEADER = `EDIT PICTURE FORM
@@ -83,6 +89,8 @@ const initPopup = (selectedPictureFromHomePage, editPictureFromHomePage) => {
         showPrimaryDetailsAndSaveButton();
         setSecondaryDetailsReadOnlyAttribute(false);
     }
+
+    checkIfCanEnableButton();
 };
 
 const initElems = () => {
@@ -104,7 +112,7 @@ const initElems = () => {
     editPicturesSaveBtnDiv = document.getElementById("editPicturesSaveBtnDiv");
 
     editPicturesCancelBtn = document.getElementById("editPicturesPopupCancelBtn");
-    editPicturesSaveBtn = document.getElementById("editPicturesPopupSaveBtn");
+    editPicturesSaveBtn = document.getElementById("editPicturesPopupSaveBtn"); 
 }
 
 const showPopup = () => {
@@ -138,8 +146,7 @@ const isImage = (src) => {
     
     imageNew.src = src;
 
-    // Check if its a real image meeting the exact specifications required, 300x300
-    //&& (imageNew.width == 300) && (imageNew.height == 300)
+    // Check if its a real image 
     if ((imageNew.width > 0) && (imageNew.height > 0) ){
         return true;
     } else {
@@ -150,6 +157,7 @@ const isImage = (src) => {
 window.addEventListener("load", () => {
     initElems();
     initBtns();
+    firstLoadChecks();    
 })
 
 const initBtns = () => {
@@ -173,26 +181,68 @@ const initBtns = () => {
     })
 
     editPicturesPopupUrl.addEventListener("input", () => {
-        let URLRegexValidityCheck = validateImgUrl(editPicturesPopupUrl.value);
-        let URLImageValidityCheck = isImage(editPicturesPopupUrl.value);
-        
-        if(URLRegexValidityCheck.length == 0 && URLImageValidityCheck){
-            editPicturesPopupImgDisplay.src = editPicturesPopupUrl.value;
-            editPicturesSaveBtn.disabled = false;
-        }
-        else{
-            editPicturesPopupImgDisplay.src = "../../public/assets/images/invalid_url.png";
-            editPicturesSaveBtn.disabled = true;
-        }
+        urlValidationLogic();
     });
-    
+
+    editPicturesPopupCreatedAt.addEventListener("input", () => {
+        createdAtValidationLogic();
+    })
 }
 
+const urlValidationLogic = () =>{
+    let URLRegexValidityCheck = validateImgUrl(editPicturesPopupUrl.value);
+    let URLImageValidityCheck = isImage(editPicturesPopupUrl.value);
+    if(URLRegexValidityCheck.length == 0 && URLImageValidityCheck){
+        editPicturesPopupImgDisplay.src = editPicturesPopupUrl.value;
+        editPicturesPopupUrl.classList.remove("is-invalid");
+        inputOkArr[inputIndexes.url] = true;
+    }
+    else{
+        editPicturesPopupImgDisplay.src = "../../public/assets/images/invalid_url.png";
+        editPicturesPopupUrl.classList.add("is-invalid");
+        inputOkArr[inputIndexes.url] = false;
+    }
+    checkIfCanEnableButton();
+}
+
+const createdAtValidationLogic = () =>{
+    let validityCheck = validateDate(editPicturesPopupCreatedAt.value);
+    if(validityCheck.length == 0)
+    {
+        editPicturesPopupCreatedAt.classList.remove("is-invalid");
+        document.getElementById("editPicturesPopupCreatedAtLabel").innerText = "created at";
+        inputOkArr[inputIndexes.createdAt] = true;
+    }
+    else{
+        editPicturesPopupCreatedAt.classList.add("is-invalid");
+        document.getElementById("editPicturesPopupCreatedAtLabel").innerText = "must be dd/mm/yyyy";
+        inputOkArr[inputIndexes.createdAt] = false;
+    }
+    checkIfCanEnableButton();
+}
+
+const checkIfCanEnableButton = () => {
+    (editPicturesSaveBtn.disabled = !(
+        inputOkArr[inputIndexes.url] 
+        && inputOkArr[inputIndexes.createdAt]
+        ));  
+
+}
 const initHeader = () => {
     editPicturesCancelBtn = document.getElementById("editPicturesPopupCancelBtn");
     editPicturesCancelBtn.addEventListener("click", () => {
+        
         hidePopup();
     })
+}
+
+const firstLoadChecks = ()=>{
+    if (editPicturesPopupUrl.value !== "") {
+        urlValidationLogic();
+    }
+    if (editPicturesPopupCreatedAt.value !== "") {
+        createdAtValidationLogic();
+    }
 }
 
 export {initPopup};
