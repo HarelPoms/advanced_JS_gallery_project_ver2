@@ -2,7 +2,7 @@ import { clearEventListeners } from "../utils/clearEventListener.js";
 import { createBtnEventListener } from "../utils/createBtnEventListener.js";
 
 let listPicturesUnorderedList;
-let picturesArr;
+let picturesDisplayArr;
 let isAdmin;
 let deletePicture;
 let showPopup;
@@ -18,7 +18,7 @@ const initializePicturesList = (picturesArrFromHomePage, isAdminParam,deletePict
 }
 
 const updatePicturesList = (picturesArrFromHomePage) => {
-    picturesArr = picturesArrFromHomePage;
+    picturesDisplayArr = picturesArrFromHomePage;
     createList();
 }
 
@@ -102,7 +102,7 @@ const createList = () => {
 
     let buffer = "" + LIST_HEADLINES;
 
-    for (let picture of picturesArr){
+    for (let picture of picturesDisplayArr){
         buffer += createListItem(picture.id,picture.url,picture.alt,picture.credit);
     }
 

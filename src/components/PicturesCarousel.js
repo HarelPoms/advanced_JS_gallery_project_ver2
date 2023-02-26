@@ -1,4 +1,4 @@
-let picturesArr;
+let picturesDisplayArr;
 let carouselDiv;
 let carouselNextBtn;
 
@@ -9,7 +9,7 @@ const initializePicturesCarousel = (picturesArrFromHomePage) => {
 }
 
 const updatePicturesCarousel = (picturesArrFromHomePage) => {
-    picturesArr = picturesArrFromHomePage; 
+    picturesDisplayArr = picturesArrFromHomePage; 
     createCarousel();
 }
 
@@ -24,7 +24,7 @@ const createCarouselItem = (id, src, alt, credit) => {
 
 const createCarousel = () => {
     let buffer = "";
-    for (let picture of picturesArr){
+    for (let picture of picturesDisplayArr){
         buffer += createCarouselItem(picture.id, picture.url, picture.alt, picture.credit);
     }
     carouselDiv.innerHTML = buffer;

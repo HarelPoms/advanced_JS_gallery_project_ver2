@@ -89,8 +89,7 @@ const initPopup = (selectedPictureFromHomePage, editPictureFromHomePage) => {
         showPrimaryDetailsAndSaveButton();
         setSecondaryDetailsReadOnlyAttribute(false);
     }
-
-    checkIfCanEnableButton();
+    firstLoadChecks(); 
 };
 
 const initElems = () => {
@@ -231,7 +230,6 @@ const checkIfCanEnableButton = () => {
 const initHeader = () => {
     editPicturesCancelBtn = document.getElementById("editPicturesPopupCancelBtn");
     editPicturesCancelBtn.addEventListener("click", () => {
-        
         hidePopup();
     })
 }

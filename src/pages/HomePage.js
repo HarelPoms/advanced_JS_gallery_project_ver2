@@ -5,7 +5,7 @@ import {initPopup} from "../components/Popup.js";
 
 import checkIfAdmin from "../utils/checkIfAdmin.js";
 
-let picturesArr, originalPicturesArr;
+let displayPicturesArr, storedPicturesArr;
 let currentDisplayMode;
 let isAdmin;
 
@@ -22,16 +22,16 @@ let homeDisplaySortDesc;
 let homeSearchLine;
 
 window.addEventListener("load", ()=>{
-    picturesArr = localStorage.getItem("pics")
-    if(!picturesArr){
+    displayPicturesArr = localStorage.getItem("pics")
+    if(!displayPicturesArr){
         return;
     }
-    picturesArr = JSON.parse(picturesArr);
-    originalPicturesArr = [...picturesArr];
+    displayPicturesArr = JSON.parse(displayPicturesArr);
+    storedPicturesArr = [...displayPicturesArr];
     isAdmin = checkIfAdmin();
-    initializePicturesGallery(picturesArr, isAdmin, deletePicture, showPopup, showExtraDetailsPopup);
-    initializePicturesList(picturesArr, isAdmin, deletePicture, showPopup, showExtraDetailsPopup);
-    initializePicturesCarousel(picturesArr);
+    initializePicturesGallery(displayPicturesArr, isAdmin, deletePicture, showPopup, showExtraDetailsPopup);
+    initializePicturesList(displayPicturesArr, isAdmin, deletePicture, showPopup, showExtraDetailsPopup);
+    initializePicturesCarousel(displayPicturesArr);
     initElements();
     initBtns();
 })
@@ -82,7 +82,7 @@ const initBtns = () => {
 
     homeSearchLine.addEventListener("input", (ev) => {
         let regex = new RegExp("^" + ev.target.value, "i");
-        picturesArr = originalPicturesArr.filter((pic) => {
+        displayPicturesArr = storedPicturesArr.filter((pic) => {
             return regex.test(pic.alt);
         });
         updateDisplays();
@@ -93,11 +93,11 @@ const initBtns = () => {
 const sortPictures = (asc = true) => {
     if(asc){
         //sort from a to z
-        picturesArr.sort((a,b) => a.alt.localeCompare(b.alt));
+        displayPicturesArr.sort((a,b) => a.alt.localeCompare(b.alt));
     }
     else{
         //sort from z to a
-        picturesArr.sort((a,b) => b.alt.localeCompare(a.alt));
+        displayPicturesArr.sort((a,b) => b.alt.localeCompare(a.alt));
     }
     updateDisplays();
 }
@@ -114,9 +114,9 @@ const switchToAnotherDisplayMode = (DisplayToSwitchTo) => {
 };
 
 const updateDisplays = () => {
-    updatePicturesGallery(picturesArr);
-    updatePicturesList(picturesArr);
-    updatePicturesCarousel(picturesArr);
+    updatePicturesGallery(displayPicturesArr);
+    updatePicturesList(displayPicturesArr);
+    updatePicturesCarousel(displayPicturesArr);
 }
 
 const saveToLocalStorage = (arrToSave) => {
@@ -124,15 +124,15 @@ const saveToLocalStorage = (arrToSave) => {
 }
 
 const deletePicture = (id) => {
-    originalPicturesArr = originalPicturesArr.filter((item) => item.id !== id);
-    saveToLocalStorage(originalPicturesArr);
+    storedPicturesArr = storedPicturesArr.filter((item) => item.id !== id);
+    saveToLocalStorage(storedPicturesArr);
 
-    picturesArr = picturesArr.filter((item) => item.id !== id);
+    displayPicturesArr = displayPicturesArr.filter((item) => item.id !== id);
     updateDisplays();
 }
 
 const showPopup = (id) => {
-    let selectedPicture = picturesArr.find((picture) => picture.id === (+id));
+    let selectedPicture = displayPicturesArr.find((picture) => picture.id === (+id));
     if(!selectedPicture){
         return;
     }
@@ -144,7 +144,7 @@ const showNewPopup = () => {
 };
 
 const showExtraDetailsPopup = (id) => {
-    let clickedPicture = picturesArr.find((picture) => picture.id === (+id));
+    let clickedPicture = displayPicturesArr.find((picture) => picture.id === (+id));
     if(!clickedPicture){
         return;
     }
@@ -152,15 +152,15 @@ const showExtraDetailsPopup = (id) => {
 }
 
 const addNewPicture = (newPicture) => {
-    originalPicturesArr = [...originalPicturesArr, newPicture];
+    storedPicturesArr = [...storedPicturesArr, newPicture];
     
     localStorage.setItem("next_pic_id", (+newPicture.id + 1) + "");
-    picturesArr = [...originalPicturesArr];
+    displayPicturesArr = [...storedPicturesArr];
     editPicture();
 };
 
 const editPicture = () => {
-    saveToLocalStorage(originalPicturesArr);
+    saveToLocalStorage(storedPicturesArr);
     updateDisplays();
 };
 

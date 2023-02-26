@@ -3,7 +3,7 @@ import { createBtnEventListener } from "../utils/createBtnEventListener.js";
 
 let galleryDiv;
 let isAdmin;
-let picturesArr;
+let picturesDisplayArr;
 let deletePicture;
 let showPopup;
 let showExtraDetailsPopup;
@@ -18,7 +18,7 @@ const initializePicturesGallery = (picturesArrFromHomePage, isAdminParam, delete
 }
 
 const updatePicturesGallery = (picturesArrFromHomePage) => {
-    picturesArr = picturesArrFromHomePage;
+    picturesDisplayArr = picturesArrFromHomePage;
     createGallery();
 }
 
@@ -89,7 +89,7 @@ const createGallery = () => {
     clearEventListeners("PictureGalleryEditButton", handleEditBtnClick);
     clearEventListeners("PictureGalleryThumbnail", handlePicClick);
 
-    for (let picture of picturesArr){
+    for (let picture of picturesDisplayArr){
         buffer += createCard(picture.id,picture.url,picture.alt,picture.credit,picture.price);
     }
 
