@@ -1,6 +1,10 @@
 
-const toastWrapper = document.getElementById("toast-wrapper");
+let toastWrapper; 
 let id = 1;
+
+window.addEventListener("load", () => {
+    toastWrapper = document.getElementById("toast-wrapper");
+})
 
 const generateToast = (errorTitle, errorMessage) => {
     let thisId = id++;

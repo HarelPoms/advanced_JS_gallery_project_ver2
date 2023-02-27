@@ -20,6 +20,7 @@ let editPicturesCancelBtn;
 let editPicturesSaveBtn;
 let editPicturesSaveBtnDiv;
 let selectedPicture, editPicture;
+let editPicturesPopupCreatedAtLabel;
 let inputOkArr = [false, false];
 const inputIndexes = {
 	url: 0,
@@ -109,6 +110,9 @@ const initElems = () => {
     //Getting the primary details NOT to be shown on view mode
     editPicturesPrimaryDetailsCard = document.getElementById("primaryPictureDetailsCard");
     editPicturesSaveBtnDiv = document.getElementById("editPicturesSaveBtnDiv");
+
+    //CreatedAtLabel
+    editPicturesPopupCreatedAtLabel = document.getElementById("editPicturesPopupCreatedAtLabel");
 
     editPicturesCancelBtn = document.getElementById("editPicturesPopupCancelBtn");
     editPicturesSaveBtn = document.getElementById("editPicturesPopupSaveBtn"); 
@@ -209,12 +213,12 @@ const createdAtValidationLogic = () =>{
     if(validityCheck.length == 0)
     {
         editPicturesPopupCreatedAt.classList.remove("is-invalid");
-        document.getElementById("editPicturesPopupCreatedAtLabel").innerText = "created at";
+        editPicturesPopupCreatedAtLabel.innerText = "created at";
         inputOkArr[inputIndexes.createdAt] = true;
     }
     else{
         editPicturesPopupCreatedAt.classList.add("is-invalid");
-        document.getElementById("editPicturesPopupCreatedAtLabel").innerText = "must be dd/mm/yyyy";
+        editPicturesPopupCreatedAtLabel.innerText = "must be dd/mm/yyyy";
         inputOkArr[inputIndexes.createdAt] = false;
     }
     checkIfCanEnableButton();
