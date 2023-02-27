@@ -91,6 +91,47 @@ footer {
   word-wrap: break-word;
 }
 
+@media (max-width: 768px) {
+  .picture-list-text {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .picture-list-img {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .picture-list-header, .desktopAdminBtns {
+    display: none;
+  }
+}
+
+@media (max-width: 1400px) {
+  .mobileAdminBtns {
+    display: none;
+  }
+}
+@media (max-width: 1200px) {
+  .mobileAdminBtns {
+    display: none;
+  }
+}
+@media (max-width: 992px) {
+  .mobileAdminBtns {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .mobileAdminBtns {
+    display: flex !important;
+    justify-content: center;
+  }
+}
+
 .carousel-center-img {
   display: block;
   margin-left: auto;
