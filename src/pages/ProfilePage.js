@@ -8,6 +8,8 @@ import validateString from "../validation/validateString.js";
 import validateNumber from "../validation/validateNumber.js";
 import checkIfAdmin from "../utils/checkIfAdmin.js";
 import { showToast } from "../utils/toast.js";
+import checkIfInputIsValid from "../utils/checkIfInputIsValid.js";
+import validateInputArr from "../validation/validateInputArr.js";
 
 
 let profileInputFirstName;
@@ -95,17 +97,10 @@ const initScreenDetails = () => {
 }
 
 const checkInput = (profileInput, profileAlert, profileBooleanIndex, validateFunc, prefixLabel) => {
-    let errorArr = validateFunc(profileInput.value, prefixLabel);
-    if (errorArr.length === 0) {
-    //no error
-    profileInput.classList.remove("is-invalid");
-    document.getElementById(profileAlert).classList.add("d-none");
-    inputOkArr[profileBooleanIndex] = true;
-    } else {
-        // error/s
-        profileInput.classList.add("is-invalid");
-        document.getElementById(profileAlert).classList.remove("d-none");
-        document.getElementById(profileAlert).innerHTML = errorArr.join("<br>"); 
+    if (checkIfInputIsValid (profileInput, profileAlert, validateFunc, prefixLabel)){
+        inputOkArr[profileBooleanIndex] = true;
+    }
+    else{
         inputOkArr[profileBooleanIndex] = false;
     }
     checkIfCanEnableButton();
@@ -188,6 +183,7 @@ const initInputEventListeners = ()=> {
 
     profileInputPassword.addEventListener("input", () => {
         checkInput(profileInputPassword, "profile-alert-password", inputIndexes.password, validatePassword, "Password ");
+        checkPasswordToReEnterMatch();
     });
 
     profileInputReenterPassword.addEventListener("input", () => {
@@ -301,17 +297,7 @@ const initDetailChecks = () => {
 
 const checkIfCanEnableButton = () => {
     (btnProfileSubmit.disabled = !(
-        inputOkArr[inputIndexes.firstName] 
-        && inputOkArr[inputIndexes.lastName]
-        && inputOkArr[inputIndexes.country]
-        && inputOkArr[inputIndexes.state]
-        && inputOkArr[inputIndexes.city]
-        && inputOkArr[inputIndexes.street]
-        && inputOkArr[inputIndexes.house_number]
-        && inputOkArr[inputIndexes.zip_code]  
-        && inputOkArr[inputIndexes.email] 
-        && inputOkArr[inputIndexes.phone]
-        && inputOkArr[inputIndexes.password] 
+        validateInputArr(inputOkArr) 
         && reEnterPasswordOk));  
 }
 
