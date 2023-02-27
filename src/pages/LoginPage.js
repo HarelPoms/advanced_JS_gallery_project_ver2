@@ -4,6 +4,7 @@ import validateEmail from "../validation/validateEmail.js";
 import validatePassword from "../validation/validatePassword.js";
 import checkIfInputIsValid from "../utils/checkIfInputIsValid.js";
 import { initializeProfile } from "./ProfilePage.js"; 
+import showToast from "../utils/toast.js";
 
 let loginEmailInput;
 let loginPasswordInput;
@@ -53,6 +54,7 @@ const initEventListeners = () => {
             
         if (!user) {
             console.log("invalid email and/or password");
+            //showToast();
             return;
         }
         localStorage.setItem("token", JSON.stringify({id: user.id, first_name:user.first_name, 
