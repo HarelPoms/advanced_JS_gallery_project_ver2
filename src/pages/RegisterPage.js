@@ -9,6 +9,7 @@ import checkIfInputIsValid from "../utils/checkIfInputIsValid.js";
 import User from "../models/User.js";
 import Address from "../models/Address.js"
 import { showToast } from "../utils/toast.js";
+import validateInputArr from "../validation/validateInputArr.js";
 
 
 let registerInputFirstName;
@@ -180,17 +181,7 @@ const initEventListeners = ()=> {
     });
 
     btnRegisterSubmit.addEventListener("click", () => {
-    if(!(inputOkArr[inputIndexes.firstName] 
-        && inputOkArr[inputIndexes.lastName]
-        && inputOkArr[inputIndexes.country]
-        && inputOkArr[inputIndexes.state]
-        && inputOkArr[inputIndexes.city]
-        && inputOkArr[inputIndexes.street]
-        && inputOkArr[inputIndexes.house_number]
-        && inputOkArr[inputIndexes.zip_code]  
-        && inputOkArr[inputIndexes.email] 
-        && inputOkArr[inputIndexes.phone]
-        && inputOkArr[inputIndexes.password] 
+    if(!(validateInputArr(inputOkArr) 
         && reEnterPasswordOk))
     {
             return;
@@ -239,16 +230,6 @@ window.addEventListener("load", () => {
 
 const checkIfCanEnableButton = () => {
     (btnRegisterSubmit.disabled = !(
-        inputOkArr[inputIndexes.firstName] 
-        && inputOkArr[inputIndexes.lastName]
-        && inputOkArr[inputIndexes.country]
-        && inputOkArr[inputIndexes.state]
-        && inputOkArr[inputIndexes.city]
-        && inputOkArr[inputIndexes.street]
-        && inputOkArr[inputIndexes.house_number]
-        && inputOkArr[inputIndexes.zip_code]  
-        && inputOkArr[inputIndexes.email] 
-        && inputOkArr[inputIndexes.phone]
-        && inputOkArr[inputIndexes.password] 
+        validateInputArr(inputOkArr) 
         && reEnterPasswordOk));  
 }
