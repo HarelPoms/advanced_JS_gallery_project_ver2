@@ -1,7 +1,6 @@
 
 const toastWrapper = document.getElementById("toast-wrapper");
 let id = 1;
-const toastLiveExample = document.getElementById('toast-1')
 
 const generateToast = (errorTitle, errorMessage) => {
     let thisId = id++;
@@ -21,7 +20,6 @@ const generateToast = (errorTitle, errorMessage) => {
 }
 const showToast = (errorTitle, errorMessage) =>{
     let newToastWithId = generateToast(errorTitle, errorMessage);
-    //console.log(newToastWithId);
     toastWrapper.innerHTML += newToastWithId[0];
     const toast = new bootstrap.Toast(document.getElementById(newToastWithId[1]));
     toast.show()
