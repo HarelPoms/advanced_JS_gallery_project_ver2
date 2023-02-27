@@ -4,7 +4,7 @@ class Address{
     city;
     street;
     house_num;
-    zip_code
+    zip_code;
     constructor(country,state,city,street,house_num,zip_code){
         this.country = country;
         this.state = state;
