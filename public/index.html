@@ -55,6 +55,10 @@
             </div>
         </nav>
         <main>
+            <!--Toast-->
+            <div class="toast-container position-static" id="toast-wrapper">
+
+            </div>
             <!--Popup Section For editing/creating new pictures-->
             <div class="popup-wrapper d-flex justify-content-center align-items-center d-none" id="editPicturesPopup">
                 <div class="popup-div" id="editPicturesPopupChild">
@@ -143,7 +147,7 @@
                 </div>
             </div>
             <!-- home page -->
-            <div id="home-page" class="d-block">
+            <div id="home-page" class="d-none">
                 <h1>Home page</h1>
 
                 <!--end of section for popup for creating/editing pictures -->
@@ -642,7 +646,7 @@
                 </form>
             </div>
             <!-- login page -->
-            <div id="login-page" class="d-none">
+            <div id="login-page" class="d-block">
                 <h1>Login page</h1>
                 <form id="login-form" onsubmit="event.preventDefault()">
 

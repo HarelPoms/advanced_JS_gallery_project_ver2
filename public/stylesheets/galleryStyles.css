@@ -134,4 +134,8 @@ footer {
 .divider-line {
   border-color: lime;
   border-style: solid;
+}
+
+.toast-error-icon {
+  width: 2rem;
 }/*# sourceMappingURL=galleryStyles.css.map */

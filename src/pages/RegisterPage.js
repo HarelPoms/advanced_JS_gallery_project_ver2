@@ -8,6 +8,7 @@ import validateNumber from "../validation/validateNumber.js";
 import checkIfInputIsValid from "../utils/checkIfInputIsValid.js";
 import User from "../models/User.js";
 import Address from "../models/Address.js"
+import { showToast } from "../utils/toast.js";
 
 
 let registerInputFirstName;
@@ -210,7 +211,7 @@ const initEventListeners = ()=> {
         for(let user of users){
             if(user.email === registerInputEmail.value){
                 //display msg - email already taken
-                console.log("email already exists")
+                showToast("Error Occured", "Email Already Exists");
                 return;
             }
         }

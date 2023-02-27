@@ -4,7 +4,7 @@ import validateEmail from "../validation/validateEmail.js";
 import validatePassword from "../validation/validatePassword.js";
 import checkIfInputIsValid from "../utils/checkIfInputIsValid.js";
 import { initializeProfile } from "./ProfilePage.js"; 
-import showToast from "../utils/toast.js";
+import {showToast} from "../utils/toast.js";
 
 let loginEmailInput;
 let loginPasswordInput;
@@ -53,8 +53,7 @@ const initEventListeners = () => {
             currUser.password === loginPasswordInput.value);
             
         if (!user) {
-            console.log("invalid email and/or password");
-            //showToast();
+            showToast("Error Occured", "Invalid Email and/or Password");
             return;
         }
         localStorage.setItem("token", JSON.stringify({id: user.id, first_name:user.first_name, 

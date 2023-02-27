@@ -7,6 +7,7 @@ import validateName from "../validation/validateName.js";
 import validateString from "../validation/validateString.js";
 import validateNumber from "../validation/validateNumber.js";
 import checkIfAdmin from "../utils/checkIfAdmin.js";
+import { showToast } from "../utils/toast.js";
 
 
 let profileInputFirstName;
@@ -235,10 +236,14 @@ const initBtns = () => {
         users = JSON.parse(users); // convert from string to array of objects
         token = JSON.parse(token);
         let userEmail = users.find((item) => item.email === profileInputEmail.value);
-        let user = users.find((item) => item.id === token.id);
-        if (userEmail && user.id !== userEmail.id) {
+        let user = users.find((item) => {
+            return item.id === token.id
+        });
+
+        if (userEmail && user.id != userEmail.id) {
             //the email already token
-            console.log("Email already taken");
+            showToast("Error Occured", "Email already taken");
+            return;
         }
     }
     
