@@ -1,5 +1,6 @@
 import { clearEventListeners } from "../utils/clearEventListener.js";
 import { createBtnEventListener } from "../utils/createBtnEventListener.js";
+import getIdFromClick from "../utils/getIdFromClick.js";
 
 let listPicturesUnorderedList;
 let picturesDisplayArr;
@@ -20,14 +21,6 @@ const initializePicturesList = (picturesArrFromHomePage, isAdminParam,deletePict
 const updatePicturesList = (picturesArrFromHomePage) => {
     picturesDisplayArr = picturesArrFromHomePage;
     createList();
-}
-
-const getIdFromClick = (ev) =>{
-    let idFromId = ev.target.id.split("-");
-    if(!ev.target.id){
-        idFromId = ev.target.parentElement.id.split("-");
-    }
-    return(idFromId[1]);
 }
 
 const handleDeleteBtnClick = (ev) => {

@@ -1,5 +1,6 @@
 import { clearEventListeners } from "../utils/clearEventListener.js";
 import { createBtnEventListener } from "../utils/createBtnEventListener.js";
+import getIdFromClick from "../utils/getIdFromClick.js";
 
 let galleryDiv;
 let isAdmin;
@@ -61,14 +62,6 @@ const createCard = (id, url, alt, credit, price) => {
     </div>
     `;
 };
-
-const getIdFromClick = (ev) =>{
-    let idFromId = ev.target.id.split("-");
-    if(!ev.target.id){
-        idFromId = ev.target.parentElement.id.split("-");
-    }
-    return(idFromId[1]);
-}
 
 const handleDeleteBtnClick = (ev) => {
     deletePicture(+(getIdFromClick(ev)));
