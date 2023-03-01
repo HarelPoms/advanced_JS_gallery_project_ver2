@@ -220,14 +220,16 @@ const initBtns = () => {
     if (users && token) {
         //we have users
         users = JSON.parse(users); // convert from string to array of objects
-        token = JSON.parse(token);
+        token = JSON.parse(token); // convert from string to array of objects
+        //check if the given email matches an email from an already existing user
         let userEmail = users.find((item) => item.email === profileInputEmail.value);
+        //find the user on the basis of the token
         let user = users.find((item) => {
             return item.id === token.id
         });
-
+        //If an email was found matching the input and the ids of the users differ
         if (userEmail && user.id != userEmail.id) {
-            //the email already token
+            //the email is already token
             showToast("Error Occured", "Email already taken");
             return;
         }
