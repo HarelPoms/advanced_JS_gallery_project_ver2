@@ -1,4 +1,3 @@
-
 let toastWrapper; 
 let id = 1;
 
@@ -6,6 +5,7 @@ window.addEventListener("load", () => {
     toastWrapper = document.getElementById("toast-wrapper");
 })
 
+//Used to generate toast in case of errors, currently in login, profile, and register.
 const generateToast = (errorTitle, errorMessage) => {
     let thisId = id++;
     return [

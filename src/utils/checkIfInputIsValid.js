@@ -1,3 +1,5 @@
+//Receives an input element, alert element, a validation func, and a prefix for error message
+//returns false if theres errors, true if theres none.
 const checkIfInputIsValid = (elemInput, elemAlert, validateFunc, prefixLabel) => {
     let errorArr = validateFunc(elemInput.value, prefixLabel);
     let res;

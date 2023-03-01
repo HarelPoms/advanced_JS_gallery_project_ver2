@@ -10,6 +10,7 @@ let navAddNewPictureLink;
 const navBeforeLogin = document.getElementById("navBeforeLogin");
 const navAfterLogin = document.getElementById("navAfterLogin");
 
+//initialize navbar on the basis if user is connected/admin
 const initializeNavbar = (showPopupFromApp) => {
     isAdmin = checkIfAdmin();
     isConnected = checkIfConnected();
