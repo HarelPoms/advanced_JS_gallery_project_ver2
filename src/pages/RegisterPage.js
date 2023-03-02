@@ -202,7 +202,7 @@ const initEventListeners = ()=> {
         for(let user of users){
             if(user.email === registerInputEmail.value){
                 //display msg - email already taken
-                showToast("Error Occured", "Email Already Exists");
+                showToast("Error Occured", "Email Already Exists", false);
                 return;
             }
         }

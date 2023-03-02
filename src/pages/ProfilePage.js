@@ -230,7 +230,7 @@ const initBtns = () => {
         //If an email was found matching the input and the ids of the users differ
         if (userEmail && user.id != userEmail.id) {
             //the email is already token
-            showToast("Error Occured", "Email already taken");
+            showToast("Error Occured", "Email already taken", false);
             return;
         }
     }

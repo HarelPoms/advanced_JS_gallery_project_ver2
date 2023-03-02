@@ -53,7 +53,7 @@ const initEventListeners = () => {
             currUser.password === loginPasswordInput.value);
             
         if (!user) {
-            showToast("Error Occured", "Invalid Email and/or Password");
+            showToast("Error Occured", "Invalid Email and/or Password", false);
             return;
         }
         localStorage.setItem("token", JSON.stringify({id: user.id, first_name:user.first_name, 

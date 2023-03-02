@@ -209,7 +209,7 @@ const addNewFav = (id) => {
         });
         for (let currFavoriteIndex = 0; currFavoriteIndex < currUser.favorites.length; currFavoriteIndex++){
             if (currUser.favorites[currFavoriteIndex] == id){
-                showToast("Cannot Favorite this", "Picture is already favorited");
+                showToast("Cannot Favorite this", "Picture is already favorited", false);
                 return;
             }
         }
@@ -220,6 +220,7 @@ const addNewFav = (id) => {
         localStorage.setItem("token", JSON.stringify({id: currUser.id, first_name:currUser.first_name, 
             last_name: currUser.last_name, email:currUser.email, isAdmin: currUser.isAdmin, favorites: updatedFavs}));
         updatePicturesFavorites(displayPicturesArr);
+        showToast("Success", "Picture is now favorited", true);
     }
 
 }

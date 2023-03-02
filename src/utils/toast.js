@@ -6,24 +6,26 @@ window.addEventListener("load", () => {
 })
 
 //Used to generate toast in case of errors, currently in login, profile, and register.
-const generateToast = (errorTitle, errorMessage) => {
+const generateToast = (title, msg, success=true) => {
+    const successIcon = `<img src="assets/images/successIcon.png" class="rounded me-2 toast-icon" alt="success Icon">`;
+    const errIcon = `<img src="assets/images/errorIcon.png" class="rounded me-2 toast-icon" alt="error Icon">`;
     let thisId = id++;
     return [
-        `<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="error-toast-${thisId}">
+        `<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="toast-${thisId}">
             <div class="toast-header">
-                <img src="assets/images/errorIcon.png" class="rounded me-2 toast-error-icon" alt="error Icon">
-                <strong class="me-auto">${errorTitle}</strong>
+                ${success ? successIcon : errIcon}
+                <strong class="me-auto">${title}</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close">
                 </button>
             </div>
             <div class="toast-body">
-                ${errorMessage}
+                ${msg}
             </div>
         </div>`,
-        `error-toast-${thisId}`];
+        `toast-${thisId}`];
 }
-const showToast = (errorTitle, errorMessage) =>{
-    let newToastWithId = generateToast(errorTitle, errorMessage);
+const showToast = (title, msg, success) =>{
+    let newToastWithId = generateToast(title, msg, success);
     toastWrapper.innerHTML += newToastWithId[0];
     const toast = new bootstrap.Toast(document.getElementById(newToastWithId[1]));
     toast.show()

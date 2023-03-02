@@ -1,7 +1,6 @@
 import { clearEventListeners } from "../utils/clearEventListener.js";
 import { createBtnEventListener } from "../utils/createBtnEventListener.js";
 import getIdFromClick from "../utils/getIdFromClick.js";
-//import { showToast } from "../utils/toast.js";
 
 let galleryDiv;
 let isAdmin;
