@@ -1,21 +1,26 @@
 import { clearEventListeners } from "../utils/clearEventListener.js";
 import { createBtnEventListener } from "../utils/createBtnEventListener.js";
 import getIdFromClick from "../utils/getIdFromClick.js";
+//import { showToast } from "../utils/toast.js";
 
 let galleryDiv;
 let isAdmin;
+let isConnected;
 let picturesDisplayArr;
 let deletePicture;
 let showPopup;
 let showExtraDetailsPopup;
+let addNewFav;
 
-const initializePicturesGallery = (picturesArrFromHomePage, isAdminParam, deletePictureFromHomePage,showPopupFromHomePage, showExtraDetailsPopupFromHomePage) => {
+const initializePicturesGallery = (picturesArrFromHomePage, isAdminParam, isConnectedParam, deletePictureFromHomePage,showPopupFromHomePage, showExtraDetailsPopupFromHomePage, addNewFavFromHomePage) => {
     galleryDiv = document.getElementById("home-page-pictures-gallery");
     isAdmin = isAdminParam;
+    isConnected = isConnectedParam;
     deletePicture = deletePictureFromHomePage;
     updatePicturesGallery(picturesArrFromHomePage);
     showPopup = showPopupFromHomePage;
     showExtraDetailsPopup = showExtraDetailsPopupFromHomePage;
+    addNewFav = addNewFavFromHomePage;
 }
 
 const updatePicturesGallery = (picturesArrFromHomePage) => {
@@ -31,6 +36,10 @@ const createCard = (id, url, alt, credit, price) => {
                             id="PictureGalleryDeleteButton-${id}">
                                 <i class="bi bi-x-circle-fill"></i> Delete
                             </button>`;
+    const purchaseBtn = `<button type="button" class="btn btn-success" 
+                            id="PictureGalleryFavoriteButton-${id}">
+                                <i class="bi bi-cart"></i>
+                        </button>`;
     return `
     <div class="col">
         <div class="card">
@@ -50,9 +59,7 @@ const createCard = (id, url, alt, credit, price) => {
             <li class="list-group-item d-flex justify-content-between">
                 <span>Price: <b>${price}$</b></span>
             
-                <button type="button" class="btn btn-success">
-                    <i class="bi bi-cart"></i>
-                </button>
+                ${isConnected ? purchaseBtn : ""}
             </li>
         </ul>
         <div class="card-body d-flex justify-content-center">
@@ -62,6 +69,10 @@ const createCard = (id, url, alt, credit, price) => {
     </div>
     `;
 };
+
+const handleFavBtnClick = (ev) => {
+    addNewFav(getIdFromClick(ev));
+}
 
 const handleDeleteBtnClick = (ev) => {
     deletePicture(+(getIdFromClick(ev)));
@@ -81,6 +92,7 @@ const createGallery = () => {
     clearEventListeners("PictureGalleryDeleteButton", handleDeleteBtnClick);
     clearEventListeners("PictureGalleryEditButton", handleEditBtnClick);
     clearEventListeners("PictureGalleryThumbnail", handlePicClick);
+    clearEventListeners("PictureGalleryFavoriteButton", handleFavBtnClick);
 
     for (let picture of picturesDisplayArr){
         buffer += createCard(picture.id,picture.url,picture.alt,picture.credit,picture.price);
@@ -91,6 +103,8 @@ const createGallery = () => {
     createBtnEventListener("PictureGalleryDeleteButton", handleDeleteBtnClick);
     createBtnEventListener("PictureGalleryEditButton", handleEditBtnClick);
     createBtnEventListener("PictureGalleryThumbnail", handlePicClick);
+    createBtnEventListener("PictureGalleryFavoriteButton", handleFavBtnClick);
+
 }
 
 export {initializePicturesGallery, updatePicturesGallery};

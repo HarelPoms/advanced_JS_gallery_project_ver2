@@ -2,6 +2,8 @@ import validateEmail from "../validation/validateEmail.js";
 import validateName from "../validation/validateName.js";
 import validateString from "../validation/validateString.js";
 import checkIfInputIsValid from "../utils/checkIfInputIsValid.js"
+import validateInputArr from "../validation/validateInputArr.js";
+
 let contactNameInput;
 let contactEmailInput;
 let contactMessageInput;
@@ -52,10 +54,7 @@ const initEventListeners = () => {
         checkInput(contactMessageInput, "contact-alert-message", inputIndexes.msg, validateString, "Message ");
     });
     btnSubmitContactForm.addEventListener("click", () => {
-        if(!(inputOkArr[inputIndexes.name] 
-            && inputOkArr[inputIndexes.email]
-            && inputOkArr[inputIndexes.msg]
-            ))
+        if(!(validateInputArr(inputOkArr)))
         {
                 return;
         }
@@ -79,7 +78,7 @@ const firstLoadChecks = ()=>{
 }
 
 const checkIfCanEnableButton = () => {
-    if(!(inputOkArr[0] && inputOkArr[1] && inputOkArr[2]))
+    if(!(validateInputArr(inputOkArr)))
     {
         btnSubmitContactForm.classList.add("disabled");
     }

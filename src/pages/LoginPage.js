@@ -57,7 +57,7 @@ const initEventListeners = () => {
             return;
         }
         localStorage.setItem("token", JSON.stringify({id: user.id, first_name:user.first_name, 
-            last_name: user.last_name, email:user.email, isAdmin: user.isAdmin}));
+            last_name: user.last_name, email:user.email, isAdmin: user.isAdmin, favorites: user.favorites}));
         initializeProfile(user);
         location.reload();
     });

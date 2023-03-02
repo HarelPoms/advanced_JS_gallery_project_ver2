@@ -16,6 +16,7 @@ const navLoginUsLink = document.getElementById("nav-login-link");
 const navRegisterUsLink = document.getElementById("nav-register-link");
 const navEditProfilePage = document.getElementById("nav-edit-profile-page");
 const navLogout = document.getElementById("nav-logout");
+const navFavorites = document.getElementById("nav-favorite-pictures-link");
 
 window.addEventListener("load", () => {
     initializeNavbar(showNewPopup);
@@ -50,3 +51,8 @@ navLogout.addEventListener("click", () => {
     localStorage.removeItem("token");
     location.reload();
 });
+
+navFavorites.addEventListener("click", () => {
+    handlePageChange(PAGES.FAVORITES);
+});
+

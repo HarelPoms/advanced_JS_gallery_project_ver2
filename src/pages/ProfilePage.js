@@ -237,7 +237,7 @@ const initBtns = () => {
     
     let updatedUsers = users.map((user) => user.id === currUser.id ? currUser : user);
     localStorage.setItem("users", JSON.stringify(updatedUsers));
-    localStorage.setItem("token", JSON.stringify({id: currUser.id, first_name: currUser.first_name, last_name: currUser.last_name, email: currUser.email, isAdmin: currUser.isAdmin}));
+    localStorage.setItem("token", JSON.stringify({id: currUser.id, first_name: currUser.first_name, last_name: currUser.last_name, email: currUser.email, isAdmin: currUser.isAdmin, favorites: currUser.favorites}));
     location.reload();
 })
 

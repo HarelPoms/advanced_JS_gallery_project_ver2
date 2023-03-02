@@ -2,12 +2,16 @@ import {initializePicturesGallery, updatePicturesGallery} from "../components/Pi
 import { initializePicturesList, updatePicturesList } from "../components/PicturesList.js";
 import { initializePicturesCarousel, updatePicturesCarousel } from "../components/PicturesCarousel.js";
 import {initPopup} from "../components/Popup.js";
+import {showToast} from "../utils/toast.js";
 
 import checkIfAdmin from "../utils/checkIfAdmin.js";
+import checkIfConnected from "../utils/checkIfConnected.js";
+import { initializeFavorites, updatePicturesFavorites } from "./FavoritePage.js";
 
 let displayPicturesArr, storedPicturesArr;
 let currentDisplayMode;
 let isAdmin;
+let isConnected;
 
 let galleryBtn;
 let listBtn;
@@ -29,11 +33,15 @@ window.addEventListener("load", ()=>{
     displayPicturesArr = JSON.parse(displayPicturesArr);
     storedPicturesArr = [...displayPicturesArr];
     isAdmin = checkIfAdmin();
-    initializePicturesGallery(displayPicturesArr, isAdmin, deletePicture, showPopup, showExtraDetailsPopup);
+    isConnected = checkIfConnected();
+    initializePicturesGallery(displayPicturesArr, isAdmin, isConnected, deletePicture, showPopup, showExtraDetailsPopup, addNewFav);
     initializePicturesList(displayPicturesArr, isAdmin, deletePicture, showPopup, showExtraDetailsPopup);
     initializePicturesCarousel(displayPicturesArr);
     initElements();
     initBtns();
+    if(isConnected){
+        initializeFavorites(displayPicturesArr);
+    }
 })
 
 const initElements = () =>{
@@ -48,7 +56,7 @@ const initElements = () =>{
     homeDisplaySortDesc = document.getElementById("homeDisplaySortDESC");
 
     homeSearchLine = document.getElementById("homeDisplaySearch");
-    currentDisplayMode = listOfItems; // choose who we want to display
+    currentDisplayMode = galleryOfItems; // choose who we want to display
     switchToAnotherDisplayMode(currentDisplayMode);
 }
 
@@ -117,6 +125,7 @@ const updateDisplays = () => {
     updatePicturesGallery(displayPicturesArr);
     updatePicturesList(displayPicturesArr);
     updatePicturesCarousel(displayPicturesArr);
+    updatePicturesFavorites(displayPicturesArr);
 }
 
 const saveToLocalStorage = (arrToSave) => {
@@ -128,7 +137,31 @@ const deletePicture = (id) => {
     saveToLocalStorage(storedPicturesArr);
 
     displayPicturesArr = displayPicturesArr.filter((item) => item.id !== id);
+    deleteFavPicIdFromUsers(id);
     updateDisplays();
+}
+
+const deleteFavPicIdFromUsers = (formerFavPicId) => {
+
+    let users = localStorage.getItem("users");
+    let token = localStorage.getItem("token");
+    if (users && token) {
+        users = JSON.parse(users);
+        token = JSON.parse(token);
+        //Iterate over all users
+        for (let userIdx = 0; userIdx < users.length; userIdx++){
+            //go over each users favorites and filter out the deleted pic
+            users[userIdx].favorites = users[userIdx].favorites.filter((picId) => {
+                return (+(picId) !== formerFavPicId)});
+            //If the current user is the one logged on, update his token accordingly.
+            if (users[userIdx].id === token.id){
+                localStorage.setItem("token", JSON.stringify({id: users[userIdx].id, first_name:users[userIdx].first_name, 
+                last_name: users[userIdx].last_name, email:users[userIdx].email, isAdmin: users[userIdx].isAdmin, favorites: users[userIdx].favorites}));
+            }
+        }
+        //Update the users in local storage.
+        localStorage.setItem("users", JSON.stringify(users));
+    }
 }
 
 const showPopup = (id) => {
@@ -163,5 +196,32 @@ const editPicture = () => {
     saveToLocalStorage(storedPicturesArr);
     updateDisplays();
 };
+
+const addNewFav = (id) => {
+    let userToken = localStorage.getItem("token");
+    let users = localStorage.getItem("users");
+    if (users && userToken) {
+        userToken = JSON.parse(userToken);
+        users = JSON.parse(users);
+        //find the user on the basis of the token
+        let currUser = users.find((user) => {
+            return user.id === userToken.id
+        });
+        for (let currFavoriteIndex = 0; currFavoriteIndex < currUser.favorites.length; currFavoriteIndex++){
+            if (currUser.favorites[currFavoriteIndex] == id){
+                showToast("Cannot Favorite this", "Picture is already favorited");
+                return;
+            }
+        }
+        let updatedFavs = [...currUser.favorites, id];
+        currUser.favorites = [...updatedFavs];
+        let updatedUsers = users.map((user) => user.id === currUser.id ? currUser : user);
+        localStorage.setItem("users", JSON.stringify(updatedUsers));
+        localStorage.setItem("token", JSON.stringify({id: currUser.id, first_name:currUser.first_name, 
+            last_name: currUser.last_name, email:currUser.email, isAdmin: currUser.isAdmin, favorites: updatedFavs}));
+        updatePicturesFavorites(displayPicturesArr);
+    }
+
+}
 
 export {showNewPopup};
