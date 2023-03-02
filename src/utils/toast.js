@@ -6,7 +6,7 @@ window.addEventListener("load", () => {
 })
 
 //Used to generate toast in case of errors, currently in login, profile, and register.
-const generateToast = (title, msg, success=true) => {
+const generateToast = (title, msg, success) => {
     const successIcon = `<img src="assets/images/successIcon.png" class="rounded me-2 toast-icon" alt="success Icon">`;
     const errIcon = `<img src="assets/images/errorIcon.png" class="rounded me-2 toast-icon" alt="error Icon">`;
     let thisId = id++;
