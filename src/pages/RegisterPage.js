@@ -10,6 +10,7 @@ import User from "../models/User.js";
 import Address from "../models/Address.js"
 import { showToast } from "../utils/toast.js";
 import validateInputArr from "../validation/validateInputArr.js";
+import validatePhoneNumber from "../validation/validatePhoneNumber.js";
 
 
 let registerInputFirstName;
@@ -100,7 +101,7 @@ const firstLoadChecks = ()=>{
         checkInput(registerInputEmail, "register-alert-email", inputIndexes.email, validateEmail, "Email ");
     }
     if (registerInputPhone.value !== "") {
-        checkInput(registerInputPhone, "register-alert-phone", inputIndexes.phone, validateNumber,
+        checkInput(registerInputPhone, "register-alert-phone", inputIndexes.phone, validatePhoneNumber,
         "Phone " );
     }
     if (registerInputPassword.value !== "") {
@@ -169,7 +170,7 @@ const initEventListeners = ()=> {
     });
 
     registerInputPhone.addEventListener("input", ()=> {
-        checkInput(registerInputPhone, "register-alert-phone", inputIndexes.phone, validateNumber, "Phone " );
+        checkInput(registerInputPhone, "register-alert-phone", inputIndexes.phone, validatePhoneNumber, "Phone " );
     })
 
     registerInputPassword.addEventListener("input", () => {

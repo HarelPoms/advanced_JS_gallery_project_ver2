@@ -10,6 +10,7 @@ import checkIfAdmin from "../utils/checkIfAdmin.js";
 import { showToast } from "../utils/toast.js";
 import checkIfInputIsValid from "../utils/checkIfInputIsValid.js";
 import validateInputArr from "../validation/validateInputArr.js";
+import validatePhoneNumber from "../validation/validatePhoneNumber.js";
 
 
 let profileInputFirstName;
@@ -178,7 +179,7 @@ const initInputEventListeners = ()=> {
     });
 
     profileInputPhone.addEventListener("input", ()=> {
-        checkInput(profileInputPhone, "profile-alert-phone", inputIndexes.phone, validateNumber, "Phone " );
+        checkInput(profileInputPhone, "profile-alert-phone", inputIndexes.phone, validatePhoneNumber, "Phone " );
     })
 
     profileInputPassword.addEventListener("input", () => {
@@ -277,7 +278,7 @@ const initDetailChecks = () => {
         checkInput(profileInputEmail, "profile-alert-email", inputIndexes.email, validateEmail, "Email ");
     }
     if (profileInputPhone.value !== "") {
-        checkInput(profileInputPhone, "profile-alert-phone", inputIndexes.phone, validateNumber, "Phone " );
+        checkInput(profileInputPhone, "profile-alert-phone", inputIndexes.phone, validatePhoneNumber, "Phone " );
     }
     if (profileInputPassword.value !== "") {
         checkInput(profileInputPassword, "profile-alert-password", inputIndexes.password, validatePassword, "Password ");
