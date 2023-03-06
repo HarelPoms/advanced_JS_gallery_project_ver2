@@ -1,4 +1,4 @@
-const validate = (regex, value, min, max) => {
+const validate = (regex, value, min, max, rules) => {
     let msgsArr = [];
     if(value.length < min){
         msgsArr = [...msgsArr, " Too short"];
@@ -7,7 +7,7 @@ const validate = (regex, value, min, max) => {
         msgsArr = [...msgsArr, " Too long"];
     }
     if(!regex.test(value)){
-        msgsArr = [...msgsArr, " invalid"]
+        msgsArr = [...msgsArr, rules ]
     }
     return msgsArr;
 }
