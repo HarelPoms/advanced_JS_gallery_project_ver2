@@ -56,7 +56,7 @@ const initElements = () =>{
     homeDisplaySortDesc = document.getElementById("homeDisplaySortDESC");
 
     homeSearchLine = document.getElementById("homeDisplaySearch");
-    currentDisplayMode = galleryOfItems; // choose who we want to display
+    currentDisplayMode = listOfItems; // choose who we want to display
     switchToAnotherDisplayMode(currentDisplayMode);
 }
 
