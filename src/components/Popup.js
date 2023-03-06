@@ -82,6 +82,7 @@ const initPopup = (selectedPictureFromHomePage, editPictureFromHomePage) => {
     //
     editPicturesPopupImgDisplay.src = selectedPicture.url;
     showPopup();
+    //If we're not editing an existing picture or creating a new one
     if(!editPictureFromHomePage){
         hidePrimaryDetailsAndSaveButton();
         setSecondaryDetailsReadOnlyAttribute();
@@ -90,6 +91,11 @@ const initPopup = (selectedPictureFromHomePage, editPictureFromHomePage) => {
         showPrimaryDetailsAndSaveButton();
         setSecondaryDetailsReadOnlyAttribute(false);
     }
+    //this line was added because viewing an existing pic
+    //then trying to add a new picture resulted in 
+    //an empty form with clickable save button. This fixes it.
+    editPicturesSaveBtn.disabled = true;
+    
     firstLoadChecks(); 
 };
 
