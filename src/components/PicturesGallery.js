@@ -27,7 +27,7 @@ const updatePicturesGallery = (picturesArrFromHomePage) => {
     createGallery();
 }
 
-const createCard = (id, url, alt, credit, price) => {
+const createCard = (id, url, alt,title, credit, price) => {
     const adminBtns = `<button type="button" class="btn btn-warning" id="PictureGalleryEditButton-${id}">
                                 <i class="bi bi-pen-fill"></i> Edit
                             </button>
@@ -49,7 +49,7 @@ const createCard = (id, url, alt, credit, price) => {
             id="PictureGalleryThumbnail-${id}"
         />
         <div class="card-body">
-            <h5 class="card-title">${alt}</h5>
+            <h5 class="card-title">${title}</h5>
             <p class="card-text">
             Credits: <b>${credit}</b>
             </p>
@@ -94,7 +94,7 @@ const createGallery = () => {
     clearEventListeners("PictureGalleryFavoriteButton", handleFavBtnClick);
 
     for (let picture of picturesDisplayArr){
-        buffer += createCard(picture.id,picture.url,picture.alt,picture.credit,picture.price);
+        buffer += createCard(picture.id,picture.url,picture.alt,picture.additionalDetails.title,picture.credit,picture.price);
     }
 
     galleryDiv.innerHTML = buffer;

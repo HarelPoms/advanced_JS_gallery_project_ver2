@@ -35,7 +35,7 @@ const handlePicClick = (ev) => {
     showExtraDetailsPopup(getIdFromClick(ev));
 }
 
-const createListItem = (id, url, alt, credit) => {
+const createListItem = (id, url, alt, title, credit) => {
     const adminBtns = `<div class="col-md-1 desktopAdminBtns">
                             <button class="btn btn-warning" id="PictureListEditButton-${id}">
                                 <i class="bi bi-pencil-square"></i>
@@ -69,7 +69,7 @@ const createListItem = (id, url, alt, credit) => {
                         </div>
 
                     </div>
-                    <div class="col-md-2 picture-list-text">${alt}</div>
+                    <div class="col-md-2 picture-list-text">${title}</div>
                     <div class="col-md-2 picture-list-text">${credit}</div>
                     ${isAdmin ? adminBtns : ""}
                 </div>
@@ -109,7 +109,7 @@ const createList = () => {
     let buffer = "" + LIST_HEADLINES;
 
     for (let picture of picturesDisplayArr){
-        buffer += createListItem(picture.id,picture.url,picture.alt,picture.credit);
+        buffer += createListItem(picture.id,picture.url,picture.alt,picture.additionalDetails.title,picture.credit);
     }
 
     listPicturesUnorderedList.innerHTML = buffer;
