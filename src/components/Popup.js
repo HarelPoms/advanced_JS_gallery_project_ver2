@@ -3,6 +3,7 @@ import Picture from "../models/Picture.js"
 import AdditionalDetails from "../models/AdditionalDetails.js";
 import validateImgUrl from "../validation/validateImgUrl.js";
 import validateDate from "../validation/validateDate.js";
+import validateTitle from "../validation/validateTitle.js";
 
 let editPicturesHeader;
 let editPicturesPopupImgDisplay;
@@ -21,10 +22,12 @@ let editPicturesSaveBtn;
 let editPicturesSaveBtnDiv;
 let selectedPicture, editPicture;
 let editPicturesPopupCreatedAtLabel;
-let inputOkArr = [false, false];
+let editPicturesPopupTitleLabel;
+let inputOkArr = [false, false, false];
 const inputIndexes = {
 	url: 0,
-    createdAt: 1
+    createdAt: 1,
+    title: 2
 }
 
 const EMPTY_URL_PIC_PATH = "../../public/assets/images/empty_image_preview.png"
@@ -121,6 +124,8 @@ const initElems = () => {
     //CreatedAtLabel
     editPicturesPopupCreatedAtLabel = document.getElementById("editPicturesPopupCreatedAtLabel");
 
+    editPicturesPopupTitleLabel = document.getElementById("editPicturesPopupTitleLabel");
+
     editPicturesCancelBtn = document.getElementById("editPicturesPopupCancelBtn");
     editPicturesSaveBtn = document.getElementById("editPicturesPopupSaveBtn"); 
 }
@@ -197,6 +202,25 @@ const initBtns = () => {
     editPicturesPopupCreatedAt.addEventListener("input", () => {
         createdAtValidationLogic();
     })
+    editPicturesPopupTitle.addEventListener("input", () => {
+        titleValidationLogic();
+    })
+}
+
+const titleValidationLogic = () => {
+    let validityCheck = validateTitle(editPicturesPopupTitle.value);
+    if(validityCheck.length == 0)
+    {
+        editPicturesPopupTitle.classList.remove("is-invalid");
+        editPicturesPopupTitleLabel.innerText = "title";
+        inputOkArr[inputIndexes.title] = true;
+    }
+    else{
+        editPicturesPopupTitle.classList.add("is-invalid");
+        editPicturesPopupTitleLabel.innerText = "must be string";
+        inputOkArr[inputIndexes.title] = false;
+    }
+    checkIfCanEnableButton();
 }
 
 const urlValidationLogic = () =>{
@@ -235,6 +259,7 @@ const checkIfCanEnableButton = () => {
     (editPicturesSaveBtn.disabled = !(
         inputOkArr[inputIndexes.url] 
         && inputOkArr[inputIndexes.createdAt]
+        && inputOkArr[inputIndexes.title]
         ));  
 
 }
@@ -251,6 +276,9 @@ const firstLoadChecks = ()=>{
     }
     if (editPicturesPopupCreatedAt.value !== "") {
         createdAtValidationLogic();
+    }
+    if (editPicturesPopupTitle.value !== "") {
+        titleValidationLogic();
     }
 }
 
