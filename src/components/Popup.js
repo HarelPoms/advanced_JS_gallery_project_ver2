@@ -4,6 +4,7 @@ import AdditionalDetails from "../models/AdditionalDetails.js";
 import validateImgUrl from "../validation/validateImgUrl.js";
 import validateDate from "../validation/validateDate.js";
 import validateTitle from "../validation/validateTitle.js";
+import validateInputArr from "../validation/validateInputArr.js"
 
 let editPicturesHeader;
 let editPicturesPopupImgDisplay;
@@ -172,6 +173,7 @@ const isImage = (src) => {
 window.addEventListener("load", () => {
     initElems();
     initBtns();
+    initEventListeners();
     firstLoadChecks();    
 })
 
@@ -194,7 +196,9 @@ const initBtns = () => {
     editPicturesCancelBtn.addEventListener("click", () => {
         hidePopup();
     })
+}
 
+const initEventListeners = () => {
     editPicturesPopupUrl.addEventListener("input", () => {
         urlValidationLogic();
     });
@@ -256,12 +260,7 @@ const createdAtValidationLogic = () =>{
 }
 
 const checkIfCanEnableButton = () => {
-    (editPicturesSaveBtn.disabled = !(
-        inputOkArr[inputIndexes.url] 
-        && inputOkArr[inputIndexes.createdAt]
-        && inputOkArr[inputIndexes.title]
-        ));  
-
+    (editPicturesSaveBtn.disabled = !(validateInputArr(inputOkArr)));
 }
 const initHeader = () => {
     editPicturesCancelBtn = document.getElementById("editPicturesPopupCancelBtn");
