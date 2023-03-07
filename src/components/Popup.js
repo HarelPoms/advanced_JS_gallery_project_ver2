@@ -45,6 +45,7 @@ const VIEW_PICTURE_FORM_HEADER = `
                                 `;
 
 const initPopup = (selectedPictureFromHomePage, editPictureFromHomePage) => {
+    resetOkArr();
     //Just viewing the picture
     if(!editPictureFromHomePage){
         editPicturesHeader.innerHTML = VIEW_PICTURE_FORM_HEADER;
@@ -251,6 +252,12 @@ const firstLoadChecks = ()=>{
     if (editPicturesPopupCreatedAt.value !== "") {
         createdAtValidationLogic();
     }
+}
+
+const resetOkArr = () =>{
+    inputOkArr[inputIndexes.url] = false;
+    inputOkArr[inputIndexes.createdAt] = false;
+    inputOkArr[inputIndexes.title] = false;
 }
 
 export {initPopup};
