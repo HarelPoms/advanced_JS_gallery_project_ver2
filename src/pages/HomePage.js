@@ -101,11 +101,11 @@ const initBtns = () => {
 const sortPictures = (asc = true) => {
     if(asc){
         //sort from a to z
-        displayPicturesArr.sort((a,b) => a.alt.localeCompare(b.alt));
+        displayPicturesArr.sort((a,b) => (a.additionalDetails.title).localeCompare(b.additionalDetails.title));
     }
     else{
         //sort from z to a
-        displayPicturesArr.sort((a,b) => b.alt.localeCompare(a.alt));
+        displayPicturesArr.sort((a,b) => (b.additionalDetails.title).localeCompare(a.additionalDetails.title));
     }
     updateDisplays();
 }
